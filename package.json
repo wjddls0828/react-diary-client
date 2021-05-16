@@ -10,6 +10,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "next": "latest",
     "react": "^17.0.1",

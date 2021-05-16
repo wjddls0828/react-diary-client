@@ -1,7 +1,10 @@
 const express = require('express');
 const next = require('next');
+const dotenv = require('dotenv');
 
-const port = 3000;
+dotenv.config();
+
+const port = process.env.SERVER_PORT;
 const app = next({ dev: true });
 const handle = app.getRequestHandler();
 
