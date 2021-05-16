@@ -1,9 +1,10 @@
 import Layout from 'components/Layout';
+import * as S from './styles';
 
 const IndexPage = () => {
   return (
     <Layout>
-      <div>메인 페이지</div>
+      <S.IndexPage>메인 페이지</S.IndexPage>
     </Layout>
   );
 };
