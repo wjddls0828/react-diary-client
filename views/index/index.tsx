@@ -1,4 +1,4 @@
-import Layout from 'components/Layout';
+import Layout from 'components/layout/index';
 import * as S from './styles';
 
 const IndexPage = () => {
