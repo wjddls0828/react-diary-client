@@ -1,7 +1,16 @@
-import Layout from 'components/Layout';
+import Layout from 'components/layout/index';
+import { NextPage } from 'next';
+import { Post } from 'share/interfaces/post';
+import { getMockdata } from '../../share/utils/mock-data';
 import * as S from './styles';
 
-const IndexPage = () => {
+interface IndexPageProps {
+  posts: Post[];
+}
+
+const IndexPage: NextPage<IndexPageProps> = ({ posts }) => {
+  console.log(posts);
+
   return (
     <Layout>
       <S.IndexPage>메인 페이지</S.IndexPage>
@@ -10,3 +19,11 @@ const IndexPage = () => {
 };
 
 export default IndexPage;
+
+export async function getServerSideProps() {
+  const data = await getMockdata();
+
+  return {
+    props: { posts: data },
+  };
+}
