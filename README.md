@@ -22,7 +22,6 @@ $ yarn dev
   - React
 - Backend For Frontend Server
   - NodeJS, Express
-  - [BFF repo](https://github.com/swimme/express-diary-server.git)
 - Client와 BFF 간 데이터 통신 - restful api
   - axios
 - Continuous Integration
@@ -37,19 +36,19 @@ $ yarn dev
 ```
 .
 ├─ README.md
-├─ components/
 ├─ pages/
 ├─ server/
 ├─ share/
 │      interfaces/
 │      utils/
-└─ views/
+├─ views/
+│      components/
 
 ```
 
-- components : 공통 React 컴포넌트
 - pages : 라우팅
 - public : 이미지 파일 등 static file
 - server : BFF api 연동 로직
 - share : 공통 모듈, 인터페이스
-- views : page별 React 컴포넌트
+- views : React 컴포넌트
+  - components : 공통 React 컴포넌트

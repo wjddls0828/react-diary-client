@@ -1,4 +1,4 @@
-import Layout from 'components/layout/index';
+import Layout from 'views/components/layout/index';
 import { NextPage } from 'next';
 import { Post } from 'share/interfaces/post';
 import { getMockdata } from '../../share/utils/mock-data';
