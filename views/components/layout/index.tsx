@@ -1,13 +1,12 @@
 import React from 'react';
+import Header from 'views/components/header';
 import * as S from './styles';
 
 const Layout: React.FC = ({ children }) => (
-  <div>
-    <S.Header>
-      <S.HomeButton href='/'> Home</S.HomeButton>
-    </S.Header>
+  <S.Layout>
+    <Header />
     <S.Content>{children}</S.Content>
-  </div>
+  </S.Layout>
 );
 
 export default Layout;
