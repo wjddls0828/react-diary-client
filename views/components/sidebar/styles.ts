@@ -21,27 +21,3 @@ export const UserProfile = styled.div`
   font-weight: bolder;
   font-size: 15px;
 `;
-
-export const PostButton = styled.button`
-  width: 100%;
-  height: 30px;
-  margin-bottom: 10px;
-
-  border: none;
-  border-radius: 2px;
-  color: white;
-  background-color: #7b6d6c;
-`;
-
-export const BookmarkButton = styled.button`
-  width: 100%;
-
-  height: 30px;
-
-  border: none;
-  border-radius: 2px;
-
-  background-color: white;
-  border: 1px solid #7b6d6c;
-  color: #7b6d6c;
-`;

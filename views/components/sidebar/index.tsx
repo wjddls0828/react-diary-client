@@ -1,17 +1,22 @@
-import Link from 'next/link';
+import router from 'next/router';
 import React from 'react';
+import ThemeButton from 'views/components/theme-button';
 import * as S from './styles';
 
 const Sidebar: React.FC = () => {
+  const handleOnClick = (href: string) => {
+    router.push(href);
+  };
+
   return (
     <S.Sidebar>
       <S.UserProfile>수영 님</S.UserProfile>
-      <Link href='/post'>
-        <S.PostButton>글쓰기</S.PostButton>
-      </Link>
-      <Link href='/bookmark'>
-        <S.BookmarkButton>책갈피 보기</S.BookmarkButton>
-      </Link>
+      <ThemeButton text={'글쓰기'} onClick={() => handleOnClick('/post')} isBrownTheme={true} />
+      <ThemeButton
+        text={'책갈피 보기'}
+        onClick={() => handleOnClick('/bookmark')}
+        isBrownTheme={false}
+      />
     </S.Sidebar>
   );
 };
