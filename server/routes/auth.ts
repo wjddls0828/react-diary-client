@@ -4,7 +4,7 @@ import { RawGoogleUser, GoogleUserDTO } from '../service/google/dto/googleUserDt
 import { User } from '../../share/interfaces/user';
 import { GoogleAuthService } from '../service/google/googleAuth';
 import { UserModel } from '../service/userService';
-import setAccessTokenCookie from '../utils/set-cookie';
+import setAccessTokenCookie from '../utils/setAccessCookie';
 
 const authRouter: Router = Router();
 
@@ -22,7 +22,9 @@ authRouter.get('/redirect', async (req: Request, res: Response) => {
 
   const userData = new GoogleUserDTO(googleUser);
   const appUser: User = await UserModel.validateUser(userData);
-  console.log(appUser);
+  const appAccessToken: string = UserModel.createAccessToken(appUser);
+
+  setAccessTokenCookie(res, appAccessToken);
 
   res.redirect('/', 301);
 });

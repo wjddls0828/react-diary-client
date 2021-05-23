@@ -59,4 +59,10 @@ export class UserModel {
       throw new Error();
     }
   }
+
+  public static createAccessToken(user: User): string {
+    return jwt.sign({ data: user, timestamp: Date.now() }, process.env.JWT_SECRET, {
+      expiresIn: Number(process.env.JWT_EXPIRATION),
+    });
+  }
 }
