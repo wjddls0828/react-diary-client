@@ -1,7 +1,10 @@
 import { Router, Request, Response } from 'express';
 import { stringify } from 'querystring';
-import { RawGoogleUser } from '../service/google/dto/googleUserDto';
+import { RawGoogleUser, GoogleUserDTO } from '../service/google/dto/googleUserDto';
+import { User } from '../../share/interfaces/user';
 import { GoogleAuthService } from '../service/google/googleAuth';
+import { UserModel } from '../service/userService';
+import setAccessTokenCookie from '../utils/set-cookie';
 
 const authRouter: Router = Router();
 
@@ -16,10 +19,10 @@ authRouter.get('/redirect', async (req: Request, res: Response) => {
   const googleUser: RawGoogleUser = await GoogleAuthService.getGoogleUserInfoByToken(
     googleAccessToken
   );
-  console.log(googleUser);
 
-  // pass to app userService
-  // ...
+  const userData = new GoogleUserDTO(googleUser);
+  const appUser: User = await UserModel.validateUser(userData);
+  console.log(appUser);
 
   res.redirect('/', 301);
 });
