@@ -1,4 +1,6 @@
 import postRouter from './routes/post';
+import authRouter from './routes/auth';
+
 const express = require('express');
 const next = require('next');
 const dotenv = require('dotenv');
@@ -14,6 +16,7 @@ app
   .then(() => {
     const server = express();
 
+    server.use('/api/auth', authRouter);
     server.use('/api/posts', postRouter);
 
     server.get('*', (req, res) => {
