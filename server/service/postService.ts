@@ -1,4 +1,4 @@
-import DBPool from './index';
+import DBPool from './config';
 import { Post } from '../../share/interfaces/post';
 import { PoolConnection } from 'mysql2/promise';
 

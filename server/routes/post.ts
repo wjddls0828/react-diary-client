@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import PostService from '../db/postService';
+import PostService from '../service/postService';
 
 const postRouter: Router = Router();
 
