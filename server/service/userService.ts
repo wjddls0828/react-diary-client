@@ -3,13 +3,14 @@ import { PoolConnection } from 'mysql2/promise';
 import { User } from '../../share/interfaces/user';
 import { GoogleUserDTO } from './google/dto/googleUserDto';
 import * as jwt from 'jsonwebtoken';
+import { parseRawData } from '../utils/parseRawData';
 export class UserModel {
   static async findUserByEmail(email: string): Promise<User[]> {
     const connection: PoolConnection = await DBPool.getConnection();
     try {
       const [user] = await connection.query(`SELECT * FROM user WHERE email = ? LIMIT 1`, [email]);
 
-      return JSON.parse(JSON.stringify(user));
+      return parseRawData(user);
     } catch (err) {
       console.error(err.message);
       throw new Error();
@@ -33,7 +34,7 @@ export class UserModel {
       const newUser = await this.findUserByEmail(userInfo.email);
       await connection.commit();
 
-      return JSON.parse(JSON.stringify(newUser));
+      return parseRawData(newUser);
     } catch (err) {
       await connection.rollback();
 
