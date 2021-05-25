@@ -1,11 +1,18 @@
 import Head from 'next/head';
+import { AppProps } from 'next/app';
+import { UserProvider } from 'common/context/user/user';
+import { User } from 'share/interfaces/user';
 
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
-function MyApp({ Component, pageProps }) {
+interface CustomAppProps extends AppProps {
+  user: User;
+}
+
+function MyApp({ Component, pageProps, user }: CustomAppProps) {
   return (
     <>
       <Head>
@@ -14,8 +21,9 @@ function MyApp({ Component, pageProps }) {
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         <meta name='description' content='Web site created using create-next-app' />
       </Head>
-
-      <Component {...pageProps} />
+      <UserProvider user={user}>
+        <Component {...pageProps} />
+      </UserProvider>
     </>
   );
 }
