@@ -25,4 +25,33 @@ export default class PostService {
 
     return parseRawData(data);
   }
+
+  public static async createPost(userId: number, body: PostRequestBody): Promise<Post> {
+    const connection = await DBPool.getConnection();
+    await connection.beginTransaction();
+
+    return await connection
+      .query(`insert into post values (NULL, ?, ?, default, default, ?)`, [
+        userId,
+        body.content,
+        body.moodId,
+      ])
+      .then(async () => {
+        const [newPost] = await connection.query(
+          `select * from post where id = (select last_insert_id())`
+        );
+        await connection.commit();
+
+        return parseRawData(newPost);
+      })
+      .catch(async (err) => {
+        await connection.rollback();
+
+        console.log(err.message);
+        throw new Error();
+      })
+      .finally(() => {
+        connection.release();
+      });
+  }
 }

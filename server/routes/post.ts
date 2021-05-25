@@ -28,4 +28,13 @@ postRouter.get('/:id', async (req: Request, res: Response) => {
   res.status(200).send(post);
 });
 
+postRouter.post('/', async (req: Request, res: Response) => {
+  const userId = req.userId;
+  const post = await PostService.createPost(userId, req.body).catch(() => {
+    res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });
+  });
+
+  res.status(200).send(post);
+});
+
 export default postRouter;
