@@ -13,4 +13,19 @@ postRouter.get('/', async (req: Request, res: Response) => {
   res.status(200).send(posts);
 });
 
+postRouter.get('/:id', async (req: Request, res: Response) => {
+  const userId = req.userId;
+  const postId = parseInt(req.params.id); //TODO: 잘못된 params 입력한 경우
+
+  const post = await PostService.getPostById(userId, postId).catch(() => {
+    res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });
+  });
+
+  if (!post) {
+    res.status(403).send({ error: '잘못된 접근입니다.' });
+  }
+
+  res.status(200).send(post);
+});
+
 export default postRouter;

@@ -13,4 +13,16 @@ export default class PostService {
 
     return parseRawData(data);
   }
+
+  public static async getPostById(userId: number, postId: number): Promise<Post> {
+    const [data] = await DBPool.query(`select * from post where id = ? and userId = ? limit 1`, [
+      postId,
+      userId,
+    ]).catch((err) => {
+      console.error(err.message);
+      throw new Error();
+    });
+
+    return parseRawData(data);
+  }
 }
