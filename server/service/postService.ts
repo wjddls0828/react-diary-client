@@ -86,4 +86,15 @@ export default class PostService {
         connection.release();
       });
   }
+
+  public static async deletePost(userId: number, postId: number): Promise<boolean> {
+    await DBPool.query(`delete from post where id = ? and userId = ?`, [postId, userId]).catch(
+      async (err) => {
+        console.log(err.message);
+        throw new Error();
+      }
+    );
+
+    return true;
+  }
 }
