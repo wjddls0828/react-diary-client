@@ -1,5 +1,6 @@
 import postRouter from './routes/post';
 import authRouter from './routes/auth';
+import authMiddleware from './middleware/authMiddleware';
 import cookieParser from 'cookie-parser';
 
 const express = require('express');
@@ -20,7 +21,7 @@ app
     server.use(express.json());
 
     server.use('/api/auth', authRouter);
-    server.use('/api/posts', postRouter);
+    server.use('/api/posts', authMiddleware, postRouter);
 
     server.get('*', (req, res) => {
       return handle(req, res);
