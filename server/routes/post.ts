@@ -37,4 +37,15 @@ postRouter.post('/', async (req: Request, res: Response) => {
   res.status(200).send(post);
 });
 
+postRouter.patch('/:id', async (req: Request, res: Response) => {
+  const userId = req.userId;
+  const postId = parseInt(req.params.id);
+
+  const post = await PostService.updatePost(userId, postId, req.body).catch(() => {
+    res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });
+  });
+
+  res.status(200).send(post);
+});
+
 export default postRouter;

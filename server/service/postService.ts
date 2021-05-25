@@ -54,4 +54,36 @@ export default class PostService {
         connection.release();
       });
   }
+
+  public static async updatePost(
+    userId: number,
+    postId: number,
+    body: Partial<PostRequestBody>
+  ): Promise<Post> {
+    const connection = await DBPool.getConnection();
+    await connection.beginTransaction();
+
+    return await connection
+      .query(`update post set content = ?, moodId = ? where id = ? and userId = ?`, [
+        body.content,
+        body.moodId,
+        postId,
+        userId,
+      ])
+      .then(async () => {
+        const post = await this.getPostById(userId, postId);
+        await connection.commit();
+
+        return parseRawData(post);
+      })
+      .catch(async (err) => {
+        await connection.rollback();
+
+        console.log(err.message);
+        throw new Error();
+      })
+      .finally(() => {
+        connection.release();
+      });
+  }
 }
