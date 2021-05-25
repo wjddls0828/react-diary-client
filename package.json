@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "build:server": "next build && tsc --project tsconfig.server.json",
-    "start:server": "node dist/index.js",
+    "start:server": "node dist/server/index.js",
     "type-check": "tsc"
   },
   "dependencies": {
