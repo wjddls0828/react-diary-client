@@ -14,7 +14,7 @@ export const Sidebar = styled.div`
 `;
 
 export const UserProfile = styled.div`
-  width: 100px;
+  width: 100%;
   margin-bottom: 10px;
 
   color: #7b6d6c;
