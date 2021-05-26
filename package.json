@@ -2,11 +2,11 @@
   "name": "with-typescript",
   "version": "1.0.0",
   "scripts": {
-    "dev": "nodemon",
-    "build": "next build",
-    "start": "next start",
-    "build:server": "next build && tsc --project tsconfig.server.json",
-    "start:server": "node dist/server/index.js",
+    "dev": "NODE_ENV=development nodemon",
+    "build": "NODE_ENV=production next build",
+    "start": "NODE_ENV=production next start",
+    "build:server": "NODE_ENV=production next build && tsc --project tsconfig.server.json",
+    "start:server": "NODE_ENV=production node dist/server/index.js",
     "type-check": "tsc"
   },
   "dependencies": {
