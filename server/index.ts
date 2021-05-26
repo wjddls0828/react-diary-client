@@ -1,3 +1,4 @@
+import postRouter from './routes/post';
 const express = require('express');
 const next = require('next');
 const dotenv = require('dotenv');
@@ -13,8 +14,10 @@ app
   .then(() => {
     const server = express();
 
+    server.use('/api/posts', postRouter);
+
     server.get('*', (req, res) => {
-      return handle(req, res, '*');
+      return handle(req, res);
     });
 
     server.listen(port, () => {

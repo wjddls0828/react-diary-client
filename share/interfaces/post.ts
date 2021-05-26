@@ -1,14 +1,13 @@
 export interface Post {
   id: number;
   userId: number;
-  title: string;
+  moodId: number;
   content: string;
-  isCompleted: boolean;
-  isBookmarked: boolean;
   createdAt: string;
+  isCompleted: boolean;
 }
 
 export interface PostRequestBody {
-  title: string;
+  moodId: number;
   content: string;
 }
