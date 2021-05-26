@@ -5,7 +5,8 @@
     "outDir": "dist",
     "target": "es2017",
     "isolatedModules": false,
-    "noEmit": false
+    "noEmit": false,
+    "noUnusedParameters": false
   },
   "exclude": ["node_modules"],
   "include": ["server"]
