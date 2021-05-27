@@ -20,6 +20,48 @@ export default class PostService {
     return parseRawData(data);
   }
 
+  // 기분별 보기
+  public static async getPostsByMoodId(
+    userId: number,
+    moodId: number,
+    page: number
+  ): Promise<Post[]> {
+    const take = POSTS_PER_PAGE;
+    const skip = (page - 1) * POSTS_PER_PAGE;
+
+    const [data] = await DBPool.query(
+      `select * from post where userId = ? and moodId = ?  
+       LIMIT ? OFFSET ?`,
+      [userId, moodId, take, skip]
+    ).catch((err) => {
+      console.error(err.message);
+      throw new Error();
+    });
+
+    return parseRawData(data);
+  }
+
+  // 검색기능
+  public static async getPostsByKeyword(
+    userId: number,
+    keyword: string,
+    page: number
+  ): Promise<Post[]> {
+    const take = POSTS_PER_PAGE;
+    const skip = (page - 1) * POSTS_PER_PAGE;
+
+    const [data] = await DBPool.query(
+      `SELECT * FROM post WHERE userId =? and content LIKE '%${keyword}%' 
+       LIMIT ? OFFSET ?`,
+      [userId, take, skip]
+    ).catch((err) => {
+      console.error(err.message);
+      throw new Error();
+    });
+
+    return parseRawData(data);
+  }
+
   public static async getPostById(userId: number, postId: number): Promise<Post> {
     const [data] = await DBPool.query(`select * from post where id = ? and userId = ? limit 1`, [
       postId,
