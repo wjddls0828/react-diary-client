@@ -1,15 +1,21 @@
 import DBPool from './config';
 import { Post, PostRequestBody } from '../../share/interfaces/post';
 import { parseRawData } from '../utils/parseRawData';
+import { POSTS_PER_PAGE } from '../../share/constant';
 
 export default class PostService {
-  public static async getAllPosts(userId: number): Promise<Post[]> {
-    const [data] = await DBPool.query(`select * from post where userId = ?`, [userId]).catch(
-      (err) => {
-        console.error(err.message);
-        throw new Error();
-      }
-    );
+  public static async getAllPosts(userId: number, page: number): Promise<Post[]> {
+    const take = POSTS_PER_PAGE;
+    const skip = (page - 1) * POSTS_PER_PAGE;
+
+    const [data] = await DBPool.query(`select * from post where userId = ? LIMIT ? OFFSET ?`, [
+      userId,
+      take,
+      skip,
+    ]).catch((err) => {
+      console.error(err.message);
+      throw new Error();
+    });
 
     return parseRawData(data);
   }
