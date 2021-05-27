@@ -30,7 +30,7 @@ export default class PostService {
     const skip = (page - 1) * POSTS_PER_PAGE;
 
     const [data] = await DBPool.query(
-      `select * from post where userId = ? and moodId = ?  
+      `select * from post where userId = ? and moodId = ? 
        LIMIT ? OFFSET ?`,
       [userId, moodId, take, skip]
     ).catch((err) => {
@@ -51,7 +51,7 @@ export default class PostService {
     const skip = (page - 1) * POSTS_PER_PAGE;
 
     const [data] = await DBPool.query(
-      `SELECT * FROM post WHERE userId =? and content LIKE '%${keyword}%' 
+      `SELECT * FROM post WHERE userId =? and content LIKE '%${keyword}%'
        LIMIT ? OFFSET ?`,
       [userId, take, skip]
     ).catch((err) => {
@@ -144,5 +144,25 @@ export default class PostService {
     );
 
     return true;
+  }
+
+  // 월별로 기분별 게시글 개수 조회
+  public static async getMonthlyMoodPostCountsBy(userId: number, yearMonth: string) {
+    const [data] = await DBPool.query(
+      `SELECT mood.id as moodId, COUNT(p.id) as count FROM 	
+      (select id, moodId from post 
+		    where userId = ?
+        AND DATE_FORMAT(createdAt, '%Y%m') = ?) 
+      as p 
+      RIGHT JOIN mood 
+      ON mood.id = p.moodId
+      GROUP BY mood.id;`,
+      [userId, yearMonth]
+    ).catch((err) => {
+      console.error(err.message);
+      throw new Error();
+    });
+
+    return parseRawData(data);
   }
 }

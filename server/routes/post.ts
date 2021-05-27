@@ -33,6 +33,19 @@ postRouter.get('/mood/:id', async (req: Request, res: Response) => {
   res.status(200).send(posts);
 });
 
+// 기분별 monthly 게시글 개수
+postRouter.get('/mood', async (req: Request, res: Response) => {
+  const userId = req.userId;
+  const yearMonth = req.query.term as string; //'yyyymm'
+
+  const count = await PostService.getMonthlyMoodPostCountsBy(userId, yearMonth).catch((err) => {
+    console.error(err);
+    res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });
+  });
+
+  res.status(200).send(count);
+});
+
 postRouter.get('/', async (req: Request, res: Response) => {
   const userId = req.userId;
   const page = parseInt(req.query.page as string);
