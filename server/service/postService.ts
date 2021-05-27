@@ -8,11 +8,11 @@ export default class PostService {
     const take = POSTS_PER_PAGE;
     const skip = (page - 1) * POSTS_PER_PAGE;
 
-    const [data] = await DBPool.query(`select * from post where userId = ? LIMIT ? OFFSET ?`, [
-      userId,
-      take,
-      skip,
-    ]).catch((err) => {
+    const [data] = await DBPool.query(
+      `select * from post where userId = ? 
+       ORDER BY id DESC LIMIT ? OFFSET ?`,
+      [userId, take, skip]
+    ).catch((err) => {
       console.error(err.message);
       throw new Error();
     });
@@ -31,7 +31,7 @@ export default class PostService {
 
     const [data] = await DBPool.query(
       `select * from post where userId = ? and moodId = ? 
-       LIMIT ? OFFSET ?`,
+       ORDER BY id DESC LIMIT ? OFFSET ?`,
       [userId, moodId, take, skip]
     ).catch((err) => {
       console.error(err.message);
@@ -52,7 +52,7 @@ export default class PostService {
 
     const [data] = await DBPool.query(
       `SELECT * FROM post WHERE userId =? and content LIKE '%${keyword}%'
-       LIMIT ? OFFSET ?`,
+       ORDER BY id DESC LIMIT ? OFFSET ?`,
       [userId, take, skip]
     ).catch((err) => {
       console.error(err.message);
