@@ -1,11 +1,9 @@
 import Layout from 'views/components/layout/index';
-import Header from 'views/components/header';
 import Sidebar from 'views/components/sidebar';
 import React from 'react';
 import router from 'next/router';
 import ThemeButton from 'views/components/theme-button'
 import { GetServerSideProps } from 'next';
-import { Post, PostRequestBody } from '../../share/interfaces/post'
 import { getMockdata } from '../../share/utils/mock-data'
 import * as S from './styles';
 
