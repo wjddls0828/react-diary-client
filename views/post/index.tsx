@@ -8,10 +8,6 @@ import { getMockdata } from '../../share/utils/mock-data'
 import * as S from './styles';
 
 const PostViewPage = ({ post }) => { 
-    const handleOnClick = (href: string) => {
-        router.push(href);
-      };
-
     const deletePost = () => {
         const deleteCheck = confirm("삭제된 글은 복구가 불가능합니다.\n글을 삭제하시겠습니까?");
         if (!deleteCheck) return;
@@ -26,7 +22,7 @@ const PostViewPage = ({ post }) => {
             <S.ButtonContainer>
                 <ThemeButton 
                 text={'수정하기'} 
-                onClick={() => handleOnClick(`/post-input/${post.id}`)} 
+                onClick={() => router.replace('/post')} 
                 isBrownTheme={true} />
                 <ThemeButton text={'삭제하기'}
                 onClick={deletePost}
