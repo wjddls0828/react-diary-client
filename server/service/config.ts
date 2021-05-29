@@ -1,6 +1,8 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
+import { loadEnvConfig } from '@next/env';
 
+loadEnvConfig('./', process.env.NODE_ENV !== 'production');
 dotenv.config();
 
 const DBPool = mysql.createPool({

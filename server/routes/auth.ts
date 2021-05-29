@@ -26,7 +26,7 @@ authRouter.get('/redirect', async (req: Request, res: Response) => {
 
   setAccessTokenCookie(res, appAccessToken);
 
-  res.redirect('/', 301);
+  res.redirect(process.env.CLIENT_BASE_URL, 301);
 });
 
 export default authRouter;
