@@ -113,24 +113,30 @@ export default class PostService {
     const connection = await DBPool.getConnection();
     await connection.beginTransaction();
 
+    const { content, moodId } = body;
+    const hasContent = content != undefined;
+    const hasMoodId = moodId != undefined;
+
     return await connection
-      .query(`update post set content = ?, moodId = ? where id = ? and userId = ?`, [
-        body.content,
-        body.moodId,
-        postId,
-        userId,
-      ])
+      .query(
+        `update post set 
+         content = (case when ? THEN ? ELSE content END), 
+         moodId = (case when ? THEN ? ELSE moodId END)
+        where id = ? and userId = ?`,
+        [hasContent, content, hasMoodId, moodId, postId, userId]
+      )
       .then(async () => {
-        const data = await this.getPostById(userId, postId);
+        const [data] = await connection.query(`select * from post where id = ? and userId = ?`, [
+          postId,
+          userId,
+        ]);
+        const [post] = parseRawData(data);
         await connection.commit();
 
-        const [post] = parseRawData(data);
         return post;
       })
       .catch(async (err) => {
         await connection.rollback();
-
-        console.log(err.message);
         throw new Error();
       })
       .finally(() => {
