@@ -1,20 +1,31 @@
 import postRouter from './routes/post';
+import authRouter from './routes/auth';
+import authMiddleware from './middleware/authMiddleware';
+import cookieParser from 'cookie-parser';
+import { loadEnvConfig } from '@next/env';
+
 const express = require('express');
 const next = require('next');
 const dotenv = require('dotenv');
 
-dotenv.config();
+const dev = process.env.NODE_ENV !== 'production';
+
+dotenv.config(); //for prod
+loadEnvConfig('./', dev); //for dev
 
 const port = process.env.SERVER_PORT;
-const app = next({ dev: true });
+const app = next({ dev });
 const handle = app.getRequestHandler();
 
 app
   .prepare()
   .then(() => {
     const server = express();
+    server.use(cookieParser());
+    server.use(express.json());
 
-    server.use('/api/posts', postRouter);
+    server.use('/api/auth', authRouter);
+    server.use('/api/posts', authMiddleware, postRouter);
 
     server.get('*', (req, res) => {
       return handle(req, res);
