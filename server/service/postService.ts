@@ -1,5 +1,5 @@
 import DBPool from './config';
-import { Post, PostRequestBody } from '../../share/interfaces/post';
+import { Post, PostCountsByMoodId, PostRequestBody } from '../../share/interfaces/post';
 import { parseRawData } from '../utils/parseRawData';
 import { POSTS_PER_PAGE } from '../../share/constant';
 
@@ -71,7 +71,8 @@ export default class PostService {
       throw new Error();
     });
 
-    return parseRawData(data);
+    const [post] = parseRawData(data);
+    return post;
   }
 
   public static async createPost(userId: number, body: PostRequestBody): Promise<Post> {
@@ -85,12 +86,13 @@ export default class PostService {
         body.moodId,
       ])
       .then(async () => {
-        const [newPost] = await connection.query(
+        const [data] = await connection.query(
           `select * from post where id = (select last_insert_id())`
         );
         await connection.commit();
 
-        return parseRawData(newPost);
+        const [newPost] = parseRawData(data);
+        return newPost;
       })
       .catch(async (err) => {
         await connection.rollback();
@@ -119,10 +121,11 @@ export default class PostService {
         userId,
       ])
       .then(async () => {
-        const post = await this.getPostById(userId, postId);
+        const data = await this.getPostById(userId, postId);
         await connection.commit();
 
-        return parseRawData(post);
+        const [post] = parseRawData(data);
+        return post;
       })
       .catch(async (err) => {
         await connection.rollback();
@@ -147,7 +150,10 @@ export default class PostService {
   }
 
   // 월별로 기분별 게시글 개수 조회
-  public static async getMonthlyMoodPostCountsBy(userId: number, yearMonth: string) {
+  public static async getMonthlyMoodPostCountsBy(
+    userId: number,
+    yearMonth: string
+  ): Promise<PostCountsByMoodId[]> {
     const [data] = await DBPool.query(
       `SELECT mood.id as moodId, COUNT(p.id) as count FROM 	
       (select id, moodId from post 
