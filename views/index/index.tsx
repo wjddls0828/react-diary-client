@@ -1,9 +1,9 @@
 import Layout from 'views/components/layout/index';
 import { NextPage } from 'next';
 import { Post } from 'share/interfaces/post';
-import { getMockdata } from 'share/utils/mock-data';
 import * as S from './styles';
 import Sidebar from 'views/components/sidebar';
+import postAPI from 'common/lib/postAPI';
 
 interface IndexPageProps {
   posts: Post[];
@@ -23,9 +23,13 @@ const IndexPage: NextPage<IndexPageProps> = ({ posts }) => {
 export default IndexPage;
 
 export async function getServerSideProps() {
-  const data = await getMockdata();
+  const posts = await postAPI.getPostById(1);
+
+  if (!posts) {
+    return { props: { posts: null } };
+  }
 
   return {
-    props: { posts: data },
+    props: { posts },
   };
 }
