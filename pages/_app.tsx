@@ -2,7 +2,7 @@ import Head from 'next/head';
 import App, { AppContext, AppProps } from 'next/app';
 import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
-import axios from 'axios';
+import axios from 'common/lib/axios';
 import { DecodedUserData, User } from 'share/interfaces/user';
 import { UserProvider } from 'common/context/user/user';
 
