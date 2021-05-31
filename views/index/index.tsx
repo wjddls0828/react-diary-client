@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { Post } from 'share/interfaces/post';
 import * as S from './styles';
 import Sidebar from 'views/components/sidebar';
-import postAPI from 'common/lib/postAPI';
+import postAPI from 'common/api/postAPI';
 
 interface IndexPageProps {
   posts: Post[];
