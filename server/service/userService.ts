@@ -29,7 +29,9 @@ export class UserModel {
         defaultBlogTitle,
       ])
       .then(async () => {
-        const newUser = await this.findUserByEmail(userInfo.email);
+        const [newUser] = await connection.query(`SELECT * FROM user WHERE email = ? LIMIT 1`, [
+          userInfo.email,
+        ]);
         await connection.commit();
 
         return parseRawData(newUser);
