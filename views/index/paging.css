@@ -1,26 +1,26 @@
 .pagebtn {
-    width: 80%;
-    height: 40px;
-    list-style: none;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .pagebtn a {
-    padding: 10px;
-    margin: 8px;
-    border-radius: 5px;
-    border: 1px solid #bdaab4;
-    color: #000000;
-    cursor: pointer;
-  }
-  
-  .pagebtn a:hover {
-    color: white;
-    background-color: #bdaab4;
-  }
-  
-  .page_active_btn a {
-    color: white;
-    background-color: #bdaab4;
-  }
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.pagebtn a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 1px solid #bdaab4;
+  color: #000000;
+  cursor: pointer;
+}
+
+.pagebtn a:hover {
+  color: white;
+  background-color: #bdaab4;
+}
+
+.page_active_btn a {
+  color: white;
+  background-color: #bdaab4;
+}
