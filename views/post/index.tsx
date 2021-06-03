@@ -17,8 +17,13 @@ const PostViewPage = ({ post }) => {
   return (
     <Layout>
       <Sidebar />
-      <S.ContentContainer>
-        <S.PostContent>{post.content}</S.PostContent>
+      <S.PageContentContainer>
+        <S.PostContainer>
+          <S.EmojiDateContainer>
+            {post.moodId} {post.createdAt}
+          </S.EmojiDateContainer>
+          <S.PostContent>{post.content}</S.PostContent>
+        </S.PostContainer>
         <S.ButtonContainer>
           <ThemeButton
             text={'수정하기'}
@@ -27,7 +32,7 @@ const PostViewPage = ({ post }) => {
           />
           <ThemeButton text={'삭제하기'} onClick={deletePost} isBrownTheme={false} />
         </S.ButtonContainer>
-      </S.ContentContainer>
+      </S.PageContentContainer>
     </Layout>
   );
 };
