@@ -25,4 +25,40 @@ export const posts: Post[] = [
     isCompleted: true,
     moodId: 1,
   },
+  {
+    id: 3,
+    userId: 1,
+    content:
+      'hihi consequat ea occaecat aute incididunt dolore cupidatat. Aliqua pariatur cupidatat aliqua pariatur non. Culpa velit velit adipisicing eu. Nulla qui incididunt eiusmod esse quis nostrud eiusmod. Et sint nostrud consectetur aute. Mollit ipsum veniam laborum sit dolor officia ad reprehenderit consectetur est quis tempor ullamco.',
+    createdAt: '2021-05-17',
+    isCompleted: true,
+    moodId: 1,
+  },
+  {
+    id: 4,
+    userId: 1,
+    content:
+      'byebye consequat ea occaecat aute incididunt dolore cupidatat. Aliqua pariatur cupidatat aliqua pariatur non. Culpa velit velit adipisicing eu. Nulla qui incididunt eiusmod esse quis nostrud eiusmod. Et sint nostrud consectetur aute. Mollit ipsum veniam laborum sit dolor officia ad reprehenderit consectetur est quis tempor ullamco.',
+    createdAt: '2021-05-17',
+    isCompleted: true,
+    moodId: 1,
+  },
+  {
+    id: 5,
+    userId: 1,
+    content:
+      'adfasdagwgehwe consequat ea occaecat aute incididunt dolore cupidatat. Aliqua pariatur cupidatat aliqua pariatur non. Culpa velit velit adipisicing eu. Nulla qui incididunt eiusmod esse quis nostrud eiusmod. Et sint nostrud consectetur aute. Mollit ipsum veniam laborum sit dolor officia ad reprehenderit consectetur est quis tempor ullamco.',
+    createdAt: '2021-05-17',
+    isCompleted: true,
+    moodId: 1,
+  },
+  {
+    id: 6,
+    userId: 1,
+    content:
+      'qqqqqqqqqqq consequat ea occaecat aute incididunt dolore cupidatat. Aliqua pariatur cupidatat aliqua pariatur non. Culpa velit velit adipisicing eu. Nulla qui incididunt eiusmod esse quis nostrud eiusmod. Et sint nostrud consectetur aute. Mollit ipsum veniam laborum sit dolor officia ad reprehenderit consectetur est quis tempor ullamco.',
+    createdAt: '2021-05-17',
+    isCompleted: true,
+    moodId: 1,
+  },
 ];

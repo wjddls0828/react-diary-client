@@ -42,8 +42,19 @@ export const PageContentContainer = styled.div`
   align-items: flex-end;
 `;
 
+export const OtherPosts = styled.div`
+  width: 100%;
+  margin-bottom: 10px;
+
+  color: #7b6d6c;
+  font-weight: bolder;
+  font-size: 15px;
+`;
+
 export const ListContainer = styled.div`
   width: 100%;
+  margin-top: 10px;
+  padding: 15px;
   background-color: white;
   color: black;
 `;
