@@ -11,3 +11,8 @@ export interface PostRequestBody {
   moodId: number;
   content: string;
 }
+
+export interface PostCountsByMoodId {
+  moodId: number;
+  count: number;
+}
