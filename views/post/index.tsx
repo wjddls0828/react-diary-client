@@ -11,7 +11,7 @@ const PostViewPage = ({ post }) => {
   const deletePost = () => {
     const deleteCheck = confirm('삭제된 글은 복구가 불가능합니다.\n글을 삭제하시겠습니까?');
     if (!deleteCheck) return;
-    else return; /* 삭제 구현할 부분 */
+    else return; //TODO: api 연동 후 삭제 구현
   };
 
   return (
@@ -26,11 +26,19 @@ const PostViewPage = ({ post }) => {
         </S.PostContainer>
         <S.ButtonContainer>
           <ThemeButton
-            text={'수정하기'}
-            onClick={() => router.replace('/post')}
+            width={'150px'}
+            text={'돌아가기'}
+            onClick={() => router.back()}
             isBrownTheme={true}
           />
-          <ThemeButton text={'삭제하기'} onClick={deletePost} isBrownTheme={false} />
+          <S.EditDeleteButtonContainer>
+            <ThemeButton
+              text={'수정하기'}
+              onClick={() => router.replace('/post')} //TODO: api 연동 후 수정 구현
+              isBrownTheme={true}
+            />
+            <ThemeButton text={'삭제하기'} onClick={deletePost} isBrownTheme={false} />
+          </S.EditDeleteButtonContainer>
         </S.ButtonContainer>
       </S.PageContentContainer>
     </Layout>

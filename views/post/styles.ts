@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const PostContainer = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: column;
 `;
@@ -22,11 +21,17 @@ export const EmojiDateContainer = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
-  width: 300px;
+  width: 100%;
   display: flex;
   margin-top: 15px;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+export const EditDeleteButtonContainer = styled.div`
+  width: 300px;
+  display: flex;
+  flex-direction: row;
 `;
 
 export const PageContentContainer = styled.div`
@@ -35,4 +40,10 @@ export const PageContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+`;
+
+export const ListContainer = styled.div`
+  width: 100%;
+  background-color: white;
+  color: black;
 `;
