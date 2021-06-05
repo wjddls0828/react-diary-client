@@ -5,13 +5,25 @@ import Editor from '@draft-js-plugins/editor';
 
 interface DraftViewerProps {
   rawPostContent: string;
+  style?: DraftViewerStyleProps;
 }
 
-const DraftViewer: React.FC<DraftViewerProps> = ({ rawPostContent }) => {
+interface DraftViewerStyleProps {
+  height?: string;
+  width?: string;
+  overflow?: string;
+  /* you can add */
+}
+
+const DraftViewer: React.FC<DraftViewerProps> = ({ rawPostContent, style }) => {
   const postContentState: ContentState = convertFromRaw(JSON.parse(rawPostContent));
   const postEditorState: EditorState = EditorState.createWithContent(postContentState);
 
-  return <Editor readOnly={true} editorState={postEditorState} onChange={() => {}} />;
+  return (
+    <div style={{ ...style }}>
+      <Editor readOnly={true} editorState={postEditorState} onChange={() => {}} />
+    </div>
+  );
 };
 
 export default React.memo(DraftViewer);
