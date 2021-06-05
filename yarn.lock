@@ -405,6 +405,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-paginate@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@types/react-paginate/-/react-paginate-7.1.0.tgz#e209fe9735f0a68633c82c419ba238133b3b31a1"
+  integrity sha512-P6yboMnZtML4KyglK2p7Wlg+sIkhNUneES+jjFqPeQkjuM93X5QjhdKIW2Ayc7csVvx1pdC9v5R+hQ9KjcYBEQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^17.0.2":
   version "17.0.8"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.8.tgz#fe76e3ba0fbb5602704110fd1e3035cf394778e3"
