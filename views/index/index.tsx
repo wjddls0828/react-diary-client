@@ -1,44 +1,35 @@
 import Layout from 'views/components/layout/index';
 import { NextPage } from 'next';
-import { Post } from 'share/interfaces/post';
+import { PagedPosts, Post } from 'share/interfaces/post';
 import * as S from './styles';
 import Sidebar from 'views/components/sidebar';
 import Search from './search';
 import Diarybox from './diarybox';
-import React, { useState } from 'react';
+import React from 'react';
 import ReactPaginate from 'react-paginate';
-import { getMockdata } from 'share/utils/mock-data';
-
+import postAPI from 'common/api/postAPI';
+import { usePagedPosts } from './hooks';
 interface IndexPageProps {
-  posts: Post[];
+  initialPosts: Post[];
+  total: number;
 }
 
-const IndexPage: NextPage<IndexPageProps> = ({ posts }) => {
-  console.log(posts);
-
-  const [users, setUsers] = useState(posts.slice(0, 50));
-  const [pageNumber, setPageNumber] = useState(0);
-
-  const usersPerPage = 10;
-  const pagesVisited = pageNumber * usersPerPage;
-
-  const diarybox = users.slice(pagesVisited, pagesVisited + usersPerPage).map((posts) => {
-    return <Diarybox posts={posts} />;
-  });
-
-  const pageCount = Math.ceil(users.length / usersPerPage);
-
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
+const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
+  const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total });
 
   return (
     <Layout>
       <Sidebar />
       <S.Mainpage>
         <Search />
-        {diarybox}
+
+        {pagedPosts.map((post) => {
+          return <Diarybox key={post.id} post={post} />;
+        })}
+
         <ReactPaginate
+          pageRangeDisplayed={2}
+          marginPagesDisplayed={3}
           previousLabel={'이전'}
           nextLabel={'다음'}
           pageCount={pageCount}
@@ -54,13 +45,14 @@ const IndexPage: NextPage<IndexPageProps> = ({ posts }) => {
 export default IndexPage;
 
 export async function getServerSideProps() {
-  const posts = await getMockdata();
+  const data: PagedPosts = await postAPI.getAllPostsByPage(1);
+  const { total, posts } = data;
 
-  if (!posts) {
-    return { props: { posts: null } };
+  if (!data) {
+    return { props: { total: 0, initialPosts: [] } };
   }
 
   return {
-    props: { posts },
+    props: { total, initialPosts: posts },
   };
 }

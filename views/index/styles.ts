@@ -5,15 +5,8 @@ export const Mainpage = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-around;
   align-items: center;
-  position: relative;
-`;
-
-export const One_box = styled.div`
-  width: 900px;
-  margin: 30px;
+  justify-content: space-around;
 `;
 
 export const Search_box = styled.div`
