@@ -1,5 +1,6 @@
 import React from 'react';
 import { usePagedBooks } from './hooks';
+import Pagination from 'views/components/pagination';
 import { BookSearchProps } from './types';
 import * as S from './styles';
 import { AiOutlineSearch } from 'react-icons/ai';
@@ -10,12 +11,17 @@ const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
   /* prettier-ignore */
   const {
     books,
+    maxPage,
+    currentPage,
     handleChangeKeyword,
+    updateCurrentPage,
     getBooksByPage,
+    resetPage,
   } = usePagedBooks();
 
   const searchBooks = () => {
-    getBooksByPage(1)();
+    resetPage();
+    getBooksByPage(currentPage)();
   };
 
   const handleEnterKeyPress = (e) => {
@@ -27,7 +33,7 @@ const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
   return (
     <S.BookSeachBar show={show}>
       <S.SearchContainer>
-        <S.SearchButton onClick={getBooksByPage(1)}>
+        <S.SearchButton onClick={searchBooks}>
           <AiOutlineSearch />
         </S.SearchButton>
         <S.SearchInput
@@ -44,6 +50,7 @@ const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
               // TODO book에 필요한 정보만 넘기기
             );
           })}
+          <Pagination currentPage={currentPage} maxPage={maxPage} updatePage={updateCurrentPage} />
         </S.BookSearchList>
       )}
     </S.BookSeachBar>
