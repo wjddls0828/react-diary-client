@@ -8,10 +8,12 @@ const ThemeButton: React.FC<ThemeButtonProps> = ({
   width,
   height,
   onClick,
+  children,
 }) => {
   return (
     <S.ThemeButton onClick={onClick} width={width} height={height} isBrownTheme={isBrownTheme}>
       {text}
+      {children}
     </S.ThemeButton>
   );
 };

@@ -9,6 +9,7 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import postAPI from 'common/api/postAPI';
 import { usePagedPosts } from './hooks';
+import Emptybox from './emptybox';
 interface IndexPageProps {
   initialPosts: Post[];
   total: number;
@@ -23,20 +24,28 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
       <S.Mainpage>
         <Search />
 
-        {pagedPosts.map((post) => {
-          return <Diarybox key={post.id} post={post} />;
-        })}
+        <S.DiaryContainer>
+          {pagedPosts.length ? (
+            pagedPosts.map((post) => {
+              return <Diarybox key={post.id} post={post} />;
+            })
+          ) : (
+            <Emptybox />
+          )}
+        </S.DiaryContainer>
 
-        <ReactPaginate
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={3}
-          previousLabel={'이전'}
-          nextLabel={'다음'}
-          pageCount={pageCount}
-          onPageChange={changePage}
-          containerClassName={'pagebtn'}
-          activeClassName={'page_active_btn'}
-        />
+        {pageCount > 0 && (
+          <ReactPaginate
+            pageRangeDisplayed={2}
+            marginPagesDisplayed={3}
+            previousLabel={'이전'}
+            nextLabel={'다음'}
+            pageCount={pageCount}
+            onPageChange={changePage}
+            containerClassName={'pagebtn'}
+            activeClassName={'page_active_btn'}
+          />
+        )}
       </S.Mainpage>
     </Layout>
   );
