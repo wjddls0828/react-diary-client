@@ -7,7 +7,7 @@ import Search from './search';
 import Diarybox from './diarybox';
 import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import postAPI from 'common/api/postAPI';
+import { getMockdata } from 'share/utils/mock-data';
 
 interface IndexPageProps {
   posts: Post[];
@@ -54,7 +54,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ posts }) => {
 export default IndexPage;
 
 export async function getServerSideProps() {
-  const posts = await postAPI.getPostById(1);
+  const posts = await getMockdata();
 
   if (!posts) {
     return { props: { posts: null } };
