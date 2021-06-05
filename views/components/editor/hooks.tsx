@@ -7,13 +7,14 @@ import {
   DraftHandleValue,
 } from 'draft-js';
 import 'draft-js/dist/Draft.css';
+import { EDITOR_KEY } from './constants';
 
 const emptyContentState = convertFromRaw({
   entityMap: {},
   blocks: [
     {
       text: '',
-      key: 'myeditor',
+      key: EDITOR_KEY,
       type: '',
       entityRanges: [],
       depth: null,

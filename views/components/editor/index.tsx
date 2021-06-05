@@ -2,6 +2,7 @@ import React from 'react';
 import Editor from '@draft-js-plugins/editor';
 import { useEditor } from './hooks';
 import * as S from './styles';
+import { EDITOR_KEY } from './constants';
 
 function DraftEditor() {
   /* prettier-ignore */
@@ -17,7 +18,7 @@ function DraftEditor() {
       <S.EditorContainer>
         <Editor
           ref={editorContainer}
-          editorKey={'myeditor'}
+          editorKey={EDITOR_KEY}
           editorState={editorState}
           onChange={setEditorState}
           handleKeyCommand={handleKeyCommand}
