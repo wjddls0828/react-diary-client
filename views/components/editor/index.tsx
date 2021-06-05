@@ -1,9 +1,10 @@
 import React from 'react';
 import Editor from '@draft-js-plugins/editor';
+import EditorToolbar from 'views/components/editor/editor-toolbar';
 import { useEditor } from './hooks';
 import * as S from './styles';
 import { EDITOR_KEY } from './constants';
-import EditorToolbar from 'views/components/editor/editor-toolbar';
+import ThemeButton from '../theme-button';
 
 function DraftEditor() {
   /* prettier-ignore */
@@ -12,6 +13,7 @@ function DraftEditor() {
     editorState,
     setEditorState,
     handleKeyCommand,
+    submitPost
   } = useEditor();
 
   return (
@@ -27,8 +29,18 @@ function DraftEditor() {
           handleKeyCommand={handleKeyCommand}
         />
       </S.EditorContainer>
+
+      <S.ButtonContainer>
+        <ThemeButton
+          isBrownTheme={true}
+          text={'저장'}
+          width={'150px'}
+          height={'50px'}
+          onClick={submitPost}
+        />
+      </S.ButtonContainer>
     </>
   );
 }
 
-export default DraftEditor;
+export default React.memo(DraftEditor);

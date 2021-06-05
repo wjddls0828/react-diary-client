@@ -12,3 +12,10 @@ export const EditorContainer = styled.div`
 
   cursor: 'text';
 `;
+
+export const ButtonContainer = styled.div`
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  /* margin-bottom: 500px; */
+`;
