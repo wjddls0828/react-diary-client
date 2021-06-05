@@ -7,6 +7,11 @@ export interface Post {
   isCompleted: boolean;
 }
 
+export interface PagedPosts {
+  total: number;
+  posts: Post[];
+}
+
 export interface PostRequestBody {
   moodId: number;
   content: string;
