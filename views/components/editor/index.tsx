@@ -1,7 +1,7 @@
 import React from 'react';
 import Editor from '@draft-js-plugins/editor';
 import EditorToolbar from 'views/components/editor/editor-toolbar';
-import { useEditor } from './hooks';
+import { useEditor, useEditorCustomBlock } from './hooks';
 import * as S from './styles';
 import { EDITOR_KEY } from './constants';
 import ThemeButton from '../theme-button';
@@ -16,6 +16,8 @@ function DraftEditor() {
     submitPost
   } = useEditor();
 
+  const { renderCustomBlock } = useEditorCustomBlock(editorState, setEditorState);
+
   return (
     <>
       <EditorToolbar editorState={editorState} setEditorState={setEditorState} />
@@ -27,6 +29,7 @@ function DraftEditor() {
           editorState={editorState}
           onChange={setEditorState}
           handleKeyCommand={handleKeyCommand}
+          blockRendererFn={renderCustomBlock}
         />
       </S.EditorContainer>
 

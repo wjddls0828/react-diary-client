@@ -12,6 +12,7 @@ import {
 import { AiOutlineUnorderedList, AiOutlineOrderedList } from 'react-icons/ai';
 
 export const EDITOR_KEY = 'myeditor';
+export const ATOMIC_BLOCK_TYPE = 'atomic';
 
 //https:react-icons.github.io/react-icons
 export const INLINE_STYLES: { iconType: IconType; style: string }[] = [
