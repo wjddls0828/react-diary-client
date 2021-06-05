@@ -1,10 +1,15 @@
 import { DraftBlockType, RichUtils } from 'draft-js';
-import React from 'react';
+import React, { useState } from 'react';
 import ToolButton from './button';
 import { BLOCK_STYLES, INLINE_STYLES } from '../constants';
 import * as S from './styles';
+import { GiArchiveResearch } from 'react-icons/gi';
+import BookSearchBar from 'views/components/editor/book-search-bar';
+import { useEditorCustomBlock } from '../hooks';
 
 function EditorToolbar({ editorState, setEditorState }) {
+  const { insertCustomBlock } = useEditorCustomBlock(editorState, setEditorState);
+
   const currentStyle = editorState.getCurrentInlineStyle();
   const selection = editorState.getSelection();
   const blockType = editorState
@@ -19,6 +24,12 @@ function EditorToolbar({ editorState, setEditorState }) {
   const toggleBlockType = (blockType: DraftBlockType) => {
     setEditorState(RichUtils.toggleBlockType(editorState, blockType));
   };
+
+  const [isBookSearchBarOpen, setIsBookSearchBarOpen] = useState(false);
+  const toggleBookSearch = () => {
+    setIsBookSearchBarOpen(!isBookSearchBarOpen);
+  };
+  //TODO : hook 분리
 
   return (
     <S.Toolbar>
@@ -49,6 +60,13 @@ function EditorToolbar({ editorState, setEditorState }) {
           />
         );
       })}
+
+      <S.Separator />
+
+      <S.ToolButton active={isBookSearchBarOpen} onClick={toggleBookSearch}>
+        <GiArchiveResearch />
+      </S.ToolButton>
+      <BookSearchBar show={isBookSearchBarOpen} insertOnEditor={insertCustomBlock} />
     </S.Toolbar>
   );
 }
