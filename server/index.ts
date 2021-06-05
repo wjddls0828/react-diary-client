@@ -7,6 +7,7 @@ import { loadEnvConfig } from '@next/env';
 const express = require('express');
 const next = require('next');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -23,6 +24,7 @@ app
     const server = express();
     server.use(cookieParser());
     server.use(express.json());
+    server.use(cors());
 
     server.use('/api/auth', authRouter);
     server.use('/api/posts', authMiddleware, postRouter);
