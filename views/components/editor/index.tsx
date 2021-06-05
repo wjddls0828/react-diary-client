@@ -3,6 +3,7 @@ import Editor from '@draft-js-plugins/editor';
 import { useEditor } from './hooks';
 import * as S from './styles';
 import { EDITOR_KEY } from './constants';
+import EditorToolbar from 'views/components/editor/editor-toolbar';
 
 function DraftEditor() {
   /* prettier-ignore */
@@ -15,6 +16,8 @@ function DraftEditor() {
 
   return (
     <>
+      <EditorToolbar editorState={editorState} setEditorState={setEditorState} />
+
       <S.EditorContainer>
         <Editor
           ref={editorContainer}
