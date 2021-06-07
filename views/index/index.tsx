@@ -43,26 +43,30 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }
             })}
         </S.MonthlyMoodCountContainer>
 
-        {pagedPosts.length ? (
-          pagedPosts.map((post) => {
-            return <Diarybox key={post.id} post={post} />;
-          })
-        ) : (
-          <Emptybox />
-        )}
+        <S.DiaryListContainer>
+          <S.DiaryBoxContainer>
+            {pagedPosts.length ? (
+              pagedPosts.map((post) => {
+                return <Diarybox key={post.id} post={post} />;
+              })
+            ) : (
+              <Emptybox />
+            )}
+          </S.DiaryBoxContainer>
 
-        {pageCount > 0 && (
-          <ReactPaginate
-            pageRangeDisplayed={2}
-            marginPagesDisplayed={3}
-            previousLabel={'이전'}
-            nextLabel={'다음'}
-            pageCount={pageCount}
-            onPageChange={changePage}
-            containerClassName={'pagebtn'}
-            activeClassName={'page_active_btn'}
-          />
-        )}
+          {pageCount > 0 && (
+            <ReactPaginate
+              pageRangeDisplayed={2}
+              marginPagesDisplayed={3}
+              previousLabel={'이전'}
+              nextLabel={'다음'}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={'pagebtn'}
+              activeClassName={'page_active_btn'}
+            />
+          )}
+        </S.DiaryListContainer>
       </S.Mainpage>
     </Layout>
   );

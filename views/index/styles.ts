@@ -28,6 +28,30 @@ export const MoodCountContainerTitle = styled.div`
   color: ${THEME_COLOR.BROWN};
 `;
 
-export const Search_box = styled.div`
+export const DiaryListContainer = styled.div`
+  width: 100%;
+
+  background-color: white;
+
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const DiaryBoxContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: white;
+
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const SearchBox = styled.div`
   margin: 30px;
 `;
