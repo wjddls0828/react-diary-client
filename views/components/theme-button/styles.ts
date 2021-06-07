@@ -1,3 +1,4 @@
+import { THEME_COLOR } from 'common/constant';
 import styled, { css } from 'styled-components';
 import { ThemeButtonStyleProps } from './types';
 
@@ -14,10 +15,18 @@ export const ThemeButton = styled.button<ThemeButtonStyleProps>`
           border: none;
           background-color: #7b6d6c;
           color: white;
+          :hover {
+            background-color: ${THEME_COLOR.LIGHT_BROWN};
+          }
         `
       : css`
           border: 1px solid #7b6d6c;
           background-color: white;
           color: #7b6d6c;
+          :hover {
+            background-color: ${THEME_COLOR.BROWN};
+            opacity: 0.6;
+            color: ${THEME_COLOR.BEIGE};
+          }
         `}
 `;
