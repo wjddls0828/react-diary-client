@@ -8,8 +8,9 @@ import ReactPaginate from 'react-paginate';
 import postAPI from 'common/api/postAPI';
 import { usePagedPosts } from './hooks';
 import Emptybox from './emptybox';
-import { PagedPosts, Post, PostCountsByMoodId } from 'share/interfaces/post';
+import MoodCount from './mood-count';
 import { getCurrentYearMonth } from 'common/utils/getCurrentYearMonth';
+import { PagedPosts, Post, PostCountsByMoodId } from 'share/interfaces/post';
 interface IndexPageProps {
   initialPosts: Post[];
   total: number;
@@ -19,6 +20,14 @@ interface IndexPageProps {
 const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }) => {
   const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total });
 
+  const monthlyTotal = useMemo(
+    () =>
+      moodCounts.reduce((acc, mood) => {
+        return acc + mood.count;
+      }, 0),
+    [moodCounts]
+  );
+
   return (
     <Layout>
       <Sidebar />
@@ -27,8 +36,10 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }
         <S.MonthlyMoodCountContainer>
           <S.MoodCountContainerTitle>이번 달 내 기분은 ...</S.MoodCountContainerTitle>
           {moodCounts &&
-            moodCounts.map((moodCount: PostCountsByMoodId) => {
-              return <div key={moodCount.moodId}>{moodCount.count}</div>;
+            moodCounts.map((moodCount) => {
+              return (
+                <MoodCount key={moodCount.moodId} moodCount={moodCount} total={monthlyTotal} />
+              );
             })}
         </S.MonthlyMoodCountContainer>
 
