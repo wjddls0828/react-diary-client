@@ -1,7 +1,7 @@
 import React from 'react';
 import Editor from '@draft-js-plugins/editor';
 import EditorToolbar from 'views/components/editor/editor-toolbar';
-import { useEditor, useEditorCustomBlock } from './hooks';
+import { useEditor, useEditorCustomBlock, useEditorOnSubmit } from './hooks';
 import * as S from './styles';
 import { EDITOR_KEY } from './constants';
 import ThemeButton from '../theme-button';
@@ -21,10 +21,10 @@ function DraftEditor({ postState }: DraftEditorProps) {
     editorState,
     setEditorState,
     handleKeyCommand,
-    submitPost
   } = useEditor(postState && postState.contentState);
 
   const { renderCustomBlock } = useEditorCustomBlock(editorState, setEditorState);
+  const { createPost, editPost } = useEditorOnSubmit(editorState);
 
   return (
     <>
@@ -47,7 +47,7 @@ function DraftEditor({ postState }: DraftEditorProps) {
           text={'저장'}
           width={'150px'}
           height={'50px'}
-          onClick={submitPost}
+          onClick={postState ? () => editPost(postState.id) : createPost}
         />
       </S.ButtonContainer>
     </>

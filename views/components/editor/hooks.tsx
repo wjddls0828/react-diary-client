@@ -30,7 +30,6 @@ const emptyContentState = convertFromRaw({
 });
 
 export const useEditor = (initialContent?: ContentState) => {
-  const router = useRouter();
   const editorContainer = useRef(null);
   const initialState = EditorState.createWithContent(
     initialContent ? initialContent : emptyContentState
@@ -48,27 +47,47 @@ export const useEditor = (initialContent?: ContentState) => {
     return 'not-handled';
   }, []);
 
-  const submitPost = async () => {
+  return {
+    editorContainer,
+    editorState,
+    setEditorState,
+    handleKeyCommand,
+  };
+};
+
+export const useEditorOnSubmit = (editorState: EditorState) => {
+  const router = useRouter();
+
+  const getRawContent = () => {
     const contentState: ContentState = editorState.getCurrentContent();
     const hasText: boolean = contentState.hasText();
-
     if (!hasText) {
       alert('내용을 입력해주새요');
       return;
     }
 
     const content: string = JSON.stringify(convertToRaw(contentState));
+
+    return content;
+  };
+
+  const createPost = async () => {
+    const content = getRawContent();
+    if (!content) return;
+
     const post: Post = await postAPI.createPost({ content: content, moodId: 1 });
     router.replace(`post/${post.id}`);
   };
 
-  return {
-    editorContainer,
-    editorState,
-    setEditorState,
-    handleKeyCommand,
-    submitPost,
+  const editPost = async (postId: number) => {
+    const content = getRawContent();
+    if (!content) return;
+
+    const post: Post = await postAPI.updatePost(postId, { content: content, moodId: 1 });
+    router.push(`/post/${post.id}`);
   };
+
+  return { createPost, editPost };
 };
 
 /* Custom Block 삽입 hook */
