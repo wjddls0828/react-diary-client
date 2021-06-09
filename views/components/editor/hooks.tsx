@@ -55,9 +55,8 @@ export const useEditor = (initialContent?: ContentState) => {
   };
 };
 
-export const useEditorOnSubmit = (editorState: EditorState) => {
+export const useEditorOnSubmit = (editorState: EditorState, moodId: number) => {
   const router = useRouter();
-
   const getRawContent = () => {
     const contentState: ContentState = editorState.getCurrentContent();
     const hasText: boolean = contentState.hasText();
@@ -75,7 +74,7 @@ export const useEditorOnSubmit = (editorState: EditorState) => {
     const content = getRawContent();
     if (!content) return;
 
-    const post: Post = await postAPI.createPost({ content: content, moodId: 1 });
+    const post: Post = await postAPI.createPost({ content, moodId });
     router.replace(`post/${post.id}`);
   };
 
@@ -83,11 +82,14 @@ export const useEditorOnSubmit = (editorState: EditorState) => {
     const content = getRawContent();
     if (!content) return;
 
-    const post: Post = await postAPI.updatePost(postId, { content: content, moodId: 1 });
+    const post: Post = await postAPI.updatePost(postId, { content, moodId });
     router.push(`/post/${post.id}`);
   };
 
-  return { createPost, editPost };
+  return {
+    createPost,
+    editPost,
+  };
 };
 
 /* Custom Block 삽입 hook */

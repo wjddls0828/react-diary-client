@@ -7,13 +7,13 @@ import { ContentState, convertFromRaw } from 'draft-js';
 import { Post } from 'share/interfaces/post';
 
 const PostEditPage = ({ post }: { post: Post }) => {
-  const { id, content } = post;
+  const { id, content, moodId } = post;
   const contentState: ContentState = convertFromRaw(JSON.parse(content));
 
   return (
     <Layout>
       <S.PostEditPageContainer>
-        <Editor postState={{ id, contentState }} />
+        <Editor postState={{ id, contentState, moodId }} />
       </S.PostEditPageContainer>
     </Layout>
   );
