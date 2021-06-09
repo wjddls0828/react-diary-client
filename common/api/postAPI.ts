@@ -1,11 +1,11 @@
-import { Post, PostCountsByMoodId, PostRequestBody } from 'share/interfaces/post';
+import { PagedPosts, Post, PostCountsByMoodId, PostRequestBody } from 'share/interfaces/post';
 import axios from './axios';
 import endpoints from './endpoints';
 
 const postAPI = {
-  getAllPosts: async (page: number): Promise<Post[]> => {
-    const posts: Post[] = await axios
-      .get<Post[]>(`${endpoints.POST_API}?page=${page}`)
+  getAllPostsByPage: async (page: number): Promise<PagedPosts> => {
+    const posts: PagedPosts = await axios
+      .get<PagedPosts>(`${endpoints.POST_API}?page=${page}`)
       .catch((err) => {
         console.error(err);
         return null;

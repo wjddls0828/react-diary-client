@@ -1,7 +1,7 @@
 import { Router, Response } from 'express';
 import PostService from '../service/postService';
 import Request from '../extend';
-import { Post, PostCountsByMoodId } from '../../share/interfaces/post';
+import { PagedPosts, Post, PostCountsByMoodId } from '../../share/interfaces/post';
 
 const postRouter: Router = Router();
 
@@ -57,7 +57,7 @@ postRouter.get('/', async (req: Request, res: Response) => {
   const userId = req.userId;
   const page = parseInt(req.query.page as string);
 
-  const posts: Post[] | void = await PostService.getAllPosts(userId, page).catch(() => {
+  const posts: PagedPosts | void = await PostService.getAllPostsByPage(userId, page).catch(() => {
     res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });
   });
 

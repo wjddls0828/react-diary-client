@@ -1,14 +1,14 @@
 import DBPool from './config';
-import { Post, PostCountsByMoodId, PostRequestBody } from '../../share/interfaces/post';
+import { Post, PagedPosts, PostCountsByMoodId, PostRequestBody } from '../../share/interfaces/post';
 import { parseRawData } from '../utils/parseRawData';
 import { POSTS_PER_PAGE } from '../../share/constant';
 
 export default class PostService {
-  public static async getAllPosts(userId: number, page: number): Promise<Post[]> {
+  public static async getAllPostsByPage(userId: number, page: number): Promise<PagedPosts> {
     const take = POSTS_PER_PAGE;
     const skip = (page - 1) * POSTS_PER_PAGE;
 
-    const [data] = await DBPool.query(
+    const [postsData] = await DBPool.query(
       `select * from post where userId = ? 
        ORDER BY id DESC LIMIT ? OFFSET ?`,
       [userId, take, skip]
@@ -17,7 +17,14 @@ export default class PostService {
       throw new Error();
     });
 
-    return parseRawData(data);
+    const [totalData] = await DBPool.query(`select count(*) as total from post where userId = ?`, [
+      userId,
+    ]);
+
+    const [data] = parseRawData(totalData);
+    data.posts = parseRawData(postsData);
+
+    return data;
   }
 
   // 기분별 보기
