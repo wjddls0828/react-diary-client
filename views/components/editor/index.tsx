@@ -5,8 +5,16 @@ import { useEditor, useEditorCustomBlock } from './hooks';
 import * as S from './styles';
 import { EDITOR_KEY } from './constants';
 import ThemeButton from '../theme-button';
+import { ContentState } from 'draft-js';
 
-function DraftEditor() {
+interface DraftEditorProps {
+  postState?: {
+    id: number;
+    contentState: ContentState;
+  };
+}
+
+function DraftEditor({ postState }: DraftEditorProps) {
   /* prettier-ignore */
   const {
     editorContainer,
@@ -14,7 +22,7 @@ function DraftEditor() {
     setEditorState,
     handleKeyCommand,
     submitPost
-  } = useEditor();
+  } = useEditor(postState && postState.contentState);
 
   const { renderCustomBlock } = useEditorCustomBlock(editorState, setEditorState);
 

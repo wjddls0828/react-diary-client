@@ -29,10 +29,12 @@ const emptyContentState = convertFromRaw({
   ],
 });
 
-export const useEditor = () => {
+export const useEditor = (initialContent?: ContentState) => {
   const router = useRouter();
   const editorContainer = useRef(null);
-  const initialState = EditorState.createWithContent(emptyContentState);
+  const initialState = EditorState.createWithContent(
+    initialContent ? initialContent : emptyContentState
+  );
   const [editorState, setEditorState] = useState(initialState);
 
   const handleKeyCommand = useCallback((command: DraftEditorCommand): DraftHandleValue => {
