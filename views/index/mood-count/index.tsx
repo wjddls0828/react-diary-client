@@ -13,7 +13,7 @@ const MoodCount: React.FC<MoodCountProps> = ({ moodCount, total }) => {
   const { moodId, count } = moodCount;
 
   const moodIcon: MoodIcon = MOOD_ICONS.find((icon) => icon.id === moodId);
-  const percent: number = total ? Math.ceil(count / total) * 100 : 0;
+  const percent: number = total ? Math.round((count / total) * 100) : 0;
 
   return (
     <S.MoodCount key={moodId}>
