@@ -5,7 +5,7 @@
 */
 
 export interface ThemeButtonProps {
-  text: string;
+  text?: string;
   onClick: () => void;
   isBrownTheme: boolean;
   width?: string;
