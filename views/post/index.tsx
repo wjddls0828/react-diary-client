@@ -10,14 +10,12 @@ import { GetServerSideProps } from 'next';
 import { getMockdata } from '../../share/utils/mock-data';
 import postAPI from 'common/api/postAPI';
 import DraftViewer from 'views/components/editor-viewer';
-
 import * as S from './styles';
 
 interface PostViewPageProps {
   post: Post;
   postList: Post[];
 }
-
 interface PostListProps {
   label: string;
   value: number;
@@ -26,20 +24,21 @@ interface PostListProps {
 const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
   const deletePost = () => {
     const deleteCheck = confirm('삭제된 글은 복구가 불가능합니다.\n글을 삭제하시겠습니까?');
-
     if (!deleteCheck) return;
     else {
       const result = postAPI.deletePost(post.id);
-
       if (!result) alert('삭제 실패');
       else alert('삭제가 완료되었습니다.\n다이어리 홈 화면으로 이동합니다.');
-
       router.replace('/');
     }
   };
 
   const updatePost = () => {
     router.push(`/post-input/${post.id}`);
+  };
+
+  const otherPostClickHandler = (list) => {
+    router.replace('/post/' + list.value);
   };
 
   const otherPosts = postList.map((p: Post): PostListProps => {
@@ -75,7 +74,7 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
         </S.ButtonContainer>
         <S.ListContainer>
           <S.OtherPosts>다른 글 보기</S.OtherPosts>
-          <ListBox options={otherPosts} onChange={(e) => router.replace('/post/' + e.value)} />​
+          <ListBox options={otherPosts} onChange={otherPostClickHandler} />​
         </S.ListContainer>
       </S.PageContentContainer>
     </Layout>
