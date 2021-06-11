@@ -26,7 +26,7 @@ function DraftEditor({ postState }: DraftEditorProps) {
     handleKeyCommand,
   } = useEditor(postState && postState.contentState);
 
-  const [moodId, setMoodId] = useState<number>(postState && postState.moodId);
+  const [moodId, setMoodId] = useState<number>(postState ? postState.moodId : 1);
   const { renderCustomBlock } = useEditorCustomBlock(editorState, setEditorState);
   const { createPost, editPost } = useEditorOnSubmit(editorState, moodId);
 
