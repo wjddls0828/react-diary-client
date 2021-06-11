@@ -55,10 +55,10 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
       <S.PageContentContainer>
         <S.PostContainer>
           <S.EmojiDateContainer>
-            ​ {post.moodId} {post.createdAt.slice(0, 10)}​
+            {post.moodId} {post.createdAt.slice(0, 10)}​
           </S.EmojiDateContainer>
           <S.PostContent>
-            ​ <DraftViewer rawPostContent={post.content} />​
+            <DraftViewer rawPostContent={post.content} />​
           </S.PostContent>
         </S.PostContainer>
         <S.ButtonContainer>
@@ -69,13 +69,13 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
             isBrownTheme={true}
           />
           <S.EditDeleteButtonContainer>
-            ​ <ThemeButton text={'수정하기'} onClick={updatePost} isBrownTheme={true} />
-            ​ <ThemeButton text={'삭제하기'} onClick={deletePost} isBrownTheme={false} />​
+            ​<ThemeButton text={'수정하기'} onClick={updatePost} isBrownTheme={true} />
+            ​<ThemeButton text={'삭제하기'} onClick={deletePost} isBrownTheme={false} />​
           </S.EditDeleteButtonContainer>
         </S.ButtonContainer>
         <S.ListContainer>
-          ​ <S.OtherPosts>다른 글 보기</S.OtherPosts>
-          ​ <ListBox options={otherPosts} onChange={(e) => router.replace('/post/' + e.value)} />​
+          <S.OtherPosts>다른 글 보기</S.OtherPosts>
+          <ListBox options={otherPosts} onChange={(e) => router.replace('/post/' + e.value)} />​
         </S.ListContainer>
       </S.PageContentContainer>
     </Layout>
