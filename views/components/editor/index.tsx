@@ -65,6 +65,7 @@ function DraftEditor({ postState }: DraftEditorProps) {
           onChange={setEditorState}
           handleKeyCommand={handleKeyCommand}
           blockRendererFn={renderCustomBlock}
+          placeholder={'나만의 일상을 기록해보세요 :)'}
         />
       </S.EditorContainer>
 
