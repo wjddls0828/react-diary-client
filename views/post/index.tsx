@@ -34,11 +34,11 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
   };
 
   const updatePost = () => {
-    router.push(`/post-input/${post.id}`);
+    router.push(`/post/${post.id}/edit`);
   };
 
   const otherPostClickHandler = (list) => {
-    router.replace('/post/' + list.value);
+    router.push('/post/' + list.value);
   };
 
   const otherPosts = postList.map((p: Post): PostListProps => {
