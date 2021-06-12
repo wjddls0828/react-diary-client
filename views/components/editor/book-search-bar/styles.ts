@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const BookSeachBar = styled.div<{ show: boolean }>`
   z-index: 10;
-  position: fixed;
+  position: absolute;
 
   right: 0px;
   margin-top: 35px;

@@ -75,15 +75,15 @@ export const useEditorOnSubmit = (editorState: EditorState, moodId: number) => {
     if (!content) return;
 
     const post: Post = await postAPI.createPost({ content, moodId });
-    router.replace(`post/${post.id}`);
+    if (post) router.push(`/post/${post.id}`);
   };
 
   const editPost = async (postId: number) => {
     const content = getRawContent();
     if (!content) return;
 
-    const post: Post = await postAPI.updatePost(postId, { content, moodId });
-    router.push(`/post/${post.id}`);
+    await postAPI.updatePost(postId, { content, moodId });
+    router.push(`/post/${postId}`);
   };
 
   return {
