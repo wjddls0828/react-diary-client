@@ -3,6 +3,8 @@ import router from 'next/router';
 import React from 'react';
 import ThemeButton from 'views/components/theme-button';
 import * as S from './styles';
+import { quotes_mood3 } from 'share/utils/quotes_mood3';
+import { Card } from 'antd';
 
 const Sidebar: React.FC = () => {
   const user = useUser();
@@ -19,6 +21,11 @@ const Sidebar: React.FC = () => {
         onClick={() => handleOnClick('/bookmark')}
         isBrownTheme={false}
       />
+      <S.PCard>
+        <Card title='오늘의 힘이 되는 말'>
+          {quotes_mood3[Math.floor(Math.random() * quotes_mood3.length)]}
+        </Card>
+      </S.PCard>
     </S.Sidebar>
   );
 };
