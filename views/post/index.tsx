@@ -8,6 +8,8 @@ import { ListBox } from 'primereact/listbox';
 import { PagedPosts, Post } from 'share/interfaces/post';
 import { GetServerSideProps } from 'next';
 import { ContentState, convertFromRaw } from 'draft-js';
+import { MOOD_ICONS, MoodIcon } from 'common/constant';
+import Image from 'next/image';
 import postAPI from 'common/api/postAPI';
 import DraftViewer from 'views/components/editor-viewer';
 import * as S from './styles';
@@ -22,6 +24,7 @@ interface PostListProps {
 }
 
 const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
+  const moodIcon: MoodIcon = MOOD_ICONS.find((icon) => icon.id === post.moodId);
   const deletePost = () => {
     const deleteCheck = confirm('삭제된 글은 복구가 불가능합니다.\n글을 삭제하시겠습니까?');
     if (!deleteCheck) return;
@@ -67,7 +70,8 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
       <S.PageContentContainer>
         <S.PostContainer>
           <S.EmojiDateContainer>
-            {post.moodId} {post.createdAt.slice(0, 10)}​
+            <Image src={`/${moodIcon.src}`} width={'50px'} height={'50px'} />{' '}
+            {post.createdAt.slice(0, 10)}​
           </S.EmojiDateContainer>
           <S.PostContent>
             <DraftViewer rawPostContent={post.content} />​
