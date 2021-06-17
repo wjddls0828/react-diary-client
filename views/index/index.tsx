@@ -11,6 +11,8 @@ import Emptybox from './emptybox';
 import MoodCount from './mood-count';
 import { getCurrentYearMonth } from 'common/utils/getCurrentYearMonth';
 import { PagedPosts, Post, PostCountsByMoodId } from 'share/interfaces/post';
+import SearchFeature from './SearchFeature';
+import { useState } from 'react';
 interface IndexPageProps {
   initialPosts: Post[];
   total: number;
@@ -18,8 +20,9 @@ interface IndexPageProps {
 }
 
 const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }) => {
+  const [posts, setPosts] = useState(initialPosts);
   const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total });
-
+  const [SearchTerm, setSearchTerm] = useState('');
   const monthlyTotal = useMemo(
     () =>
       moodCounts.reduce((acc, mood) => {
@@ -28,21 +31,21 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }
     [moodCounts]
   );
 
+  const updateSearchTerm = (newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+    if (newSearchTerm) {
+      postAPI.searchPosts(newSearchTerm, pageCount).then((value) => {
+        console.log(value);
+        setPosts(value);
+      });
+    }
+  };
+
   return (
     <Layout>
       <Sidebar />
 
       <S.Mainpage>
-        <S.MonthlyMoodCountContainer>
-          <S.MoodCountContainerTitle>이번 달 내 기분은 ...</S.MoodCountContainerTitle>
-          {moodCounts &&
-            moodCounts.map((moodCount) => {
-              return (
-                <MoodCount key={moodCount.moodId} moodCount={moodCount} total={monthlyTotal} />
-              );
-            })}
-        </S.MonthlyMoodCountContainer>
-
         <S.DiaryListContainer>
           <S.DiaryBoxContainer>
             {pagedPosts.length ? (
@@ -66,7 +69,18 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }
               activeClassName={'page_active_btn'}
             />
           )}
+          <SearchFeature refreshFunction={updateSearchTerm} />
         </S.DiaryListContainer>
+
+        <S.MonthlyMoodCountContainer>
+          <S.MoodCountContainerTitle>이번 달 내 기분은 ...</S.MoodCountContainerTitle>
+          {moodCounts &&
+            moodCounts.map((moodCount) => {
+              return (
+                <MoodCount key={moodCount.moodId} moodCount={moodCount} total={monthlyTotal} />
+              );
+            })}
+        </S.MonthlyMoodCountContainer>
       </S.Mainpage>
     </Layout>
   );
