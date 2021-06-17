@@ -5,8 +5,9 @@ import router from 'next/router';
 import ThemeButton from 'views/components/theme-button';
 import { NextPage } from 'next';
 import { ListBox } from 'primereact/listbox';
-import { Post } from 'share/interfaces/post';
+import { PagedPosts, Post } from 'share/interfaces/post';
 import { GetServerSideProps } from 'next';
+import { ContentState, convertFromRaw } from 'draft-js';
 import { getMockdata } from '../../share/utils/mock-data';
 import postAPI from 'common/api/postAPI';
 import DraftViewer from 'views/components/editor-viewer';
@@ -42,8 +43,21 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
   };
 
   const otherPosts = postList.map((p: Post): PostListProps => {
+    let contentText: string;
+    try {
+      const parsedContent: ContentState = convertFromRaw(JSON.parse(p.content));
+      contentText = parsedContent.getPlainText();
+      contentText = contentText.trim();
+      contentText = contentText.slice(0, 20);
+      if (!contentText.length) {
+        contentText = '...';
+      }
+    } catch {
+      contentText = p.content;
+    }
+
     return {
-      label: p.moodId + '\t' + p.createdAt + '\t' + p.content.slice(0, 20) + '...',
+      label: p.moodId + '\t' + p.createdAt.slice(0, 10) + '\t' + contentText + '...',
       value: p.id,
     };
   });
@@ -83,12 +97,10 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id;
-  const posts = await getMockdata();
   const item = await postAPI.getPostById(Number(id));
-  const otherPosts = posts.filter(
-    (data) => data.id === Number(id) - 1 || data.id === Number(id) + 1 //TODO: 글 목록 앞뒤 글 말고 다르게 받아오기 ?
-  );
-  return { props: { post: item, postList: otherPosts } };
+  const data: PagedPosts = await postAPI.getAllPostsByPage(1); // TODO: 해당 포스트의 page 번호 어떻게 알수있나?
+  const { total, posts } = data;
+  return { props: { post: item, postList: posts } };
 };
 
 export default PostViewPage;
