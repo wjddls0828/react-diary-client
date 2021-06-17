@@ -8,7 +8,6 @@ import { ListBox } from 'primereact/listbox';
 import { PagedPosts, Post } from 'share/interfaces/post';
 import { GetServerSideProps } from 'next';
 import { ContentState, convertFromRaw } from 'draft-js';
-import { getMockdata } from '../../share/utils/mock-data';
 import postAPI from 'common/api/postAPI';
 import DraftViewer from 'views/components/editor-viewer';
 import * as S from './styles';
