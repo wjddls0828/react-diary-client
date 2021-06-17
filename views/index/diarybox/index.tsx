@@ -30,7 +30,7 @@ const Diarybox: React.FC<{ post: Post }> = ({ post }) => {
   return (
     <S.DiaryBox onClick={handleClick}>
       <Panel header={date}>
-        <S.DiaryContent>{contentText}</S.DiaryContent>
+        <S.DiaryContent>{contentText.slice(0, 30)}</S.DiaryContent>
       </Panel>
     </S.DiaryBox>
   );
