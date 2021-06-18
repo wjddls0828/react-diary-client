@@ -27,8 +27,8 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
     if (!deleteCheck) return;
     else {
       const result = postAPI.deletePost(post.id);
-      if (!result) alert('삭제 실패');
-      else alert('삭제가 완료되었습니다.\n다이어리 홈 화면으로 이동합니다.');
+      if (!result) alert('글이 삭제되지 않았습니다. 잠시 후 다시 시도해주세요 :)');
+      // else alert('삭제가 완료되었습니다.\n다이어리 홈 화면으로 이동합니다.');
       router.replace('/');
     }
   };
@@ -84,10 +84,19 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id;
   const posts = await getMockdata();
-  const item = await postAPI.getPostById(Number(id));
+  const item = await postAPI.getPostById(parseInt(id as string));
   const otherPosts = posts.filter(
     (data) => data.id === Number(id) - 1 || data.id === Number(id) + 1 //TODO: 글 목록 앞뒤 글 말고 다르게 받아오기 ?
   );
+
+  if (!item)
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+
   return { props: { post: item, postList: otherPosts } };
 };
 

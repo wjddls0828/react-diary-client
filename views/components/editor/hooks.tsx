@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useRef, useState } from 'react';
 import {
   EditorState,
@@ -61,7 +62,7 @@ export const useEditorOnSubmit = (editorState: EditorState, moodId: number) => {
     const contentState: ContentState = editorState.getCurrentContent();
     const hasText: boolean = contentState.hasText();
     if (!hasText) {
-      alert('내용을 입력해주새요');
+      alert('내용을 입력해주새요!');
       return;
     }
 
@@ -75,14 +76,22 @@ export const useEditorOnSubmit = (editorState: EditorState, moodId: number) => {
     if (!content) return;
 
     const post: Post = await postAPI.createPost({ content, moodId });
-    if (post) router.push(`/post/${post.id}`);
+    if (!post) {
+      alert('글 작성이 완료되지 않았습니다. 잠시 후 다시 시도해주세요 :)');
+    }
+
+    router.push(`/post/${post.id}`);
   };
 
   const editPost = async (postId: number) => {
     const content = getRawContent();
     if (!content) return;
 
-    await postAPI.updatePost(postId, { content, moodId });
+    const post: Post = await postAPI.updatePost(postId, { content, moodId });
+    if (!post) {
+      alert('글 수정이 완료되지 않았습니다. 잠시 후 다시 시도해주세요 :)');
+    }
+
     router.push(`/post/${postId}`);
   };
 
