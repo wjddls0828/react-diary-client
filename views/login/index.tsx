@@ -1,8 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import ThemeButton from 'views/components/theme-button';
-//import Logo from 'asset/mood-diary-logo.png';
-//import GoogleLogo from 'asset/google-logo.png';
 import * as S from './styles';
 const LoginPage = () => {
   const googleLogin = () => {
@@ -11,7 +9,7 @@ const LoginPage = () => {
   return (
     <S.LoginPageContainer>
       <S.LogoContainer>
-        <Image src={'/mood-diary-logo.png'} width={'300px'} height={'300px'} />
+        <Image src={'/diary-logo.jpg'} width={'1026px'} height={'761px'} />
       </S.LogoContainer>
 
       <S.LoginButtonContainer>
@@ -21,7 +19,7 @@ const LoginPage = () => {
         <ThemeButton
           isBrownTheme={true}
           text={'구글 계정으로 로그인'}
-          width={'200px'}
+          width={'180px'}
           onClick={googleLogin}
         />
       </S.LoginButtonContainer>

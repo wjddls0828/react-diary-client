@@ -7,7 +7,6 @@ export const LoginPageContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
 `;
 
 export const LoginButtonContainer = styled.div`
@@ -27,6 +26,6 @@ export const GoogleLogoContainer = styled.div`
 `;
 
 export const LogoContainer = styled.div`
-  width: 300px;
-  margin-top: 50px;
+  width: 350px;
+  margin-top: 100px;
 `;
