@@ -22,6 +22,7 @@ interface IndexPageProps {
 const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }) => {
   const [posts, setPosts] = useState(initialPosts);
   const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total });
+  console.log(pagedPosts[0]);
   const [SearchTerm, setSearchTerm] = useState('');
   const monthlyTotal = useMemo(
     () =>
@@ -47,6 +48,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }
 
       <S.Mainpage>
         <S.DiaryListContainer>
+          <S.Diaryinfo>나의 일기들</S.Diaryinfo>
           <S.DiaryBoxContainer>
             {pagedPosts.length ? (
               pagedPosts.map((post) => {
@@ -56,19 +58,20 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }
               <Emptybox />
             )}
           </S.DiaryBoxContainer>
-
-          {pageCount > 0 && (
-            <ReactPaginate
-              pageRangeDisplayed={2}
-              marginPagesDisplayed={3}
-              previousLabel={'이전'}
-              nextLabel={'다음'}
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName={'pagebtn'}
-              activeClassName={'page_active_btn'}
-            />
-          )}
+          <S.Pgbox>
+            {pageCount > 0 && (
+              <ReactPaginate
+                pageRangeDisplayed={2}
+                marginPagesDisplayed={3}
+                previousLabel={'이전'}
+                nextLabel={'다음'}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={'pagebtn'}
+                activeClassName={'page_active_btn'}
+              />
+            )}
+          </S.Pgbox>
           <SearchFeature refreshFunction={updateSearchTerm} />
         </S.DiaryListContainer>
 
