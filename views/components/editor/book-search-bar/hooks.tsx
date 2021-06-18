@@ -44,12 +44,9 @@ export const usePagedBooks = () => {
     [keyword]
   );
 
-  const handleChangeKeyword = useCallback(
-    (e) => {
-      setKeyword(e.currentTarget.value);
-    },
-    [currentPage]
-  );
+  const handleChangeKeyword = useCallback((e) => {
+    setKeyword(e.currentTarget.value);
+  }, []);
 
   useEffect(() => {
     if (!keyword) return;

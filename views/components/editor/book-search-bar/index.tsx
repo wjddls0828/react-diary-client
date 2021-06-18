@@ -39,10 +39,11 @@ const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
         <S.SearchInput
           onChange={(e) => handleChangeKeyword(e)}
           onKeyUp={(e) => handleEnterKeyPress(e)}
+          placeholder={'검색어를 입력하세요'}
         />
       </S.SearchContainer>
 
-      {books && (
+      {books ? (
         <S.BookSearchList>
           {books.map((book) => {
             return (
@@ -52,6 +53,8 @@ const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
           })}
           <Pagination currentPage={currentPage} maxPage={maxPage} updatePage={updateCurrentPage} />
         </S.BookSearchList>
+      ) : (
+        <S.EmptyBookSearchList>읽은 책을 검색해보세요!</S.EmptyBookSearchList>
       )}
     </S.BookSeachBar>
   );
