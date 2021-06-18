@@ -3,9 +3,10 @@ import { Panel } from 'primereact/panel';
 import * as S from './styles';
 import { ContentState, convertFromRaw } from 'draft-js';
 import { Post } from 'share/interfaces/post';
+import { useRouter } from 'next/router';
 
 const Diarybox: React.FC<{ post: Post }> = ({ post }) => {
-  const { createdAt, content } = post;
+  const { id, createdAt, content } = post;
   const date = createdAt.slice(0, 10);
 
   let contentText: string;
@@ -21,8 +22,13 @@ const Diarybox: React.FC<{ post: Post }> = ({ post }) => {
     contentText = content; // for 에디터 구현 이전의 posts
   }
 
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`post/${id}`);
+  };
+
   return (
-    <S.DiaryBox>
+    <S.DiaryBox onClick={handleClick}>
       <Panel header={date}>
         <S.DiaryContent>{contentText}</S.DiaryContent>
       </Panel>
