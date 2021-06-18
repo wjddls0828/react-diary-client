@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const Layout = styled.div`
-  display: table;
+  display: flex;
+  flex-direction: column;
+  /* display: table; */
   margin-left: auto;
   margin-right: auto;
 
-  width: 100%;
+  width: 1200px;
   height: 100%;
   max-width: 1500px;
   min-width: 1000px;
@@ -13,6 +15,8 @@ export const Layout = styled.div`
   padding: 0 100px;
   padding-top: 10px;
   background-color: #f1f0ef;
+
+  align-items: center;
 `;
 
 export const Content = styled.div`
