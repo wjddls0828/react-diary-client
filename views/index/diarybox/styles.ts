@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const DiaryBox = styled.div`
-  width: 900px;
-  height: 110px;
+  width: 100%;
   margin-bottom: 10px;
 
   cursor: pointer;

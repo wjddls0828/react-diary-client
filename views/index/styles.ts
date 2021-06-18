@@ -42,5 +42,6 @@ export const CalendarContainer = styled.div`
   height: 100% auto;
 
   background-color: white;
-  padding: 30px;
+  padding: 30px 40px;
+  margin-bottom: 30px;
 `;
