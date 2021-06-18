@@ -99,7 +99,7 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.params?.id;
+  const id = context.params?.id; // TODO: id에 해당하는 글 없는경우 처리
   const item = await postAPI.getPostById(Number(id));
   const data: PagedPosts = await postAPI.getAllPostsByPage(1); // TODO: 해당 포스트의 page 번호 어떻게 알수있나?
   const { total, posts } = data;
