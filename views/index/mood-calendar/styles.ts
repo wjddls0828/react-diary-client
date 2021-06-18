@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { THEME_COLOR } from 'common/constant';
 
+export const MoodCalendarContainer = styled.div`
+  font-size: 12px;
+  color: ${THEME_COLOR.BROWN};
+`;
+
 export const MonthlyMoodCountContainer = styled.div`
   width: 100%;
   display: flex;
