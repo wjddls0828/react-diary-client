@@ -55,3 +55,12 @@ export const DiaryBoxContainer = styled.div`
 export const SearchBox = styled.div`
   margin: 30px;
 `;
+
+export const CalendarContainer = styled.div`
+  width: 100%;
+  height: 100% auto;
+
+  background-color: white;
+  padding: 30px 40px;
+  margin-bottom: 30px;
+`;
