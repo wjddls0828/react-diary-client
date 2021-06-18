@@ -54,6 +54,16 @@ export const SearchInput = styled.input`
   }
 `;
 
+export const EmptyBookSearchList = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 10px 10px;
+  color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const BookSearchList = styled.div`
   width: 100%;
   height: 100%;
