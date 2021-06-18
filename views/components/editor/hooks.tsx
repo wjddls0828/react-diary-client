@@ -29,10 +29,11 @@ const emptyContentState = convertFromRaw({
   ],
 });
 
-export const useEditor = () => {
-  const router = useRouter();
+export const useEditor = (initialContent?: ContentState) => {
   const editorContainer = useRef(null);
-  const initialState = EditorState.createWithContent(emptyContentState);
+  const initialState = EditorState.createWithContent(
+    initialContent ? initialContent : emptyContentState
+  );
   const [editorState, setEditorState] = useState(initialState);
 
   const handleKeyCommand = useCallback((command: DraftEditorCommand): DraftHandleValue => {
@@ -46,26 +47,48 @@ export const useEditor = () => {
     return 'not-handled';
   }, []);
 
-  const submitPost = async () => {
+  return {
+    editorContainer,
+    editorState,
+    setEditorState,
+    handleKeyCommand,
+  };
+};
+
+export const useEditorOnSubmit = (editorState: EditorState, moodId: number) => {
+  const router = useRouter();
+  const getRawContent = () => {
     const contentState: ContentState = editorState.getCurrentContent();
     const hasText: boolean = contentState.hasText();
-
     if (!hasText) {
       alert('내용을 입력해주새요');
       return;
     }
 
     const content: string = JSON.stringify(convertToRaw(contentState));
-    const post: Post = await postAPI.createPost({ content: content, moodId: 1 });
-    router.replace(`post/${post.id}`);
+
+    return content;
+  };
+
+  const createPost = async () => {
+    const content = getRawContent();
+    if (!content) return;
+
+    const post: Post = await postAPI.createPost({ content, moodId });
+    if (post) router.push(`/post/${post.id}`);
+  };
+
+  const editPost = async (postId: number) => {
+    const content = getRawContent();
+    if (!content) return;
+
+    await postAPI.updatePost(postId, { content, moodId });
+    router.push(`/post/${postId}`);
   };
 
   return {
-    editorContainer,
-    editorState,
-    setEditorState,
-    handleKeyCommand,
-    submitPost,
+    createPost,
+    editPost,
   };
 };
 

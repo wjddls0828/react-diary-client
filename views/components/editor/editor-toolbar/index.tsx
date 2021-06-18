@@ -63,9 +63,11 @@ function EditorToolbar({ editorState, setEditorState }) {
 
       <S.Separator />
 
-      <S.ToolButton active={isBookSearchBarOpen} onClick={toggleBookSearch}>
+      <S.BookSearchButton active={isBookSearchBarOpen} onClick={toggleBookSearch}>
+        <label>글감 검색</label>
         <GiArchiveResearch />
-      </S.ToolButton>
+      </S.BookSearchButton>
+
       <BookSearchBar show={isBookSearchBarOpen} insertOnEditor={insertCustomBlock} />
     </S.Toolbar>
   );
