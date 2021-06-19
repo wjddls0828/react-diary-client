@@ -4,8 +4,9 @@ import Pagination from 'views/components/pagination';
 import { BookSearchProps } from './types';
 import * as S from './styles';
 import { AiOutlineSearch } from 'react-icons/ai';
-
 import BookSearchCard from './book-search-card';
+import { GiSpellBook } from 'react-icons/gi';
+import { NaverBook } from 'share/interfaces/naverBook';
 
 const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
   /* prettier-ignore */
@@ -30,6 +31,16 @@ const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
     }
   };
 
+  const handleClickSearchedBook = (book: NaverBook) => {
+    const parsedBook = {
+      title: book.title,
+      author: book.author,
+      link: book.link,
+    };
+
+    insertOnEditor(parsedBook);
+  };
+
   return (
     <S.BookSeachBar show={show}>
       <S.SearchContainer>
@@ -44,17 +55,34 @@ const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
       </S.SearchContainer>
 
       {books ? (
-        <S.BookSearchList>
-          {books.map((book) => {
-            return (
-              <BookSearchCard key={book.link} book={book} onClick={() => insertOnEditor(book)} />
-              // TODO book에 필요한 정보만 넘기기
-            );
-          })}
-          <Pagination currentPage={currentPage} maxPage={maxPage} updatePage={updateCurrentPage} />
-        </S.BookSearchList>
+        <>
+          <S.BookSearchList>
+            <S.Row>
+              {books.map((book) => {
+                return (
+                  <BookSearchCard
+                    key={book.link}
+                    book={book}
+                    onClick={() => handleClickSearchedBook(book)}
+                  />
+                );
+              })}
+              <S.PaginationContainer>
+                <Pagination
+                  currentPage={currentPage}
+                  maxPage={maxPage}
+                  updatePage={updateCurrentPage}
+                  columnStyle={true}
+                />
+              </S.PaginationContainer>
+            </S.Row>
+          </S.BookSearchList>
+        </>
       ) : (
-        <S.EmptyBookSearchList>읽은 책을 검색해보세요!</S.EmptyBookSearchList>
+        <S.EmptyBookSearchList>
+          <GiSpellBook />
+          오늘은 어떤 책을 읽었나요?
+        </S.EmptyBookSearchList>
       )}
     </S.BookSeachBar>
   );
