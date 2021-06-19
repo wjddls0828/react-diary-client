@@ -4,7 +4,7 @@ export const Toolbar = styled.div`
   /* background-color: white; */
   display: flex;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid gray;
 
   padding-left: 15px;
 
