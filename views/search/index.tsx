@@ -23,7 +23,7 @@ const SearchPage: NextPage<SearchPageProps> = ({ initialPosts, total, term }) =>
       <Sidebar />
       <S.Mainpage>
         <S.DiaryListContainer>
-          <S.Diaryinfo>나의 일기들</S.Diaryinfo>
+          <S.Diaryinfo>일기 검색 결과</S.Diaryinfo>
           <S.DiaryBoxContainer>
             {pagedPosts.length
               ? pagedPosts.map((post) => <DiaryBox key={post.id} post={post} />)
