@@ -6,8 +6,8 @@ const { Search } = Input;
 
 const SearchBar: React.FC = () => {
   const router = useRouter();
-  const { keyword } = router.query;
-  const decodedTerm = decodeURIComponent(keyword as string);
+  const { term } = router.query;
+  const decodedTerm = decodeURIComponent(term as string);
   const [searchTerm, setSearchTerm] = useState<string>(decodedTerm);
 
   const handleSearchInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -15,13 +15,12 @@ const SearchBar: React.FC = () => {
   };
 
   const handleSearchInputSubmit = () => {
-    router.push({ pathname: '/search', query: { keyword: encodeURIComponent(searchTerm) } });
+    router.push({ pathname: '/search', query: { term: encodeURIComponent(searchTerm) } });
   };
 
   return (
     <div>
       <Search
-        placeholder='input search text'
         onSearch={handleSearchInputSubmit}
         onChange={handleSearchInputChange}
         value={searchTerm}
