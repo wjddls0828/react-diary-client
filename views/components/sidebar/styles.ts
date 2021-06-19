@@ -45,7 +45,11 @@ export const LogoutButton = styled.button`
   color: ${THEME_COLOR.BROWN};
 `;
 
-export const PCard = styled.div`
-  background: #7d5a5a;
+interface PCardProps {
+  backgroundColor?: string;
+}
+
+export const PCard = styled.div<PCardProps>`
+  background: ${(props) => props.backgroundColor ?? '#7d5a5a'};
   padding: 10px;
 `;
