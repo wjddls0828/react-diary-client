@@ -5,7 +5,7 @@ export const DiaryBox = styled.div`
   width: 100%;
   margin-bottom: 10px;
   cursor: pointer;
-  background: #eee0e5;
+  background: #f3e1e1;
 `;
 
 export const contentbox = styled.div`
@@ -15,5 +15,11 @@ export const contentbox = styled.div`
 
 export const forleft = styled.div`
   float: left;
-  margin: 10px;
+  margin: 5px;
+`;
+
+export const datebox = styled.div`
+  float: right;
+  margin-right: 10px;
+  margin: 5px;
 `;

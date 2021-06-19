@@ -1,10 +1,10 @@
 import React from 'react';
-import { Panel } from 'primereact/panel';
 import * as S from './styles';
 import { ContentState, convertFromRaw } from 'draft-js';
 import { Post } from 'share/interfaces/post';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { MOOD_ICONS, MoodIcon } from 'common/constant';
 
 var icon;
 
@@ -42,6 +42,7 @@ const Diarybox: React.FC<{ post: Post }> = ({ post }) => {
         <Image src={icon} width={'20px'} height={'20px'} />
       </S.forleft>
       <S.contentbox>{contentText.slice(0, 30)}</S.contentbox>
+      <S.datebox>{createdAt.slice(0, 10)}</S.datebox>
     </S.DiaryBox>
   );
 };
