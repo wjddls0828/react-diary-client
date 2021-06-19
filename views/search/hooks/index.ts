@@ -1,18 +1,16 @@
 import { Post } from 'share/interfaces/post';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useCallback } from 'react';
 import { POSTS_PER_PAGE } from 'share/constant';
 import postAPI from 'common/api/postAPI';
 
-interface IPagedPosts {
-  initialPosts: Post[];
-  total: number;
-  term: string;
-}
-
-export const usePagedPosts = ({ initialPosts, term, total }: IPagedPosts) => {
+export const usePagedPosts = (initialPosts: Post[], term: string, total: number) => {
   const [pagedPosts, setPagedPosts] = useState<Post[]>(initialPosts);
   const pageCount = useMemo(() => Math.ceil(total / POSTS_PER_PAGE), [total]);
+
+  useEffect(() => {
+    setPagedPosts(initialPosts);
+  }, [initialPosts]);
 
   const changePage = useCallback(
     async ({ selected }: { selected: number }) => {

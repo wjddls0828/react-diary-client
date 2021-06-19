@@ -16,7 +16,7 @@ interface SearchPageProps {
 }
 
 const SearchPage: NextPage<SearchPageProps> = ({ initialPosts, total, term }) => {
-  const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total, term });
+  const { pageCount, changePage, pagedPosts } = usePagedPosts(initialPosts, term, total);
 
   return (
     <Layout>
@@ -53,6 +53,7 @@ export default SearchPage;
 
 export async function getServerSideProps({ query }) {
   const { term } = query;
+  const decodedTerm = decodeURIComponent(term);
   const { total, posts } = await postAPI.searchPosts(term, 1);
-  return { props: { initialPosts: posts, total, term } };
+  return { props: { initialPosts: posts, total, term: decodedTerm } };
 }
