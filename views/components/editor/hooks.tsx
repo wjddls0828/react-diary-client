@@ -102,7 +102,7 @@ export const useEditorOnSubmit = (editorState: EditorState, moodId: number) => {
 };
 
 /* Custom Block 삽입 hook */
-export const useEditorCustomBlock = (editorState: EditorState, setEditorState) => {
+export const useEditorCustomBlock = (editorState?: EditorState, setEditorState?) => {
   const insertCustomBlock = (blockData) => {
     const contentState = editorState.getCurrentContent();
     // ediitor state = content state + selection, history 정보
