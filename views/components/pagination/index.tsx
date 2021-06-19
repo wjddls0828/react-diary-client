@@ -4,21 +4,26 @@ import { PaginationButton } from './button';
 import * as S from './styles';
 import { PaginationProps } from './types';
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, maxPage, updatePage }) => {
+const Pagination: React.FC<PaginationProps> = ({
+  currentPage,
+  maxPage,
+  updatePage,
+  columnStyle,
+}) => {
   const pagesSection = calculateSectionsByFivePage(currentPage, maxPage);
 
   const isFirstSection = pagesSection[0] === 1;
   const isLastSection = pagesSection[pagesSection.length - 1] === maxPage;
 
   return (
-    <S.PaginationBar>
+    <S.PaginationBar columnStyle={columnStyle}>
       {!isFirstSection && (
         <S.ArrowBlock onClick={updatePage(currentPage - 1)}>
-          <S.Arrow className='left'></S.Arrow>
+          <S.Arrow className='left' columnStyle={columnStyle}></S.Arrow>
         </S.ArrowBlock>
       )}
 
-      <S.ButtonContainer>
+      <S.ButtonContainer columnStyle={columnStyle}>
         {!!pagesSection.length &&
           pagesSection.map((pageIndex) => (
             <PaginationButton
@@ -32,7 +37,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, maxPage, updatePag
 
       {!isLastSection && (
         <S.ArrowBlock onClick={updatePage(currentPage + 1)}>
-          <S.Arrow className='right'></S.Arrow>
+          <S.Arrow className='right' columnStyle={columnStyle}></S.Arrow>
         </S.ArrowBlock>
       )}
     </S.PaginationBar>
