@@ -52,13 +52,14 @@ export const MoodIcon = styled.div<{ clicked: boolean }>`
 
 export const EditorContainer = styled.div`
   height: 100%;
-  border: 1px solid gray;
+  border: 1px solid #d3d3d3;
   border-top: 0px;
 
   background-color: white;
 
   min-height: 400px;
-  padding: 10px 10px;
+  padding: 20px 30px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
 
   cursor: 'text';
 `;
