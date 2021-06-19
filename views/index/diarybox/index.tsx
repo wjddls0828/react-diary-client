@@ -4,9 +4,7 @@ import { ContentState, convertFromRaw } from 'draft-js';
 import { Post } from 'share/interfaces/post';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { MOOD_ICONS, MoodIcon } from 'common/constant';
-
-var icon;
+import { MOOD_ICONS } from 'common/constant';
 
 const Diarybox: React.FC<{ post: Post }> = ({ post }) => {
   const { id, createdAt, content, moodId } = post;
@@ -28,18 +26,14 @@ const Diarybox: React.FC<{ post: Post }> = ({ post }) => {
     router.push(`post/${id}`);
   };
 
-  if (moodId == 1) {
-    icon = '/good.png';
-  } else if (moodId == 2) {
-    icon = '/sad.png';
-  } else if (moodId == 3) {
-    icon = '/soso.PNG';
-  }
+  const iconSrc = React.useMemo(() => {
+    return MOOD_ICONS.find((mood) => mood.id === moodId).src;
+  }, [moodId]);
 
   return (
     <S.DiaryBox onClick={handleClick}>
       <S.forleft>
-        <Image src={icon} width={'20px'} height={'20px'} />
+        <Image src={`/${iconSrc}`} width={'20px'} height={'20px'} />
       </S.forleft>
       <S.contentbox>{contentText.slice(0, 30)}</S.contentbox>
       <S.datebox>{createdAt.slice(0, 10)}</S.datebox>
