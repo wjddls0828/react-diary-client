@@ -53,11 +53,11 @@ export default class PostService {
     userId: number,
     keyword: string,
     page: number
-  ): Promise<Post[]> {
+  ): Promise<PagedPosts> {
     const take = POSTS_PER_PAGE;
     const skip = (page - 1) * POSTS_PER_PAGE;
 
-    const [data] = await DBPool.query(
+    const [postsData] = await DBPool.query(
       `SELECT * FROM post WHERE userId =? and content LIKE '%${keyword}%'
        ORDER BY id DESC LIMIT ? OFFSET ?`,
       [userId, take, skip]
@@ -66,7 +66,16 @@ export default class PostService {
       throw new Error();
     });
 
-    return parseRawData(data);
+    const [totalData] = await DBPool.query(
+      `select count(*) as total FROM post WHERE userId =? and content LIKE '%${keyword}%'
+    ORDER BY id DESC`,
+      userId
+    );
+
+    const [data] = parseRawData(totalData);
+    data.posts = parseRawData(postsData);
+
+    return data;
   }
 
   public static async getPostById(userId: number, postId: number): Promise<Post> {

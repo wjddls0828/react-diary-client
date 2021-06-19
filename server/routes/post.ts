@@ -11,7 +11,7 @@ postRouter.get('/search', async (req: Request, res: Response) => {
   const keyword = req.query.keyword as string;
   const page = parseInt(req.query.page as string);
 
-  const posts: Post[] | void = await PostService.getPostsByKeyword(userId, keyword, page).catch(
+  const posts: PagedPosts | void = await PostService.getPostsByKeyword(userId, keyword, page).catch(
     (err) => {
       console.error(err);
       res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });
