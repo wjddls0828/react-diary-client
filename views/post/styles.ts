@@ -12,7 +12,7 @@ export const PostContent = styled.div`
   margin-top: 15px;
   background-color: white;
   color: black;
-  box-shadow:   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 `;
 
 interface EmojiDateContainerProps {
