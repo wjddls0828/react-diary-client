@@ -4,10 +4,9 @@ import React from 'react';
 import router from 'next/router';
 import ThemeButton from 'views/components/theme-button';
 import { NextPage } from 'next';
-import { ListBox } from 'primereact/listbox';
+import PostList from 'views/components/post-list';
 import { PagedPosts, Post } from 'share/interfaces/post';
 import { GetServerSideProps } from 'next';
-import { ContentState, convertFromRaw } from 'draft-js';
 import { MOOD_ICONS, MoodIcon } from 'common/constant';
 import Image from 'next/image';
 import postAPI from 'common/api/postAPI';
@@ -16,14 +15,11 @@ import * as S from './styles';
 
 interface PostViewPageProps {
   post: Post;
-  postList: Post[];
-}
-interface PostListProps {
-  label: string;
-  value: number;
+  initialPosts: Post[];
+  total: number;
 }
 
-const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
+const PostViewPage: NextPage<PostViewPageProps> = ({ post, initialPosts, total }) => {
   const moodIcon: MoodIcon = MOOD_ICONS.find((icon) => icon.id === post.moodId);
   const bgcolorHandler = React.useMemo(() => {
     switch (post.moodId) {
@@ -53,30 +49,6 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
     router.push(`/post/${post.id}/edit`);
   };
 
-  const otherPostClickHandler = (list) => {
-    router.push('/post/' + list.value);
-  };
-
-  const otherPosts = postList.map((p: Post): PostListProps => {
-    let contentText: string;
-    try {
-      const parsedContent: ContentState = convertFromRaw(JSON.parse(p.content));
-      contentText = parsedContent.getPlainText();
-      contentText = contentText.trim();
-      contentText = contentText.slice(0, 20);
-      if (!contentText.length) {
-        contentText = '...';
-      }
-    } catch {
-      contentText = p.content;
-    }
-
-    return {
-      label: p.moodId + '\t' + p.createdAt.slice(0, 10) + '\t' + contentText + '...',
-      value: p.id,
-    };
-  });
-
   return (
     <Layout>
       <Sidebar />
@@ -103,8 +75,8 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
           </S.EditDeleteButtonContainer>
         </S.ButtonContainer>
         <S.ListContainer>
-          <S.OtherPosts>다른 글 보기</S.OtherPosts>
-          <ListBox options={otherPosts} onChange={otherPostClickHandler} />​
+          <S.OtherPosts>나의 다른 일기글 보기</S.OtherPosts>
+          <PostList initialPosts={initialPosts} total={total} />​
         </S.ListContainer>
       </S.PageContentContainer>
     </Layout>
@@ -114,9 +86,12 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id; // TODO: id에 해당하는 글 없는경우 처리
   const item = await postAPI.getPostById(Number(id));
-  const data: PagedPosts = await postAPI.getAllPostsByPage(1); // TODO: 해당 포스트의 page 번호 어떻게 알수있나?
+  const data: PagedPosts = await postAPI.getAllPostsByPage(1);
+  if (!data) {
+    return { props: { total: 0, initialPosts: [], moodCounts: [] } };
+  }
   const { total, posts } = data;
-  return { props: { post: item, postList: posts } };
+  return { props: { total, post: item, initialPosts: posts } };
 };
 
 export default PostViewPage;
