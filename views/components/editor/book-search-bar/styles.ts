@@ -7,6 +7,7 @@ export const BookSeachBar = styled.div<{ show: boolean }>`
 
   display: flex;
   flex-direction: column;
+
   position: fixed;
   transition: all 0.3s linear;
   top: 100%;
@@ -76,7 +77,7 @@ export const EmptyBookSearchList = styled.div`
 
 export const BookSearchList = styled.div`
   width: 100%;
-  padding: 15px 30px;
+  padding: 30px;
 
   display: flex;
   justify-content: center;

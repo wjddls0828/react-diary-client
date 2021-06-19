@@ -15,8 +15,6 @@ const BookCardBlock: React.FC<EditorBlockProps> = (props) => {
 
   const { title, image, author } = blockData.data;
   const titleText = title.replace(/<[^>]*>/g, '');
-  const parsedTitle = titleText.length > 30 ? titleText.slice(0, 30) + '...' : titleText;
-  // TODO: util 정리
 
   const onClick = () => {
     // TODO: 삭제, 정렬 버튼 보이게?
@@ -26,8 +24,8 @@ const BookCardBlock: React.FC<EditorBlockProps> = (props) => {
     <S.BookCard onClick={onClick} contentEditable={false}>
       <S.BookCardImage src={image} />
       <S.BookCardInfo>
-        <S.BookCardTitle>{parsedTitle}</S.BookCardTitle>
-        <S.BookCardMeta> 저자 {author}</S.BookCardMeta>
+        <S.BookCardTitle>{titleText}</S.BookCardTitle>
+        <S.BookCardMeta> {author}</S.BookCardMeta>
       </S.BookCardInfo>
     </S.BookCard>
   );

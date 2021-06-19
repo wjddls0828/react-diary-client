@@ -35,6 +35,7 @@ const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
     const parsedBook = {
       title: book.title,
       author: book.author,
+      image: book.image,
       link: book.link,
     };
 

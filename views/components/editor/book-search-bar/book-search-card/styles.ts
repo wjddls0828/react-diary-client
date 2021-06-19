@@ -10,7 +10,8 @@ export const BookSearchCardContainer = styled.div`
 `;
 
 export const BookSearchCard = styled.div`
-  background-color: white;
+  background-color: ${THEME_COLOR.BEIGE};
+
   width: 130px;
   height: 160px;
 
