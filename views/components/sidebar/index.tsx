@@ -10,15 +10,16 @@ const Sidebar: React.FC = () => {
     router.push(href);
   };
 
+  const logout = () => {
+    window.location.href = process.env.API_BASE_URL + '/auth/logout';
+  };
+
   return (
     <S.Sidebar>
-      <S.UserProfile>{user.name} 님</S.UserProfile>
+      <S.UserProfile>
+        {user && user.name} 님<S.LogoutButton onClick={logout}>로그아웃</S.LogoutButton>
+      </S.UserProfile>
       <ThemeButton text={'글쓰기'} onClick={() => handleOnClick('/post')} isBrownTheme={true} />
-      <ThemeButton
-        text={'책갈피 보기'}
-        onClick={() => handleOnClick('/bookmark')}
-        isBrownTheme={false}
-      />
     </S.Sidebar>
   );
 };

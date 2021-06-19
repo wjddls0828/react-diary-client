@@ -24,7 +24,12 @@ app
     const server = express();
     server.use(cookieParser());
     server.use(express.json());
-    server.use(cors());
+    server.use(
+      cors({
+        origin: process.env.CLIENT_BASE_URL,
+        credentials: true,
+      })
+    );
 
     server.use('/api/auth', authRouter);
     server.use('/api/posts', authMiddleware, postRouter);
