@@ -22,7 +22,7 @@ export const UserProfile = styled.div`
 
   margin-bottom: 10px;
 
-  color: #7b6d6c;
+  color: #000000;
   font-weight: bolder;
   font-size: 15px;
 
@@ -43,4 +43,9 @@ export const LogoutButton = styled.button`
   }
 
   color: ${THEME_COLOR.BROWN};
+`;
+
+export const PCard = styled.div`
+  background: #7d5a5a;
+  padding: 10px;
 `;
