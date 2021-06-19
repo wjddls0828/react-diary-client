@@ -3,45 +3,30 @@ import { NextPage } from 'next';
 import * as S from './styles';
 import Sidebar from 'views/components/sidebar';
 import Diarybox from './diarybox';
-import React, { useMemo } from 'react';
+import React from 'react';
 import ReactPaginate from 'react-paginate';
 import postAPI from 'common/api/postAPI';
 import { usePagedPosts } from './hooks';
 import Emptybox from './emptybox';
-import MoodCount from './mood-count';
-import { getCurrentYearMonth } from 'common/utils/getCurrentYearMonth';
-import { PagedPosts, Post, PostCountsByMoodId } from 'share/interfaces/post';
+import { PagedPosts, Post } from 'share/interfaces/post';
+import MoodCalendar from './mood-calendar';
+
 interface IndexPageProps {
   initialPosts: Post[];
   total: number;
-  moodCounts: PostCountsByMoodId[];
 }
 
-const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }) => {
+const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
   const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total });
-
-  const monthlyTotal = useMemo(
-    () =>
-      moodCounts.reduce((acc, mood) => {
-        return acc + mood.count;
-      }, 0),
-    [moodCounts]
-  );
 
   return (
     <Layout>
       <Sidebar />
 
       <S.Mainpage>
-        <S.MonthlyMoodCountContainer>
-          <S.MoodCountContainerTitle>이번 달 내 기분은 ...</S.MoodCountContainerTitle>
-          {moodCounts &&
-            moodCounts.map((moodCount) => {
-              return (
-                <MoodCount key={moodCount.moodId} moodCount={moodCount} total={monthlyTotal} />
-              );
-            })}
-        </S.MonthlyMoodCountContainer>
+        <S.CalendarContainer>
+          <MoodCalendar />
+        </S.CalendarContainer>
 
         <S.DiaryListContainer>
           <S.DiaryBoxContainer>
@@ -76,16 +61,14 @@ export default IndexPage;
 
 export async function getServerSideProps() {
   const data: PagedPosts = await postAPI.getAllPostsByPage(1);
-  const term = getCurrentYearMonth(); // TODO - SSR ok?
-  const moodCounts = await postAPI.getMonthlyMoodPostCounts(term);
 
-  if (!data || !moodCounts) {
-    return { props: { total: 0, initialPosts: [], moodCounts: [] } };
+  if (!data) {
+    return { props: { total: 0, initialPosts: [] } };
   }
 
   const { total, posts } = data;
 
   return {
-    props: { total, initialPosts: posts, moodCounts },
+    props: { total, initialPosts: posts },
   };
 }
