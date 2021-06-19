@@ -52,8 +52,8 @@ const SearchPage: NextPage<SearchPageProps> = ({ initialPosts, total, term }) =>
 export default SearchPage;
 
 export async function getServerSideProps({ query }) {
-  const { term } = query;
-  const decodedTerm = decodeURIComponent(term);
-  const { total, posts } = await postAPI.searchPosts(term, 1);
+  const { keyword } = query;
+  const decodedTerm = decodeURIComponent(keyword);
+  const { total, posts } = await postAPI.searchPosts(keyword, 1);
   return { props: { initialPosts: posts, total, term: decodedTerm } };
 }
