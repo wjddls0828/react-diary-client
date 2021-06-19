@@ -11,8 +11,7 @@ import Emptybox from './emptybox';
 import MoodCount from './mood-count';
 import { getCurrentYearMonth } from 'common/utils/getCurrentYearMonth';
 import { PagedPosts, Post, PostCountsByMoodId } from 'share/interfaces/post';
-import SearchFeature from './SearchFeature';
-import { useState } from 'react';
+
 interface IndexPageProps {
   initialPosts: Post[];
   total: number;
@@ -20,9 +19,7 @@ interface IndexPageProps {
 }
 
 const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }) => {
-  const [posts, setPosts] = useState(initialPosts);
   const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total });
-  const [SearchTerm, setSearchTerm] = useState('');
   const monthlyTotal = useMemo(
     () =>
       moodCounts.reduce((acc, mood) => {
@@ -31,22 +28,13 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }
     [moodCounts]
   );
 
-  const updateSearchTerm = (newSearchTerm) => {
-    setSearchTerm(newSearchTerm);
-    if (newSearchTerm) {
-      postAPI.searchPosts(newSearchTerm, pageCount).then((value) => {
-        console.log(value);
-        setPosts(value);
-      });
-    }
-  };
-
   return (
     <Layout>
       <Sidebar />
 
       <S.Mainpage>
         <S.DiaryListContainer>
+          <S.Diaryinfo>나의 일기들</S.Diaryinfo>
           <S.DiaryBoxContainer>
             {pagedPosts.length ? (
               pagedPosts.map((post) => {
@@ -56,20 +44,20 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total, moodCounts }
               <Emptybox />
             )}
           </S.DiaryBoxContainer>
-
-          {pageCount > 0 && (
-            <ReactPaginate
-              pageRangeDisplayed={2}
-              marginPagesDisplayed={3}
-              previousLabel={'이전'}
-              nextLabel={'다음'}
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName={'pagebtn'}
-              activeClassName={'page_active_btn'}
-            />
-          )}
-          <SearchFeature refreshFunction={updateSearchTerm} />
+          <S.Pgbox>
+            {pageCount > 0 && (
+              <ReactPaginate
+                pageRangeDisplayed={2}
+                marginPagesDisplayed={3}
+                previousLabel={'이전'}
+                nextLabel={'다음'}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={'pagebtn'}
+                activeClassName={'page_active_btn'}
+              />
+            )}
+          </S.Pgbox>
         </S.DiaryListContainer>
 
         <S.MonthlyMoodCountContainer>

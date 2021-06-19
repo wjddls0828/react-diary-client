@@ -5,6 +5,7 @@ import ThemeButton from 'views/components/theme-button';
 import * as S from './styles';
 import { quotes_mood3 } from 'share/utils/quotes_mood3';
 import { Card } from 'antd';
+import SearchBar from 'views/index/SearchBar';
 
 const Sidebar: React.FC = () => {
   const user = useUser();
@@ -26,6 +27,7 @@ const Sidebar: React.FC = () => {
           {quotes_mood3[Math.floor(Math.random() * quotes_mood3.length)]}
         </Card>
       </S.PCard>
+      <SearchBar />
     </S.Sidebar>
   );
 };
