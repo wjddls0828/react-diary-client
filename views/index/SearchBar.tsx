@@ -21,7 +21,7 @@ const SearchBar: React.FC = () => {
   return (
     <div>
       <Search
-        placeholder='내 일기 검색'
+        placeholder='내 일기'
         onSearch={handleSearchInputSubmit}
         onChange={handleSearchInputChange}
         value={keyword && searchTerm}
