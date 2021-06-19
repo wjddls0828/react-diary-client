@@ -129,7 +129,7 @@ export const useEditorCustomBlock = (editorState?: EditorState, setEditorState?)
 
     return {
       component: BookCardBlock,
-      editable: true,
+      editable: false,
     };
   };
 

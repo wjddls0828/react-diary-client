@@ -11,17 +11,15 @@ interface EditorBlockProps {
 
 const BookCardBlock: React.FC<EditorBlockProps> = (props) => {
   const { block, contentState } = props;
-  const blockData: { data: NaverBook } = contentState.getEntity(block.getEntityAt(0)).getData();
+  const blockData: { data: Partial<NaverBook> } = contentState
+    .getEntity(block.getEntityAt(0))
+    .getData();
 
   const { title, image, author } = blockData.data;
   const titleText = title.replace(/<[^>]*>/g, '');
 
-  const onClick = () => {
-    // TODO: 삭제, 정렬 버튼 보이게?
-  };
-
   return (
-    <S.BookCard onClick={onClick} contentEditable={false}>
+    <S.BookCard contentEditable={false}>
       <S.BookCardImage src={image} />
       <S.BookCardInfo>
         <S.BookCardTitle>{titleText}</S.BookCardTitle>

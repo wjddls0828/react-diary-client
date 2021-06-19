@@ -57,7 +57,7 @@ export const EditorContainer = styled.div`
 
   background-color: white;
 
-  min-height: 400px;
+  min-height: 500px;
   padding: 20px 30px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
 
