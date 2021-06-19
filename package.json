@@ -10,7 +10,12 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "@draft-js-plugins/editor": "^4.1.0",
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/styles": "^4.11.4",
+    "@types/antd": "^1.0.0",
+    "antd": "^4.16.3",
     "axios": "^0.21.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -48,7 +53,7 @@
     "@typescript-eslint/parser": "^4.23.0",
     "babel-plugin-styled-components": "^1.12.0",
     "cross-env": "^7.0.3",
-    "eslint": "^7.26.0",
+    "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
