@@ -25,6 +25,19 @@ interface PostListProps {
 
 const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
   const moodIcon: MoodIcon = MOOD_ICONS.find((icon) => icon.id === post.moodId);
+  const bgcolorHandler = React.useMemo(() => {
+    switch (post.moodId) {
+      case 1:
+        return '#fcdad7';
+      case 2:
+        return '#f5e8bf';
+      case 3:
+        return '#b1cade';
+      default:
+        return '#c1b7b7';
+    }
+  }, [post.moodId]);
+
   const deletePost = () => {
     const deleteCheck = confirm('삭제된 글은 복구가 불가능합니다.\n글을 삭제하시겠습니까?');
     if (!deleteCheck) return;
@@ -69,7 +82,7 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
       <Sidebar />
       <S.PageContentContainer>
         <S.PostContainer>
-          <S.EmojiDateContainer>
+          <S.EmojiDateContainer backgroundColor={bgcolorHandler}>
             <Image src={`/${moodIcon.src}`} width={'50px'} height={'50px'} />{' '}
             {post.createdAt.slice(0, 10)}​
           </S.EmojiDateContainer>

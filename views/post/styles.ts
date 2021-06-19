@@ -15,8 +15,12 @@ export const PostContent = styled.div`
   box-shadow:   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 `;
 
-export const EmojiDateContainer = styled.div`
-  background-color: #c1b7b7;
+interface EmojiDateContainerProps {
+  backgroundColor?: string;
+}
+
+export const EmojiDateContainer = styled.div<EmojiDateContainerProps>`
+  background-color: ${(props) => props.backgroundColor ?? '#c1b7b7'};
   padding: 5px;
   width: 150px;
   display: flex;
