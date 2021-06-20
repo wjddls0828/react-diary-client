@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { MOOD_ICONS } from 'common/constant';
 
+
 const Diarybox: React.FC<{ post: Post }> = ({ post }) => {
   const { id, createdAt, content, moodId } = post;
   const date = createdAt.slice(0, 10);
@@ -29,6 +30,7 @@ const Diarybox: React.FC<{ post: Post }> = ({ post }) => {
   const iconSrc = React.useMemo(() => {
     return MOOD_ICONS.find((mood) => mood.id === moodId).src;
   }, [moodId]);
+
 
   return (
     <S.DiaryBox onClick={handleClick}>

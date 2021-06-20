@@ -14,9 +14,11 @@ export const contentbox = styled.div`
 `;
 
 export const forleft = styled.div`
+
   float: left;
   margin: 5px;
 `;
+
 
 export const datebox = styled.div`
   float: right;
