@@ -5,9 +5,11 @@ import router from 'next/router';
 import ThemeButton from 'views/components/theme-button';
 import { NextPage } from 'next';
 import { ListBox } from 'primereact/listbox';
-import { Post } from 'share/interfaces/post';
+import { PagedPosts, Post } from 'share/interfaces/post';
 import { GetServerSideProps } from 'next';
-import { getMockdata } from '../../share/utils/mock-data';
+import { ContentState, convertFromRaw } from 'draft-js';
+import { MOOD_ICONS, MoodIcon } from 'common/constant';
+import Image from 'next/image';
 import postAPI from 'common/api/postAPI';
 import DraftViewer from 'views/components/editor-viewer';
 import * as S from './styles';
@@ -22,6 +24,7 @@ interface PostListProps {
 }
 
 const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
+  const moodIcon: MoodIcon = MOOD_ICONS.find((icon) => icon.id === post.moodId);
   const deletePost = () => {
     const deleteCheck = confirm('삭제된 글은 복구가 불가능합니다.\n글을 삭제하시겠습니까?');
     if (!deleteCheck) return;
@@ -42,8 +45,21 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
   };
 
   const otherPosts = postList.map((p: Post): PostListProps => {
+    let contentText: string;
+    try {
+      const parsedContent: ContentState = convertFromRaw(JSON.parse(p.content));
+      contentText = parsedContent.getPlainText();
+      contentText = contentText.trim();
+      contentText = contentText.slice(0, 20);
+      if (!contentText.length) {
+        contentText = '...';
+      }
+    } catch {
+      contentText = p.content;
+    }
+
     return {
-      label: p.moodId + '\t' + p.createdAt + '\t' + p.content.slice(0, 20) + '...',
+      label: p.moodId + '\t' + p.createdAt.slice(0, 10) + '\t' + contentText + '...',
       value: p.id,
     };
   });
@@ -54,7 +70,8 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
       <S.PageContentContainer>
         <S.PostContainer>
           <S.EmojiDateContainer>
-            {post.moodId} {post.createdAt.slice(0, 10)}​
+            <Image src={`/${moodIcon.src}`} width={'50px'} height={'50px'} />{' '}
+            {post.createdAt.slice(0, 10)}​
           </S.EmojiDateContainer>
           <S.PostContent>
             <DraftViewer rawPostContent={post.content} />​
@@ -85,9 +102,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id;
   const posts = await getMockdata();
   const item = await postAPI.getPostById(parseInt(id as string));
-  const otherPosts = posts.filter(
-    (data) => data.id === Number(id) - 1 || data.id === Number(id) + 1 //TODO: 글 목록 앞뒤 글 말고 다르게 받아오기 ?
-  );
+  const data: PagedPosts = await postAPI.getAllPostsByPage(1);
+  const { total, posts } = data;
 
   if (!item)
     return {
@@ -97,7 +113,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
 
-  return { props: { post: item, postList: otherPosts } };
+  return { props: { post: item, postList: posts } };
+
 };
 
 export default PostViewPage;
