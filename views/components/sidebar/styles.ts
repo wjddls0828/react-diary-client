@@ -52,6 +52,8 @@ interface PCardProps {
 export const PCard = styled.div<PCardProps>`
   background: ${(props) => props.backgroundColor ?? '#7d5a5a'};
   padding: 10px;
+  margin-bottom: 30px;
+  margin-top: 30px;
 `;
 
 interface MoodIconProps {
@@ -68,4 +70,20 @@ export const MoodIcon = styled.button<MoodIconProps>`
   :focus {
     opacity: 1;
   }
+`;
+
+export const MoodSearchBox = styled.div`
+  border: 2px solid;
+  border-color: ${THEME_COLOR.BROWN};
+  margin-top: 30px;
+  padding: 3px;
+`;
+
+export const MoodUpContent = styled.div`
+  color: ${THEME_COLOR.BROWN};
+  padding: 3px;
+  margin-left: auto;
+  font-size: 13px;
+  justify-content: center;
+  font-weight: bolder;
 `;

@@ -69,8 +69,8 @@ const Sidebar: React.FC = () => {
         <Card title='오늘의 편지'>{quote}</Card>
       </S.PCard>
       <SearchBar />
-      <div>
-        <p>기분별 일기 조회하기</p>
+      <S.MoodSearchBox>
+        <S.MoodUpContent>기분별 일기 조회</S.MoodUpContent>
         {[1, 2, 3].map((mood) => (
           <S.MoodIcon key={mood} isSelected={parseInt(moodId as string) === mood}>
             <Image
@@ -81,7 +81,7 @@ const Sidebar: React.FC = () => {
             />
           </S.MoodIcon>
         ))}
-      </div>
+      </S.MoodSearchBox>
     </S.Sidebar>
   );
 };
