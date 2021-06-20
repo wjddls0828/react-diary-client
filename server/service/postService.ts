@@ -32,11 +32,11 @@ export default class PostService {
     userId: number,
     moodId: number,
     page: number
-  ): Promise<Post[]> {
+  ): Promise<PagedPosts> {
     const take = POSTS_PER_PAGE;
     const skip = (page - 1) * POSTS_PER_PAGE;
 
-    const [data] = await DBPool.query(
+    const [postsData] = await DBPool.query(
       `select * from post where userId = ? and moodId = ? 
        ORDER BY id DESC LIMIT ? OFFSET ?`,
       [userId, moodId, take, skip]
@@ -45,7 +45,15 @@ export default class PostService {
       throw new Error();
     });
 
-    return parseRawData(data);
+    const [totalData] = await DBPool.query(
+      `select count(*) as total from post where userId = ? and moodId = ?`,
+      [userId, moodId]
+    );
+
+    const [data] = parseRawData(totalData);
+    data.posts = parseRawData(postsData);
+
+    return data;
   }
 
   // 검색기능

@@ -63,7 +63,7 @@ const postAPI = {
     return posts;
   },
 
-  getPostsByMoodId: async (moodId: number, page: number): Promise<Post[]> => {
+  getPostsByMoodId: async (moodId: number, page: number): Promise<PagedPosts> => {
     const posts = await axios
       .get<Post[]>(`${endpoints.POST_API}/mood/${moodId}?page=${page}`)
       .catch((err) => {
