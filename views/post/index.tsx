@@ -100,10 +100,9 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id;
-  const posts = await getMockdata();
   const item = await postAPI.getPostById(parseInt(id as string));
   const data: PagedPosts = await postAPI.getAllPostsByPage(1);
-  const { total, posts } = data;
+  const { posts } = data;
 
   if (!item)
     return {
@@ -114,7 +113,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
 
   return { props: { post: item, postList: posts } };
-
 };
 
 export default PostViewPage;
