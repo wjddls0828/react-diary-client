@@ -52,7 +52,7 @@ const postAPI = {
     return result;
   },
 
-  searchPosts: async (keyword: string, page: number): Promise<Post[]> => {
+  searchPosts: async (keyword: string, page: number): Promise<PagedPosts> => {
     const posts = await axios
       .get<Post[]>(`${endpoints.POST_API}/search?keyword=${keyword}&page=${page}`)
       .catch((err) => {
@@ -63,7 +63,7 @@ const postAPI = {
     return posts;
   },
 
-  getPostsByMoodId: async (moodId: number, page: number): Promise<Post[]> => {
+  getPostsByMoodId: async (moodId: number, page: number): Promise<PagedPosts> => {
     const posts = await axios
       .get<Post[]>(`${endpoints.POST_API}/mood/${moodId}?page=${page}`)
       .catch((err) => {
@@ -77,6 +77,17 @@ const postAPI = {
   getMonthlyMoodPostCounts: async (term: string): Promise<PostCountsByMoodId[]> => {
     const postCountsByMoodId = await axios
       .get<PostCountsByMoodId[]>(`${endpoints.POST_API}/mood?term=${term}`)
+      .catch((err) => {
+        console.error(err);
+        return null;
+      });
+
+    return postCountsByMoodId;
+  },
+
+  getPostsAndMoodCountsByYearMonth: async (term: string) => {
+    const postCountsByMoodId = await axios
+      .get(`${endpoints.POST_API}/monthly?term=${term}`)
       .catch((err) => {
         console.error(err);
         return null;

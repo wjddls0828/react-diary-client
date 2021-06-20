@@ -22,7 +22,7 @@ export const UserProfile = styled.div`
 
   margin-bottom: 10px;
 
-  color: #7b6d6c;
+  color: #000000;
   font-weight: bolder;
   font-size: 15px;
 
@@ -43,4 +43,47 @@ export const LogoutButton = styled.button`
   }
 
   color: ${THEME_COLOR.BROWN};
+`;
+
+interface PCardProps {
+  backgroundColor?: string;
+}
+
+export const PCard = styled.div<PCardProps>`
+  background: ${(props) => props.backgroundColor ?? '#7d5a5a'};
+  padding: 10px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+`;
+
+interface MoodIconProps {
+  isSelected?: boolean;
+}
+
+export const MoodIcon = styled.button<MoodIconProps>`
+  border: none;
+  background: none;
+  opacity: ${(props) => (props.isSelected ? '1' : '0.7')};
+
+  :hover,
+  :active,
+  :focus {
+    opacity: 1;
+  }
+`;
+
+export const MoodSearchBox = styled.div`
+  border: 2px solid;
+  border-color: ${THEME_COLOR.BROWN};
+  margin-top: 30px;
+  padding: 3px;
+`;
+
+export const MoodUpContent = styled.div`
+  color: ${THEME_COLOR.BROWN};
+  padding: 3px;
+  margin-left: auto;
+  font-size: 13px;
+  justify-content: center;
+  font-weight: bolder;
 `;

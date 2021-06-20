@@ -1,38 +1,42 @@
 import Layout from 'views/components/layout/index';
 import { NextPage } from 'next';
-import * as S from './styles';
+import * as S from 'views/index/styles';
 import Sidebar from 'views/components/sidebar';
-import Diarybox from './diarybox';
+import Diarybox from 'views/index/diarybox';
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import postAPI from 'common/api/postAPI';
-import { usePagedPosts } from './hooks';
-import Emptybox from './emptybox';
+import Emptybox from 'views/index/emptybox';
 import { PagedPosts, Post } from 'share/interfaces/post';
-import MoodCalendar from './mood-calendar';
+import MoodCalendar from 'views/index/mood-calendar';
+import { usePagedPosts } from './hooks/usePagedPosts';
+import { useRouter } from 'next/router';
 
-
-interface IndexPageProps {
+interface MoodPageProps {
   initialPosts: Post[];
   total: number;
+  moodId?: number;
 }
 
+const MoodPage: NextPage<MoodPageProps> = ({ initialPosts, moodId, total }) => {
+  const router = useRouter();
 
-const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
-  const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total });
+  React.useEffect(() => {
+    if (![1, 2, 3].includes(moodId)) {
+      alert('존재하지 않는 moodId입니다!');
+      router.back();
+    }
+  }, [router, moodId]);
 
+  const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total, moodId });
 
   return (
     <Layout>
       <Sidebar />
-
       <S.Mainpage>
         <S.CalendarContainer>
           <MoodCalendar />
         </S.CalendarContainer>
-
-
-
         <S.DiaryListContainer>
           <S.Diaryinfo>나의 일기들</S.Diaryinfo>
           <S.DiaryBoxContainer>
@@ -59,26 +63,28 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
             )}
           </S.Pgbox>
         </S.DiaryListContainer>
-
-        
-
       </S.Mainpage>
     </Layout>
   );
 };
 
-export default IndexPage;
+export default MoodPage;
 
-export async function getServerSideProps() {
-  const data: PagedPosts = await postAPI.getAllPostsByPage(1);
+export async function getServerSideProps({ query }) {
+  const { moodId: rawMoodId } = query;
+  const moodId = parseInt(rawMoodId);
+
+  if (![1, 2, 3].includes(moodId)) {
+    return { props: { total: 0, initialPosts: [], moodId: 0 } };
+  }
+
+  const data: PagedPosts = await postAPI.getPostsByMoodId(moodId, 1);
 
   if (!data) {
-    return { props: { total: 0, initialPosts: [] } };
+    return { props: { total: 0, initialPosts: [], moodId } };
   }
 
   const { total, posts } = data;
 
-  return {
-    props: { total, initialPosts: posts },
-  };
+  return { props: { total, initialPosts: posts, moodId } };
 }

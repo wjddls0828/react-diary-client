@@ -11,7 +11,7 @@ postRouter.get('/search', async (req: Request, res: Response) => {
   const keyword = req.query.keyword as string;
   const page = parseInt(req.query.page as string);
 
-  const posts: Post[] | void = await PostService.getPostsByKeyword(userId, keyword, page).catch(
+  const posts: PagedPosts | void = await PostService.getPostsByKeyword(userId, keyword, page).catch(
     (err) => {
       console.error(err);
       res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });
@@ -27,7 +27,7 @@ postRouter.get('/mood/:id', async (req: Request, res: Response) => {
   const moodId = parseInt(req.params.id);
   const page = parseInt(req.query.page as string);
 
-  const posts: Post[] | void = await PostService.getPostsByMoodId(userId, moodId, page).catch(
+  const posts: PagedPosts | void = await PostService.getPostsByMoodId(userId, moodId, page).catch(
     (err) => {
       console.error(err);
       res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });
@@ -42,10 +42,23 @@ postRouter.get('/mood', async (req: Request, res: Response) => {
   const userId = req.userId;
   const yearMonth = req.query.term as string; //'yyyymm'
 
-  const counts: PostCountsByMoodId[] | void = await PostService.getMonthlyMoodPostCountsBy(
+  const counts: PostCountsByMoodId[] | void = await PostService.getMoodPostCountsByYearMonth(
     userId,
     yearMonth
   ).catch((err) => {
+    console.error(err);
+    res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });
+  });
+
+  res.status(200).send(counts);
+});
+
+// 기분별 monthly 게시글과 개수
+postRouter.get('/monthly', async (req: Request, res: Response) => {
+  const userId = req.userId;
+  const yearMonth = req.query.term as string; //'yyyymm'
+
+  const counts = await PostService.getPostsAndCountsByYearMonth(userId, yearMonth).catch((err) => {
     console.error(err);
     res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });
   });
@@ -68,7 +81,8 @@ postRouter.get('/:id', async (req: Request, res: Response) => {
   const userId = req.userId;
   const postId = parseInt(req.params.id); //TODO: 잘못된 params 입력한 경우
 
-  const post: Post | void = await PostService.getPostById(userId, postId).catch(() => {
+  const post: Post | void = await PostService.getPostById(userId, postId).catch((err) => {
+    console.error(err);
     res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });
   });
 

@@ -32,11 +32,11 @@ export default class PostService {
     userId: number,
     moodId: number,
     page: number
-  ): Promise<Post[]> {
+  ): Promise<PagedPosts> {
     const take = POSTS_PER_PAGE;
     const skip = (page - 1) * POSTS_PER_PAGE;
 
-    const [data] = await DBPool.query(
+    const [postsData] = await DBPool.query(
       `select * from post where userId = ? and moodId = ? 
        ORDER BY id DESC LIMIT ? OFFSET ?`,
       [userId, moodId, take, skip]
@@ -45,7 +45,15 @@ export default class PostService {
       throw new Error();
     });
 
-    return parseRawData(data);
+    const [totalData] = await DBPool.query(
+      `select count(*) as total from post where userId = ? and moodId = ?`,
+      [userId, moodId]
+    );
+
+    const [data] = parseRawData(totalData);
+    data.posts = parseRawData(postsData);
+
+    return data;
   }
 
   // 검색기능
@@ -53,11 +61,11 @@ export default class PostService {
     userId: number,
     keyword: string,
     page: number
-  ): Promise<Post[]> {
+  ): Promise<PagedPosts> {
     const take = POSTS_PER_PAGE;
     const skip = (page - 1) * POSTS_PER_PAGE;
 
-    const [data] = await DBPool.query(
+    const [postsData] = await DBPool.query(
       `SELECT * FROM post WHERE userId =? and content LIKE '%${keyword}%'
        ORDER BY id DESC LIMIT ? OFFSET ?`,
       [userId, take, skip]
@@ -66,7 +74,16 @@ export default class PostService {
       throw new Error();
     });
 
-    return parseRawData(data);
+    const [totalData] = await DBPool.query(
+      `select count(*) as total FROM post WHERE userId =? and content LIKE '%${keyword}%'
+    ORDER BY id DESC`,
+      userId
+    );
+
+    const [data] = parseRawData(totalData);
+    data.posts = parseRawData(postsData);
+
+    return data;
   }
 
   public static async getPostById(userId: number, postId: number): Promise<Post> {
@@ -163,7 +180,7 @@ export default class PostService {
   }
 
   // 월별로 기분별 게시글 개수 조회
-  public static async getMonthlyMoodPostCountsBy(
+  public static async getMoodPostCountsByYearMonth(
     userId: number,
     yearMonth: string
   ): Promise<PostCountsByMoodId[]> {
@@ -183,5 +200,34 @@ export default class PostService {
     });
 
     return parseRawData(data);
+  }
+
+  public static async getPostsAndCountsByYearMonth(userId: number, yearMonth: string) {
+    const [postsData] = await DBPool.query(
+      `select * from post 
+		    where userId = ?
+        AND DATE_FORMAT(createdAt, '%Y%m') = ?`,
+      [userId, yearMonth]
+    );
+
+    const [countsData] = await DBPool.query(
+      `SELECT mood.id as moodId, COUNT(p.id) as count FROM 	
+      (select id, moodId from post 
+		    where userId = ?
+        AND DATE_FORMAT(createdAt, '%Y%m') = ?) 
+      as p 
+      RIGHT JOIN mood 
+      ON mood.id = p.moodId
+      GROUP BY mood.id;`,
+      [userId, yearMonth]
+    );
+
+    const data = {};
+    const posts = parseRawData(postsData);
+    const counts = parseRawData(countsData);
+    data['posts'] = posts;
+    data['counts'] = counts;
+
+    return data;
   }
 }
