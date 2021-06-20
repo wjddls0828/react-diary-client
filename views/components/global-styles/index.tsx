@@ -48,7 +48,6 @@ const GlobalStyles = createGlobalStyle`
     src: url("/fonts/NanumGothic-Regular.ttf") format("truetype");
   }
 
-
   /* Events On Calendar */
   .goodMood {
     background-image: url('/good.png');
