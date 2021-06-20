@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Input } from 'antd';
 
+import 'antd/lib/input/style/index.css';
+import 'antd/lib/button/style/index.css';
+
 const { Search } = Input;
 
 const SearchBar: React.FC = () => {

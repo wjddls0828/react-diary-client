@@ -9,6 +9,8 @@ import SearchBar from 'views/index/SearchBar';
 import getRecentMoodId from './utils/getRecentMoodId';
 import { useState } from 'react';
 
+import 'antd/lib/card/style/index.css';
+
 const Sidebar: React.FC = () => {
   const [currentMoodId, setCurrentMoodId] = useState(1);
   const [quote, setQuote] = useState('');
