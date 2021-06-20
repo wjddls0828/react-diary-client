@@ -10,7 +10,7 @@ export const DiaryBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
   :hover {
     background-color: #c1b7b7;
   }
