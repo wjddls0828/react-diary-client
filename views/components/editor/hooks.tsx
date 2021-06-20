@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useRef, useState } from 'react';
 import {
   EditorState,
@@ -37,7 +36,7 @@ export const useEditor = (initialContent?: ContentState) => {
   );
   const [editorState, setEditorState] = useState(initialState);
 
-  const handleKeyCommand = useCallback((command: DraftEditorCommand): DraftHandleValue => {
+  const handleKeyCommand = (command: DraftEditorCommand): DraftHandleValue => {
     const newState: EditorState = RichUtils.handleKeyCommand(editorState, command);
 
     if (newState) {
@@ -46,7 +45,7 @@ export const useEditor = (initialContent?: ContentState) => {
     }
 
     return 'not-handled';
-  }, []);
+  };
 
   return {
     editorContainer,
@@ -122,7 +121,7 @@ export const useEditorCustomBlock = (editorState?: EditorState, setEditorState?)
     setEditorState(insertedEditorState);
   };
 
-  const renderCustomBlock = (contentBlock: ContentBlock) => {
+  const renderCustomBlock = useCallback((contentBlock: ContentBlock) => {
     const type = contentBlock.getType();
 
     if (type !== ATOMIC_BLOCK_TYPE) return;
@@ -131,7 +130,7 @@ export const useEditorCustomBlock = (editorState?: EditorState, setEditorState?)
       component: BookCardBlock,
       editable: false,
     };
-  };
+  }, []);
 
   return {
     insertCustomBlock,

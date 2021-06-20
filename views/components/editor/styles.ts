@@ -27,8 +27,9 @@ export const MoodInputContainer = styled.div`
 `;
 
 export const MoodInputLabel = styled.div`
-  width: 200px;
-  margin-bottom: 5px;
+  width: 100%;
+  margin-bottom: 8px;
+  font-size: 17px;
 `;
 
 export const MoodInput = styled.div`
@@ -62,4 +63,5 @@ export const EditorContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
 
   cursor: 'text';
+  line-height: '200%';
 `;

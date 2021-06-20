@@ -6,7 +6,7 @@ import { NaverBook, PagedNaverBooks } from 'share/interfaces/naverBook';
 const DEFAULT_PAGE = 1;
 const BOOK_RESULTS_PER_PAGE = 7;
 
-export const usePagedBooks = () => {
+export const useSearchPagedBooks = () => {
   const [keyword, setKeyword] = useState();
   const [maxPage, setMaxPage] = useState(DEFAULT_PAGE);
   const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE);

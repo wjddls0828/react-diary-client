@@ -1,5 +1,5 @@
 import React from 'react';
-import { usePagedBooks } from './hooks';
+import { useSearchPagedBooks } from './hooks';
 import Pagination from 'views/components/pagination';
 import { BookSearchProps } from './types';
 import * as S from './styles';
@@ -18,7 +18,7 @@ const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
     updateCurrentPage,
     getBooksByPage,
     resetPage,
-  } = usePagedBooks();
+  } = useSearchPagedBooks();
 
   const searchBooks = () => {
     resetPage();
@@ -89,4 +89,4 @@ const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
   );
 };
 
-export default React.memo(BookSearchBar);
+export default BookSearchBar;
