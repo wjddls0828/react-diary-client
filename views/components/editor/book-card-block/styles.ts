@@ -1,44 +1,52 @@
 import styled from 'styled-components';
 
 export const BookCard = styled.div`
-  border: 1px solid gray;
-
-  width: 350px;
-  height: 130px;
+  background-color: white;
+  width: 250px;
+  height: 120px;
+  padding-right: 10px;
 
   display: flex;
   align-items: center;
-
-  color: gray;
-
   cursor: pointer;
-  margin-bottom: 10px;
-  z-index: 10;
 
-  :focus,
-  :active {
-    border: 1px solid #de6287;
-  }
+  border: 1px solid transparent;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  margin-bottom: 8px;
   user-select: none;
+`;
+
+export const BookCardImage = styled.img`
+  width: 90px;
+  min-height: 120px;
+  object-fit: cover;
 `;
 
 export const BookCardInfo = styled.div`
   width: 100%;
-  font-size: 14px;
-
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
+  padding: 6px 13px;
 `;
 
 export const BookCardTitle = styled.div`
-  width: 80%;
-  font-weight: 700;
-  color: black;
-  margin-bottom: 10px;
-  font-size: 16px;
+  width: 150px;
+  font-size: 13px;
 
-  /* white-space: nowrap;
+  font-weight: 700;
+  color: gray;
+  margin: 2px 0;
+
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; */
+  text-overflow: ellipsis;
+`;
+
+export const BookCardMeta = styled.div`
+  padding: 0 5px;
+  font-size: 11px;
+  color: gray;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

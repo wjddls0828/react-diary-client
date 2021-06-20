@@ -11,6 +11,9 @@ export class GoogleUserDTO {
   name: string;
   constructor(userData: RawGoogleUser) {
     this.email = userData.email;
-    this.name = userData.name.length > 5 ? userData.name.slice(0, 5) : userData.name;
+    this.name =
+      userData.name.length > 5
+        ? userData.name.slice(0, 5).replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi, '')
+        : userData.name;
   }
 }

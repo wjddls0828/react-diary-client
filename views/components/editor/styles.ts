@@ -1,6 +1,17 @@
 import { THEME_COLOR } from 'common/constant';
 import styled from 'styled-components';
 
+export const EditorHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  border: 1px solid black;
+`;
+
 export const MoodInputContainer = styled.div`
   margin-top: 10px;
   /* width: 200px; */
@@ -41,20 +52,14 @@ export const MoodIcon = styled.div<{ clicked: boolean }>`
 
 export const EditorContainer = styled.div`
   height: 100%;
-  border: 1px solid black;
+  border: 1px solid #d3d3d3;
   border-top: 0px;
 
   background-color: white;
 
-  min-height: 400px;
-  padding: 10px 10px;
+  min-height: 500px;
+  padding: 20px 30px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
 
   cursor: 'text';
-`;
-
-export const ButtonContainer = styled.div`
-  margin-top: 10px;
-  display: flex;
-  justify-content: flex-end;
-  /* margin-bottom: 500px; */
 `;

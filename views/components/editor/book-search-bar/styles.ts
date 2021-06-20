@@ -1,33 +1,36 @@
+import { THEME_COLOR } from 'common/constant';
 import styled, { css } from 'styled-components';
 
 export const BookSeachBar = styled.div<{ show: boolean }>`
   z-index: 10;
-  position: absolute;
+  width: 100%;
 
-  right: 0px;
-  margin-top: 35px;
-  width: 250px;
-  height: 600px;
+  display: flex;
+  flex-direction: column;
 
-  border: 1px solid black;
+  position: fixed;
+  transition: all 0.3s linear;
+  top: 100%;
+  left: 0;
+
+  text-align: left;
   background-color: white;
 
-  overflow-x: hidden;
-  overflow-y: scroll;
-
-  transition: all 0.3s linear;
-  transform: translate(100%);
+  box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.16), 0 -2px 4px rgba(0, 0, 0, 0.12);
+  overflow-x: scroll;
 
   ${(props) =>
     props.show &&
     css`
-      transform: translate(0);
+      top: 65%;
+      height: 40%;
     `};
 `;
 
 export const SearchContainer = styled.button`
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-left: 15px;
 
   width: 100%;
   display: flex;
@@ -56,51 +59,43 @@ export const SearchInput = styled.input`
 
 export const EmptyBookSearchList = styled.div`
   width: 100%;
-  height: 100%;
   padding: 10px 10px;
   color: gray;
+
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+
+  position: relative;
+  top: 50px;
+
+  svg {
+    margin-bottom: 5px;
+    font-size: 30px;
+  }
 `;
 
 export const BookSearchList = styled.div`
   width: 100%;
-  height: 100%;
-  padding: 10px 10px;
-`;
-
-export const BookCard = styled.div`
-  width: 100%;
+  padding: 30px;
 
   display: flex;
-  align-items: center;
-
-  color: gray;
-
-  cursor: pointer;
-  margin-bottom: 10px;
-
-  :hover {
-    border: 1px solid black;
-  }
+  justify-content: center;
 `;
 
-export const BookCardInfo = styled.div`
-  width: 100%;
-
+export const Row = styled.div`
   display: flex;
-  flex-direction: column;
-  padding: 10px;
+  width: 100%;
 `;
 
-export const BookCardTitle = styled.div`
-  width: 60%;
-  font-weight: 700;
-  color: black;
-  margin-bottom: 10px;
+export const BookShelf = styled.div`
+  background-color: ${THEME_COLOR.BROWN};
+  width: 101%;
+  height: 10px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+`;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+export const PaginationContainer = styled.div`
+  width: 100%auto;
+  margin-left: 20px;
 `;

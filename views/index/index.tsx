@@ -23,7 +23,6 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
   return (
     <Layout>
       <Sidebar />
-
       <S.Mainpage>
 
         <S.CalendarContainer>

@@ -21,7 +21,7 @@ export const BlogTitle = styled.a`
   height: 200px;
   margin-left: 30px;
 
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 800;
   color: ${THEME_COLOR.BROWN};
 `;
