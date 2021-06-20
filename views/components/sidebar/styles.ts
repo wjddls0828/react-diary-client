@@ -1,6 +1,11 @@
 import { THEME_COLOR } from 'common/constant';
 import styled from 'styled-components';
+import { Card } from 'antd';
+import 'antd/lib/card/style/index.css';
 
+export const styledCard = styled(Card)`
+  font-size: 13px;
+`;
 export const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,4 +57,6 @@ interface PCardProps {
 export const PCard = styled.div<PCardProps>`
   background: ${(props) => props.backgroundColor ?? '#7d5a5a'};
   padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;

@@ -11,7 +11,6 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import 'views/components/global-styles/paging.css';
-import 'antd/dist/antd.css';
 
 interface CustomAppProps extends AppProps {
   user: User;
