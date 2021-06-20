@@ -11,6 +11,7 @@ import Emptybox from './emptybox';
 import { PagedPosts, Post } from 'share/interfaces/post';
 import MoodCalendar from './mood-calendar';
 
+
 interface IndexPageProps {
   initialPosts: Post[];
   total: number;
@@ -24,11 +25,14 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
       <Sidebar />
 
       <S.Mainpage>
+
         <S.CalendarContainer>
           <MoodCalendar />
         </S.CalendarContainer>
 
+
         <S.DiaryListContainer>
+          <S.Diaryinfo>나의 일기들</S.Diaryinfo>
           <S.DiaryBoxContainer>
             {pagedPosts.length ? (
               pagedPosts.map((post) => {
@@ -38,20 +42,23 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
               <Emptybox />
             )}
           </S.DiaryBoxContainer>
-
-          {pageCount > 0 && (
-            <ReactPaginate
-              pageRangeDisplayed={2}
-              marginPagesDisplayed={3}
-              previousLabel={'이전'}
-              nextLabel={'다음'}
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName={'pagebtn'}
-              activeClassName={'page_active_btn'}
-            />
-          )}
+          <S.Pgbox>
+            {pageCount > 0 && (
+              <ReactPaginate
+                pageRangeDisplayed={2}
+                marginPagesDisplayed={3}
+                previousLabel={'이전'}
+                nextLabel={'다음'}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={'pagebtn'}
+                activeClassName={'page_active_btn'}
+              />
+            )}
+          </S.Pgbox>
         </S.DiaryListContainer>
+
+        
       </S.Mainpage>
     </Layout>
   );
