@@ -73,7 +73,7 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, initialPosts, total }
           </S.EditDeleteButtonContainer>
         </S.ButtonContainer>
         <S.ListContainer>
-          <S.OtherPosts>나의 다른 일기글 보기</S.OtherPosts>
+          <S.OtherPosts>목록보기</S.OtherPosts>
           <PostList initialPosts={initialPosts} total={total} />​
         </S.ListContainer>
       </S.PageContentContainer>
@@ -100,7 +100,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const { total, posts } = data;
   return { props: { total, post: item, initialPosts: posts } };
-  
 };
 
 export default PostViewPage;

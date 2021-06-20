@@ -8,12 +8,14 @@ export const PostContainer = styled.div`
 
 export const PostContent = styled.div`
   width: 100%;
-  padding: 15px;
+  padding: 15px 25px;
   margin-top: 15px;
   background-color: white;
   color: black;
   line-height: '200%';
+
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  min-height: 100px;
 `;
 
 interface EmojiDateContainerProps {
@@ -34,6 +36,7 @@ export const EmojiDateContainer = styled.div<EmojiDateContainerProps>`
   justify-content: space-evenly;
   align-items: center;
   font-weight: bolder;
+  color: #453e3e;
 `;
 
 export const ButtonContainer = styled.div`
@@ -63,13 +66,13 @@ export const OtherPosts = styled.div`
   margin-bottom: 10px;
 
   color: #7b6d6c;
-  font-weight: bolder;
+  font-weight: 600;
   font-size: 15px;
 `;
 
 export const ListContainer = styled.div`
   width: 100%;
-  margin-top: 10px;
+  margin-top: 50px;
   padding: 15px;
   background-color: white;
   color: black;
