@@ -2,6 +2,7 @@ import React from 'react';
 import { EditorState, convertFromRaw, ContentState } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import Editor from '@draft-js-plugins/editor';
+import { EDITOR_KEY } from '../editor/constants';
 
 interface DraftViewerProps {
   rawPostContent: string;
@@ -21,7 +22,12 @@ const DraftViewer: React.FC<DraftViewerProps> = ({ rawPostContent, style }) => {
 
   return (
     <div style={{ ...style }}>
-      <Editor readOnly={true} editorState={postEditorState} onChange={() => {}} />
+      <Editor
+        readOnly={true}
+        editorKey={EDITOR_KEY}
+        editorState={postEditorState}
+        onChange={() => {}}
+      />
     </div>
   );
 };

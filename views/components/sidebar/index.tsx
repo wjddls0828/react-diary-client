@@ -16,7 +16,6 @@ const Sidebar: React.FC = () => {
   const handleOnClick = (href: string) => {
     router.push(href);
   };
-
   React.useEffect(() => {
     const setTodayQuote = async () => {
       const recentMoodId = await getRecentMoodId();
@@ -42,10 +41,15 @@ const Sidebar: React.FC = () => {
         return undefined;
     }
   }, [currentMoodId]);
+  const logout = () => {
+    window.location.href = process.env.API_BASE_URL + '/auth/logout';
+  };
 
   return (
     <S.Sidebar>
-      <S.UserProfile>{user.name} 님</S.UserProfile>
+      <S.UserProfile>
+        {user && user.name} 님<S.LogoutButton onClick={logout}>로그아웃</S.LogoutButton>
+      </S.UserProfile>
       <ThemeButton text={'글쓰기'} onClick={() => handleOnClick('/post')} isBrownTheme={true} />
       <ThemeButton
         text={'책갈피 보기'}
