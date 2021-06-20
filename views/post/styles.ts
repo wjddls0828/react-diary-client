@@ -13,16 +13,27 @@ export const PostContent = styled.div`
   background-color: white;
   color: black;
   line-height: '200%';
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 `;
 
-export const EmojiDateContainer = styled.div`
-  background-color: #c1b7b7;
-  padding: 5px;
-  width: 150px;
+interface EmojiDateContainerProps {
+  backgroundImage?: string;
+}
+
+export const EmojiDateContainer = styled.div<EmojiDateContainerProps>`
+  background-image: url(${(props) => props.backgroundImage});
+  background-size: 180px 60px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 180px;
+  height: 50px;
+  padding-right: 15px;
+  padding-left: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
+  font-weight: bolder;
 `;
 
 export const ButtonContainer = styled.div`

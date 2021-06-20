@@ -5,6 +5,10 @@ export const Header = styled.header`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  background: url(/header-tape.png);
+  background-repeat: no-repeat;
+  background-position: left center;
 `;
 
 export const BlogTitle = styled.a`
@@ -15,6 +19,7 @@ export const BlogTitle = styled.a`
 
   width: 100%;
   height: 200px;
+  margin-left: 30px;
 
   font-size: 40px;
   font-weight: 800;
