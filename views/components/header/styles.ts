@@ -19,6 +19,9 @@ export const BlogTitle = styled.a`
   font-size: 40px;
   font-weight: 800;
   color: ${THEME_COLOR.BROWN};
+  :hover {
+    color: ${THEME_COLOR.BROWN};
+  }
 `;
 
 export const StyleLine = styled.div`

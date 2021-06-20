@@ -1,6 +1,6 @@
 import { useUser } from 'common/context/user/user';
 import router, { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ThemeButton from 'views/components/theme-button';
 import * as S from './styles';
 import quotes from 'share/utils/quotes';
@@ -13,7 +13,6 @@ import 'antd/lib/card/style/index.css';
 import Image from 'next/image';
 import { MOOD_ICONS } from 'common/constant';
 
-
 const Sidebar: React.FC = () => {
   const {
     query: { moodId },
@@ -25,7 +24,7 @@ const Sidebar: React.FC = () => {
     router.push(href);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const setTodayQuote = async () => {
       const recentMoodId = await getRecentMoodId();
       setCurrentMoodId(recentMoodId);
@@ -83,7 +82,6 @@ const Sidebar: React.FC = () => {
           </S.MoodIcon>
         ))}
       </S.MoodSearchBox>
-
     </S.Sidebar>
   );
 };

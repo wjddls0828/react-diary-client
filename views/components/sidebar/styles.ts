@@ -13,7 +13,7 @@ export const Sidebar = styled.div`
   margin-bottom: 15px;
 
   background-color: white;
-  color: black;
+  color: ${THEME_COLOR.BROWN};
 `;
 
 export const UserProfile = styled.div`
@@ -21,13 +21,12 @@ export const UserProfile = styled.div`
   height: 30px;
 
   margin-bottom: 10px;
-
-  color: #000000;
   font-weight: bolder;
   font-size: 15px;
 
   display: flex;
   align-items: center;
+  color: ${THEME_COLOR.BROWN};
 `;
 
 export const LogoutButton = styled.button`
