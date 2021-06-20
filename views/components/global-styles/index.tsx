@@ -8,6 +8,8 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box; 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-family: "NanumGothic";
+    line-height: 200%;
   }
   html,
   body {
@@ -28,6 +30,21 @@ const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
     cursor: pointer;
+  }
+
+  @font-face {
+    font-family: "NanumSquare";
+    src: url("/fonts/NanumSquareR.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "Sunflower";
+    src: url("/fonts/Sunflower-Medium.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "NanumGothic";
+    src: url("/fonts/NanumGothic-Regular.ttf") format("truetype");
   }
 
 
