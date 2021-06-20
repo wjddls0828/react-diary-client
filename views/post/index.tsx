@@ -21,16 +21,14 @@ interface PostViewPageProps {
 
 const PostViewPage: NextPage<PostViewPageProps> = ({ post, initialPosts, total }) => {
   const moodIcon: MoodIcon = MOOD_ICONS.find((icon) => icon.id === post.moodId);
-  const bgcolorHandler = React.useMemo(() => {
+  const bgHandler = React.useMemo(() => {
     switch (post.moodId) {
       case 1:
-        return '#fcdad7';
+        return '/pink-tape.png';
       case 2:
-        return '#f5e8bf';
+        return '/yellow-tape.png';
       case 3:
-        return '#b1cade';
-      default:
-        return '#c1b7b7';
+        return '/blue-tape.png';
     }
   }, [post.moodId]);
 
@@ -54,7 +52,7 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, initialPosts, total }
       <Sidebar />
       <S.PageContentContainer>
         <S.PostContainer>
-          <S.EmojiDateContainer backgroundColor={bgcolorHandler}>
+          <S.EmojiDateContainer backgroundImage={bgHandler}>
             <Image src={`/${moodIcon.src}`} width={'50px'} height={'50px'} />{' '}
             {post.createdAt.slice(0, 10)}​
           </S.EmojiDateContainer>
@@ -84,7 +82,7 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, initialPosts, total }
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.params?.id; // TODO: id에 해당하는 글 없는경우 처리
+  const id = context.params?.id;
   const item = await postAPI.getPostById(Number(id));
   const data: PagedPosts = await postAPI.getAllPostsByPage(1);
   if (!data) {

@@ -12,20 +12,23 @@ export const PostContent = styled.div`
   margin-top: 15px;
   background-color: white;
   color: black;
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 `;
 
 interface EmojiDateContainerProps {
-  backgroundColor?: string;
+  backgroundImage?: string;
 }
 
 export const EmojiDateContainer = styled.div<EmojiDateContainerProps>`
-  background-color: ${(props) => props.backgroundColor ?? '#c1b7b7'};
+  background-image: url(${(props) => props.backgroundImage});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
   padding: 5px;
-  width: 150px;
+  width: 200px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 `;
 

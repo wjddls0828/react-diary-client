@@ -46,6 +46,10 @@ const GlobalStyles = createGlobalStyle`
     font-family: "NanumGothic";
     src: url("/fonts/NanumGothic-Regular.ttf") format("truetype");
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c26da2344a2287db92b3be3bb8288f27ef0db04c
 
   /* Events On Calendar */
   .goodMood {
