@@ -52,7 +52,7 @@ const postAPI = {
     return result;
   },
 
-  searchPosts: async (keyword: string, page: number): Promise<Post[]> => {
+  searchPosts: async (keyword: string, page: number): Promise<PagedPosts> => {
     const posts = await axios
       .get<Post[]>(`${endpoints.POST_API}/search?keyword=${keyword}&page=${page}`)
       .catch((err) => {
