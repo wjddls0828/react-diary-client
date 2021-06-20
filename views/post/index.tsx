@@ -24,11 +24,11 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, initialPosts, total }
   const bgHandler = React.useMemo(() => {
     switch (post.moodId) {
       case 1:
-        return '/pink-tape.png';
+        return '/pastelpink.png';
       case 2:
-        return '/yellow-tape.png';
+        return '/pastelyellow.png';
       case 3:
-        return '/blue-tape.png';
+        return '/pastelblue.png';
     }
   }, [post.moodId]);
 
@@ -53,7 +53,7 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, initialPosts, total }
       <S.PageContentContainer>
         <S.PostContainer>
           <S.EmojiDateContainer backgroundImage={bgHandler}>
-            <Image src={`/${moodIcon.src}`} width={'50px'} height={'50px'} />{' '}
+            <Image src={`/${moodIcon.src}`} width={'35px'} height={'35px'} />{' '}
             {post.createdAt.slice(0, 10)}​
           </S.EmojiDateContainer>
           <S.PostContent>

@@ -21,15 +21,18 @@ interface EmojiDateContainerProps {
 
 export const EmojiDateContainer = styled.div<EmojiDateContainerProps>`
   background-image: url(${(props) => props.backgroundImage});
-  background-size: contain;
+  background-size: 180px 60px;
   background-repeat: no-repeat;
   background-position: center center;
-  padding: 5px;
-  width: 200px;
+  width: 180px;
+  height: 50px;
+  padding-right: 15px;
+  padding-left: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  font-weight: bolder;
 `;
 
 export const ButtonContainer = styled.div`
