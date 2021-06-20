@@ -172,7 +172,7 @@ export default class PostService {
   }
 
   // 월별로 기분별 게시글 개수 조회
-  public static async getMonthlyMoodPostCountsBy(
+  public static async getMoodPostCountsByYearMonth(
     userId: number,
     yearMonth: string
   ): Promise<PostCountsByMoodId[]> {
@@ -192,5 +192,34 @@ export default class PostService {
     });
 
     return parseRawData(data);
+  }
+
+  public static async getPostsAndCountsByYearMonth(userId: number, yearMonth: string) {
+    const [postsData] = await DBPool.query(
+      `select * from post 
+		    where userId = ?
+        AND DATE_FORMAT(createdAt, '%Y%m') = ?`,
+      [userId, yearMonth]
+    );
+
+    const [countsData] = await DBPool.query(
+      `SELECT mood.id as moodId, COUNT(p.id) as count FROM 	
+      (select id, moodId from post 
+		    where userId = ?
+        AND DATE_FORMAT(createdAt, '%Y%m') = ?) 
+      as p 
+      RIGHT JOIN mood 
+      ON mood.id = p.moodId
+      GROUP BY mood.id;`,
+      [userId, yearMonth]
+    );
+
+    const data = {};
+    const posts = parseRawData(postsData);
+    const counts = parseRawData(countsData);
+    data['posts'] = posts;
+    data['counts'] = counts;
+
+    return data;
   }
 }

@@ -18,6 +18,10 @@ export const EmojiDateContainer = styled.div`
   background-color: #c1b7b7;
   padding: 5px;
   width: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 export const ButtonContainer = styled.div`
