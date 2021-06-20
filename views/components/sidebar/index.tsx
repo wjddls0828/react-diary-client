@@ -10,6 +10,8 @@ import getRecentMoodId from './utils/getRecentMoodId';
 import { useState } from 'react';
 
 import 'antd/lib/card/style/index.css';
+import Image from 'next/image';
+import { MOOD_ICONS } from 'common/constant';
 
 const Sidebar: React.FC = () => {
   const [currentMoodId, setCurrentMoodId] = useState(1);
@@ -18,6 +20,7 @@ const Sidebar: React.FC = () => {
   const handleOnClick = (href: string) => {
     router.push(href);
   };
+
   React.useEffect(() => {
     const setTodayQuote = async () => {
       const recentMoodId = await getRecentMoodId();
@@ -43,6 +46,7 @@ const Sidebar: React.FC = () => {
         return undefined;
     }
   }, [currentMoodId]);
+
   const logout = () => {
     window.location.href = process.env.API_BASE_URL + '/auth/logout';
   };
@@ -62,6 +66,33 @@ const Sidebar: React.FC = () => {
         <Card title='오늘의 편지'>{quote}</Card>
       </S.PCard>
       <SearchBar />
+      <div>
+        <p>기분별 일기 조회하기</p>
+        <S.MoodIcon>
+          <Image
+            onClick={() => router.push('/mood?moodId=1')}
+            src={'/' + MOOD_ICONS[0].src}
+            width='48px'
+            height='48px'
+          />
+        </S.MoodIcon>
+        <S.MoodIcon>
+          <Image
+            onClick={() => router.push('/mood?moodId=2')}
+            src={'/' + MOOD_ICONS[1].src}
+            width='48px'
+            height='48px'
+          />
+        </S.MoodIcon>
+        <S.MoodIcon>
+          <Image
+            onClick={() => router.push('/mood?moodId=3')}
+            src={'/' + MOOD_ICONS[2].src}
+            width='48px'
+            height='48px'
+          />
+        </S.MoodIcon>
+      </div>
     </S.Sidebar>
   );
 };

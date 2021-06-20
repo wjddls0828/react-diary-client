@@ -53,3 +53,8 @@ export const PCard = styled.div<PCardProps>`
   background: ${(props) => props.backgroundColor ?? '#7d5a5a'};
   padding: 10px;
 `;
+
+export const MoodIcon = styled.button`
+  border: none;
+  background: none;
+`;
