@@ -1,3 +1,4 @@
+import { THEME_COLOR } from 'common/constant';
 import styled from 'styled-components';
 
 export const Mainpage = styled.div`
@@ -17,7 +18,6 @@ export const DiaryListContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-
 `;
 
 export const DiaryBoxContainer = styled.div`
