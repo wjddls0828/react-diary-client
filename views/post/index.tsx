@@ -30,8 +30,8 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
     if (!deleteCheck) return;
     else {
       const result = postAPI.deletePost(post.id);
-      if (!result) alert('삭제 실패');
-      else alert('삭제가 완료되었습니다.\n다이어리 홈 화면으로 이동합니다.');
+      if (!result) alert('글이 삭제되지 않았습니다. 잠시 후 다시 시도해주세요 :)');
+      // else alert('삭제가 완료되었습니다.\n다이어리 홈 화면으로 이동합니다.');
       router.replace('/');
     }
   };
@@ -99,11 +99,22 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, postList }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.params?.id; // TODO: id에 해당하는 글 없는경우 처리
-  const item = await postAPI.getPostById(Number(id));
-  const data: PagedPosts = await postAPI.getAllPostsByPage(1); // TODO: 해당 포스트의 page 번호 어떻게 알수있나?
+  const id = context.params?.id;
+  const posts = await getMockdata();
+  const item = await postAPI.getPostById(parseInt(id as string));
+  const data: PagedPosts = await postAPI.getAllPostsByPage(1);
   const { total, posts } = data;
+
+  if (!item)
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+
   return { props: { post: item, postList: posts } };
+
 };
 
 export default PostViewPage;

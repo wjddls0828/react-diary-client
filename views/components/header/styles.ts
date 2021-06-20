@@ -16,7 +16,7 @@ export const BlogTitle = styled.a`
   width: 100%;
   height: 200px;
 
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 800;
   color: ${THEME_COLOR.BROWN};
 `;

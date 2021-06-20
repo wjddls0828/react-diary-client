@@ -1,3 +1,10 @@
+export interface PaginationProps {
+  currentPage: number;
+  maxPage: number;
+  updatePage: (idx: number) => () => void;
+  columnStyle?: boolean;
+}
+
 export interface PaginationButtonProps {
   number: number;
   focus?: boolean;
@@ -6,10 +13,4 @@ export interface PaginationButtonProps {
 
 export interface PaginationButtonStyleProps {
   focus?: boolean;
-}
-
-export interface PaginationProps {
-  currentPage: number;
-  maxPage: number;
-  updatePage: (idx: number) => () => void;
 }
