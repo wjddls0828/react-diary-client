@@ -54,7 +54,18 @@ export const PCard = styled.div<PCardProps>`
   padding: 10px;
 `;
 
-export const MoodIcon = styled.button`
+interface MoodIconProps {
+  isSelected?: boolean;
+}
+
+export const MoodIcon = styled.button<MoodIconProps>`
   border: none;
   background: none;
+  opacity: ${(props) => (props.isSelected ? '1' : '0.7')};
+
+  :hover,
+  :active,
+  :focus {
+    opacity: 1;
+  }
 `;

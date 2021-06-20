@@ -1,5 +1,5 @@
 import { useUser } from 'common/context/user/user';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 import React from 'react';
 import ThemeButton from 'views/components/theme-button';
 import * as S from './styles';
@@ -14,6 +14,9 @@ import Image from 'next/image';
 import { MOOD_ICONS } from 'common/constant';
 
 const Sidebar: React.FC = () => {
+  const {
+    query: { moodId },
+  } = useRouter();
   const [currentMoodId, setCurrentMoodId] = useState(1);
   const [quote, setQuote] = useState('');
   const user = useUser();
@@ -68,30 +71,16 @@ const Sidebar: React.FC = () => {
       <SearchBar />
       <div>
         <p>기분별 일기 조회하기</p>
-        <S.MoodIcon>
-          <Image
-            onClick={() => router.push('/mood?moodId=1')}
-            src={'/' + MOOD_ICONS[0].src}
-            width='48px'
-            height='48px'
-          />
-        </S.MoodIcon>
-        <S.MoodIcon>
-          <Image
-            onClick={() => router.push('/mood?moodId=2')}
-            src={'/' + MOOD_ICONS[1].src}
-            width='48px'
-            height='48px'
-          />
-        </S.MoodIcon>
-        <S.MoodIcon>
-          <Image
-            onClick={() => router.push('/mood?moodId=3')}
-            src={'/' + MOOD_ICONS[2].src}
-            width='48px'
-            height='48px'
-          />
-        </S.MoodIcon>
+        {[1, 2, 3].map((mood) => (
+          <S.MoodIcon key={mood} isSelected={parseInt(moodId as string) === mood}>
+            <Image
+              onClick={() => router.push(`/mood?moodId=${mood}`)}
+              src={'/' + MOOD_ICONS[mood - 1].src}
+              width='48px'
+              height='48px'
+            />
+          </S.MoodIcon>
+        ))}
       </div>
     </S.Sidebar>
   );
