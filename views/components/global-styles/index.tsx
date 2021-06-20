@@ -10,7 +10,6 @@ const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: "NanumGothic";
-    line-height: 200%;
   }
   html,
   body {
@@ -31,6 +30,10 @@ const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
     cursor: pointer;
+    color: inherit;
+    :hover{
+      color: inherit;
+    }
   }
 
   @font-face {

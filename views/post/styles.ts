@@ -12,6 +12,7 @@ export const PostContent = styled.div`
   margin-top: 15px;
   background-color: white;
   color: black;
+  line-height: '200%';
 `;
 
 export const EmojiDateContainer = styled.div`
