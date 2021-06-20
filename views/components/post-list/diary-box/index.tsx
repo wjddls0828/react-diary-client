@@ -11,16 +11,13 @@ const Diarybox: React.FC<{ post: Post }> = ({ post }) => {
   const date = createdAt.slice(0, 10);
 
   let contentText: string;
-  try {
-    const parsedContent: ContentState = convertFromRaw(JSON.parse(content));
-    contentText = parsedContent.getPlainText();
-    contentText = contentText.trim();
-    if (!contentText.length) {
-      contentText = '...';
-    }
-  } catch {
-    contentText = content; // for 에디터 구현 이전의 posts
+  const parsedContent: ContentState = convertFromRaw(JSON.parse(content));
+  contentText = parsedContent.getPlainText();
+  contentText = contentText.trim();
+  if (!contentText.length) {
+    contentText = '...';
   }
+ 
   const router = useRouter();
   const handleClick = () => {
     router.push(`/post/${id}`);
