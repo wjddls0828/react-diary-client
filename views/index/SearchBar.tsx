@@ -21,7 +21,6 @@ const SearchBar: React.FC = () => {
 
   const handleSearchInputSubmit = () => {
     router.push({ pathname: '/search', query: { keyword: encodeURIComponent(searchTerm) } });
-
   };
 
   return (

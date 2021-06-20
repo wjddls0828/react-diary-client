@@ -46,7 +46,7 @@ export const CalendarContainer = styled.div`
 `;
 
 export const Diaryinfo = styled.div`
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
   margin-bottom: 10px;
   color: ${THEME_COLOR.BROWN};

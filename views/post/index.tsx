@@ -4,7 +4,6 @@ import React from 'react';
 import router from 'next/router';
 import ThemeButton from 'views/components/theme-button';
 import { NextPage } from 'next';
-import PostList from 'views/components/post-list';
 import { PagedPosts, Post } from 'share/interfaces/post';
 import { GetServerSideProps } from 'next';
 import { MOOD_ICONS, MoodIcon } from 'common/constant';
@@ -12,6 +11,7 @@ import Image from 'next/image';
 import postAPI from 'common/api/postAPI';
 import DraftViewer from 'views/components/editor-viewer';
 import * as S from './styles';
+import PostList from 'views/components/post-list';
 
 interface PostViewPageProps {
   post: Post;
@@ -73,7 +73,7 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, initialPosts, total }
           </S.EditDeleteButtonContainer>
         </S.ButtonContainer>
         <S.ListContainer>
-          <S.OtherPosts>목록보기</S.OtherPosts>
+          <S.OtherPosts>목록 보기</S.OtherPosts>
           <PostList initialPosts={initialPosts} total={total} />​
         </S.ListContainer>
       </S.PageContentContainer>

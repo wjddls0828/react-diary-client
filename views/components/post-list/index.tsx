@@ -1,28 +1,25 @@
 import React from 'react';
-import { Post } from 'share/interfaces/post';
 import Diarybox from './diary-box';
-import Emptybox from './empty-box';
 import ReactPaginate from 'react-paginate';
-import { usePagedPosts } from 'views/index/hooks';
 import * as S from './styles';
+import { usePagedPosts } from './hooks';
+import { Post } from 'share/interfaces/post';
 
 interface PostListProps {
   initialPosts: Post[];
   total: number;
 }
+
 const PostList: React.FC<PostListProps> = ({ initialPosts, total }) => {
   const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total });
 
   return (
     <S.DiaryListContainer>
       <S.DiaryBoxContainer>
-        {pagedPosts.length ? (
+        {pagedPosts.length &&
           pagedPosts.map((post) => {
             return <Diarybox key={post.id} post={post} />;
-          })
-        ) : (
-          <Emptybox />
-        )}
+          })}
       </S.DiaryBoxContainer>
       <S.Pgbox>
         {pageCount > 0 && (
