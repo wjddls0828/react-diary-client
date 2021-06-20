@@ -3,7 +3,7 @@ import router, { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import ThemeButton from 'views/components/theme-button';
 import * as S from './styles';
-import quotes from 'share/utils/quotes';
+import quotes from 'common/utils/quotes';
 import { Card } from 'antd';
 import SearchBar from 'views/index/SearchBar';
 import getRecentMoodId from './utils/getRecentMoodId';
