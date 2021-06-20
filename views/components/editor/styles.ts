@@ -12,6 +12,11 @@ export const ButtonContainer = styled.div`
   border: 1px solid black;
 `;
 
+export const ButtonText = styled.p`
+  font-size: 14px;
+  color: white;
+`;
+
 export const MoodInputContainer = styled.div`
   margin-top: 10px;
   /* width: 200px; */
@@ -60,7 +65,7 @@ export const EditorContainer = styled.div`
 
   min-height: 500px;
   padding: 20px 30px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 8px 10px;
 
   cursor: 'text';
   line-height: '200%';
