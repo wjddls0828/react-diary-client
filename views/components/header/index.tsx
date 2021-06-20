@@ -1,16 +1,16 @@
-import { useUser } from 'common/context/user/user';
+import { useUserContext } from 'common/context/user/user';
 import Link from 'next/link';
 import React from 'react';
 import * as S from './styles';
 
 const Header: React.FC = () => {
-  const user = useUser();
+  const { user } = useUserContext();
 
   return (
     <S.Header>
       <Link href='/'>
         <S.BlogTitle>
-          {user.blogTitle} <S.StyleLine />
+          {user && user.blogTitle} <S.StyleLine />
         </S.BlogTitle>
       </Link>
     </S.Header>

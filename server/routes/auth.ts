@@ -29,4 +29,9 @@ authRouter.get('/redirect', async (req: Request, res: Response) => {
   res.redirect(process.env.CLIENT_BASE_URL, 301);
 });
 
+authRouter.get('/logout', async (req: Request, res: Response) => {
+  setAccessTokenCookie(res, '');
+  res.redirect(process.env.CLIENT_BASE_URL, 301);
+});
+
 export default authRouter;

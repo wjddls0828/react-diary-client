@@ -84,6 +84,17 @@ const postAPI = {
 
     return postCountsByMoodId;
   },
+
+  getPostsAndMoodCountsByYearMonth: async (term: string) => {
+    const postCountsByMoodId = await axios
+      .get(`${endpoints.POST_API}/monthly?term=${term}`)
+      .catch((err) => {
+        console.error(err);
+        return null;
+      });
+
+    return postCountsByMoodId;
+  },
 };
 
 export default postAPI;

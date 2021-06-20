@@ -1,3 +1,4 @@
+import { THEME_COLOR } from 'common/constant';
 import styled from 'styled-components';
 
 export const Header = styled.header`
@@ -15,9 +16,9 @@ export const BlogTitle = styled.a`
   width: 100%;
   height: 200px;
 
-  font-size: 50px;
-  font-weight: bolder;
-  color: #c1b7b7;
+  font-size: 30px;
+  font-weight: 800;
+  color: ${THEME_COLOR.BROWN};
 `;
 
 export const StyleLine = styled.div`
