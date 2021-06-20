@@ -1,5 +1,5 @@
 import { useUser } from 'common/context/user/user';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 import React from 'react';
 import ThemeButton from 'views/components/theme-button';
 import * as S from './styles';
@@ -10,14 +10,20 @@ import getRecentMoodId from './utils/getRecentMoodId';
 import { useState } from 'react';
 
 import 'antd/lib/card/style/index.css';
+import Image from 'next/image';
+import { MOOD_ICONS } from 'common/constant';
 
 const Sidebar: React.FC = () => {
+  const {
+    query: { moodId },
+  } = useRouter();
   const [currentMoodId, setCurrentMoodId] = useState(1);
   const [quote, setQuote] = useState('');
   const user = useUser();
   const handleOnClick = (href: string) => {
     router.push(href);
   };
+
   React.useEffect(() => {
     const setTodayQuote = async () => {
       const recentMoodId = await getRecentMoodId();
@@ -43,6 +49,7 @@ const Sidebar: React.FC = () => {
         return undefined;
     }
   }, [currentMoodId]);
+
   const logout = () => {
     window.location.href = process.env.API_BASE_URL + '/auth/logout';
   };
@@ -62,6 +69,19 @@ const Sidebar: React.FC = () => {
         <Card title='오늘의 편지'>{quote}</Card>
       </S.PCard>
       <SearchBar />
+      <S.MoodSearchBox>
+        <S.MoodUpContent>기분별 일기 조회</S.MoodUpContent>
+        {[1, 2, 3].map((mood) => (
+          <S.MoodIcon key={mood} isSelected={parseInt(moodId as string) === mood}>
+            <Image
+              onClick={() => router.push(`/mood?moodId=${mood}`)}
+              src={'/' + MOOD_ICONS[mood - 1].src}
+              width='48px'
+              height='48px'
+            />
+          </S.MoodIcon>
+        ))}
+      </S.MoodSearchBox>
     </S.Sidebar>
   );
 };
