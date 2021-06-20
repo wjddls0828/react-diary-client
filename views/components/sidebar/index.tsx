@@ -8,7 +8,7 @@ import { Card } from 'antd';
 import SearchBar from 'views/index/SearchBar';
 import getRecentMoodId from './utils/getRecentMoodId';
 import { useState } from 'react';
-
+import { BsPencil } from 'react-icons/bs';
 import 'antd/lib/card/style/index.css';
 import Image from 'next/image';
 import { MOOD_ICONS } from 'common/constant';
@@ -60,12 +60,11 @@ const Sidebar: React.FC = () => {
         {user && user.name} 님<S.LogoutButton onClick={logout}>로그아웃</S.LogoutButton>
       </S.UserProfile>
 
-      <ThemeButton
-        text={'글쓰기'}
-        height={'35px'}
-        onClick={() => handleOnClick('/post')}
-        isBrownTheme={true}
-      ></ThemeButton>
+      <ThemeButton height={'35px'} onClick={() => handleOnClick('/post')} isBrownTheme={true}>
+        <S.ButtonText>
+          <BsPencil /> {'글쓰기'}
+        </S.ButtonText>
+      </ThemeButton>
       <S.MetaContainer>
         <SearchBar />
         <S.MoodSearchBox>

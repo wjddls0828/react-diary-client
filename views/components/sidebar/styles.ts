@@ -37,6 +37,14 @@ export const UserProfile = styled.div`
   color: ${THEME_COLOR.BROWN};
 `;
 
+export const ButtonText = styled.p`
+  line-height: 15px;
+  font-size: 13px;
+  svg {
+    font-size: 10px;
+  }
+`;
+
 export const LogoutButton = styled.button`
   border: 1px solid #c1b7b7;
   background-color: transparent;
