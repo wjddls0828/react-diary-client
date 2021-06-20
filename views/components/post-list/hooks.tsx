@@ -16,7 +16,6 @@ export const usePagedPosts = ({ initialPosts, total }) => {
 
       const { posts } = pagedPosts;
       setPagedPosts(posts);
-      console.log(posts);
     };
 
     getPostsByPage(selected)();

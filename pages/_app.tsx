@@ -49,8 +49,6 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     const userData = jwt.verify(accessToken, process.env.JWT_SECRET) as DecodedUserData;
     userProps.user = userData.data;
   } catch (err) {
-    console.log(err);
-
     // if (typeof res.writeHead === 'function')
     res.writeHead(302, { Location: '/login' }).end();
 
