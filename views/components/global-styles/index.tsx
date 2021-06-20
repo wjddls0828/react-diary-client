@@ -81,11 +81,6 @@ const GlobalStyles = createGlobalStyle`
     grid-template-rows: repeat(2, 25px);
     grid-template-columns: repeat(3, 25px);
     direction: rtl;
-  
-    /* @media only screen and (max-width: 800px) {
-      grid-template-rows: repeat(2, 25px);
-      grid-template-columns: repeat(2, 25px);
-    } */
   }
 
   .fc-toolbar-chunk {
@@ -101,8 +96,11 @@ const GlobalStyles = createGlobalStyle`
     :disabled{
       /* opacity:1 !important; */
     }
-    background-color:  ${THEME_COLOR.PINK} !important;
-    border: 1px solid ${THEME_COLOR.PINK} !important;
+    :hover{
+      background-color: ${THEME_COLOR.LIGHT_BROWN} !important;
+    }
+    background-color:  ${THEME_COLOR.LIGHT_BROWN} !important;
+    border:none !important;
   }
 
   .fc-prev-button, .fc-next-button {
