@@ -59,23 +59,29 @@ const BookSearchBar: React.FC<BookSearchProps> = ({ insertOnEditor, show }) => {
         <>
           <S.BookSearchList>
             <S.Row>
-              {books.map((book) => {
-                return (
-                  <BookSearchCard
-                    key={book.link}
-                    book={book}
-                    onClick={() => handleClickSearchedBook(book)}
-                  />
-                );
-              })}
-              <S.PaginationContainer>
-                <Pagination
-                  currentPage={currentPage}
-                  maxPage={maxPage}
-                  updatePage={updateCurrentPage}
-                  columnStyle={true}
-                />
-              </S.PaginationContainer>
+              {books.length ? (
+                <>
+                  {books.map((book) => {
+                    return (
+                      <BookSearchCard
+                        key={book.link}
+                        book={book}
+                        onClick={() => handleClickSearchedBook(book)}
+                      />
+                    );
+                  })}
+                  <S.PaginationContainer>
+                    <Pagination
+                      currentPage={currentPage}
+                      maxPage={maxPage}
+                      updatePage={updateCurrentPage}
+                      columnStyle={true}
+                    />
+                  </S.PaginationContainer>
+                </>
+              ) : (
+                '검색결과가 없습니다.'
+              )}
             </S.Row>
           </S.BookSearchList>
         </>
