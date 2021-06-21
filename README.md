@@ -120,4 +120,11 @@ $ yarn dev
 
 ![image](https://user-images.githubusercontent.com/44095036/122753690-93849380-d2cd-11eb-8d57-f64616ce1dc6.png)
 ![image](https://user-images.githubusercontent.com/44095036/122753697-967f8400-d2cd-11eb-95aa-4a5b9ca04b42.png)
-
+### (7) 오늘의 편지
+가장 최근 일기의 기분에 따라 메시지를 사이드바에 출력합니다. 사용자가 가장 최근에 작성한 일기의 기분에 따라, 사용자의 기분을 나아지게 하도록 하며 하루에 하나의 메시지를 보여줍니다. 단, 사용자가 하루에 다수의 일기를 쓴 경우, 가장 최근의 일기에 해당하는 기분에 따라 메시지가 설정됩니다.
+- 설정값
+  - 기분 좋음 (moodId==1) 이면 하루를 응원해주는 메시지
+  - 그저 그럼 (moodId==2) 이면 기분을 좋게 해주는 메시지
+  - 우울함 (moodId==3) 이면 위로의 메시지
+ 
+![image](https://user-images.githubusercontent.com/44095036/122754454-a5b30180-d2ce-11eb-9bf9-61c47a6f88b7.png)
