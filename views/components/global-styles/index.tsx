@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     width : 100%;
     height: 100%;
-    background-color: #F1F0EF;
+    background-color: #EEEEEE;
   }
 
   button {
