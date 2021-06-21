@@ -6,7 +6,6 @@ import Diarybox from 'views/components/post-list/diary-box';
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import postAPI from 'common/api/postAPI';
-import Emptybox from 'views/components/post-list/empty-box';
 import { PagedPosts, Post } from 'share/interfaces/post';
 import { usePagedPosts } from './hooks/usePagedPosts';
 import { useRouter } from 'next/router';
@@ -36,13 +35,10 @@ const MoodPage: NextPage<MoodPageProps> = ({ initialPosts, moodId, total }) => {
         <S.DiaryListContainer>
           <S.Diaryinfo>나의 일기들</S.Diaryinfo>
           <S.DiaryBoxContainer>
-            {pagedPosts.length ? (
+            {pagedPosts.length &&
               pagedPosts.map((post) => {
                 return <Diarybox key={post.id} post={post} />;
-              })
-            ) : (
-              <Emptybox />
-            )}
+              })}
           </S.DiaryBoxContainer>
           <S.Pgbox>
             {pageCount > 0 && (
