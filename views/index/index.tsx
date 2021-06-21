@@ -8,15 +8,12 @@ import MoodCalendar from './mood-calendar';
 import PostList from 'views/components/post-list';
 import EmptyBox from 'views/components/post-list/empty-box';
 
-
 interface IndexPageProps {
   initialPosts: Post[];
   total: number;
 }
 
 const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
-  const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total });
-
   return (
     <Layout>
       <Sidebar />
