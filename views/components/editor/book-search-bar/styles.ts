@@ -51,6 +51,7 @@ export const SearchInput = styled.input`
   width: 100%;
   height: 30px;
   border: 0px;
+  font-size: 15px;
 
   :focus {
     outline: none;
