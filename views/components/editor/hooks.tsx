@@ -57,7 +57,7 @@ export const useEditor = (initialContent?: ContentState) => {
 
 export const useEditorOnSubmit = (editorState: EditorState, moodId: number) => {
   const router = useRouter();
-  const getRawContent = () => {
+  const getContent = () => {
     const contentState: ContentState = editorState.getCurrentContent();
     const hasText: boolean = contentState.hasText();
     if (!hasText) {
@@ -65,30 +65,35 @@ export const useEditorOnSubmit = (editorState: EditorState, moodId: number) => {
       return;
     }
 
-    const content: string = JSON.stringify(convertToRaw(contentState));
+    const pureContent = contentState.getPlainText();
+    const rawContent: string = JSON.stringify(convertToRaw(contentState));
 
-    return content;
+    return { rawContent, pureContent };
   };
 
   const createPost = async () => {
-    const content = getRawContent();
+    const content = getContent();
     if (!content) return;
+    const { rawContent, pureContent } = content;
 
-    const post: Post = await postAPI.createPost({ content, moodId });
+    const post: Post = await postAPI.createPost({ pureContent, rawContent, moodId });
     if (!post) {
       alert('글 작성이 완료되지 않았습니다. 잠시 후 다시 시도해주세요 :)');
+      return;
     }
 
     router.push(`/post/${post.id}`);
   };
 
   const editPost = async (postId: number) => {
-    const content = getRawContent();
+    const content = getContent();
     if (!content) return;
+    const { rawContent, pureContent } = content;
 
-    const post: Post = await postAPI.updatePost(postId, { content, moodId });
+    const post: Post = await postAPI.updatePost(postId, { pureContent, rawContent, moodId });
     if (!post) {
       alert('글 수정이 완료되지 않았습니다. 잠시 후 다시 시도해주세요 :)');
+      return;
     }
 
     router.push(`/post/${postId}`);
