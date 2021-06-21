@@ -3,6 +3,7 @@ export interface Post {
   userId: number;
   moodId: number;
   content: string;
+  pureContent: string;
   createdAt: string;
   isCompleted: boolean;
 }
@@ -14,7 +15,8 @@ export interface PagedPosts {
 
 export interface PostRequestBody {
   moodId: number;
-  content: string;
+  rawContent: string;
+  pureContent: string;
 }
 
 export interface PostCountsByMoodId {

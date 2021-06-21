@@ -2,7 +2,7 @@ import { Router, Response } from 'express';
 import PostService from '../service/postService';
 import Request from '../extend';
 import { PagedPosts, Post, PostCountsByMoodId } from '../../share/interfaces/post';
-import { isValidPositiveInteger, validatePostRequest } from '../utils/validate';
+import { isValidPositiveInteger } from '../utils/validate';
 
 const postRouter: Router = Router();
 
@@ -142,11 +142,6 @@ postRouter.get('/:id', async (req: Request, res: Response) => {
 });
 
 postRouter.post('/', async (req: Request, res: Response) => {
-  if (!validatePostRequest(req.body)) {
-    res.status(400).send({ error: '잘못된 요청입니다. request body 형식을 확인해주세요' });
-    return;
-  }
-
   const userId = req.userId;
   const post: Post | void = await PostService.createPost(userId, req.body).catch(() => {
     res.status(500).send({ error: '서버 점검중입니다. 잠시 후 다시 시도해주세요!' });

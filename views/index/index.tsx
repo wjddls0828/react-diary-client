@@ -24,7 +24,11 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
 
         <S.DiaryListContainer>
           <S.Diaryinfo>목록 보기</S.Diaryinfo>
-          {initialPosts ? <PostList initialPosts={initialPosts} total={total} /> : <EmptyBox />}
+          {initialPosts.length ? (
+            <PostList initialPosts={initialPosts} total={total} />
+          ) : (
+            <EmptyBox />
+          )}
         </S.DiaryListContainer>
       </S.Mainpage>
     </Layout>

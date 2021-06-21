@@ -66,7 +66,7 @@ export default class PostService {
     const skip = (page - 1) * POSTS_PER_PAGE;
 
     const [postsData] = await DBPool.query(
-      `SELECT * FROM post WHERE userId =? and content LIKE '%${keyword}%'
+      `SELECT * FROM post WHERE userId =? and pureContent LIKE '%${keyword}%'
        ORDER BY id DESC LIMIT ? OFFSET ?`,
       [userId, take, skip]
     ).catch((err) => {
@@ -75,7 +75,7 @@ export default class PostService {
     });
 
     const [totalData] = await DBPool.query(
-      `select count(*) as total FROM post WHERE userId =? and content LIKE '%${keyword}%'
+      `select count(*) as total FROM post WHERE userId =? and pureContent LIKE '%${keyword}%'
     ORDER BY id DESC`,
       userId
     );
@@ -104,10 +104,11 @@ export default class PostService {
     await connection.beginTransaction();
 
     return await connection
-      .query(`insert into post values (NULL, ?, ?, default, default, ?)`, [
+      .query(`insert into post values (NULL, ?, ?, default, default, ?,?)`, [
         userId,
-        body.content,
+        body.rawContent,
         body.moodId,
+        body.pureContent,
       ])
       .then(async () => {
         const [data] = await connection.query(
@@ -137,17 +138,18 @@ export default class PostService {
     const connection = await DBPool.getConnection();
     await connection.beginTransaction();
 
-    const { content, moodId } = body;
-    const hasContent = content != undefined;
+    const { rawContent, pureContent, moodId } = body;
+    const hasContent = rawContent != undefined;
     const hasMoodId = moodId != undefined;
 
     return await connection
       .query(
         `update post set 
          content = (case when ? THEN ? ELSE content END), 
-         moodId = (case when ? THEN ? ELSE moodId END)
+         moodId = (case when ? THEN ? ELSE moodId END),
+         pureContent = (case when ? THEN ? ELSE pureContent END)
         where id = ? and userId = ?`,
-        [hasContent, content, hasMoodId, moodId, postId, userId]
+        [hasContent, rawContent, hasMoodId, moodId, hasContent, pureContent, postId, userId]
       )
       .then(async () => {
         const [data] = await connection.query(`select * from post where id = ? and userId = ?`, [
@@ -160,6 +162,7 @@ export default class PostService {
         return post;
       })
       .catch(async (err) => {
+        console.log(err);
         await connection.rollback();
         throw new Error();
       })
