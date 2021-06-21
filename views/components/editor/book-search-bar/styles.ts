@@ -86,6 +86,8 @@ export const BookSearchList = styled.div`
 export const Row = styled.div`
   display: flex;
   width: 100%;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const BookShelf = styled.div`

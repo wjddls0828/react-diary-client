@@ -58,7 +58,7 @@ const GlobalStyles = createGlobalStyle`
     background-repeat: no-repeat;
   }
   .sosoMood {
-    background-image: url('/soso.png');
+    background-image: url('/soso2.png');
     background-size: contain;
     background-repeat: no-repeat;
   }

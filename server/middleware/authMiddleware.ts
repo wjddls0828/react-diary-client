@@ -12,7 +12,6 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
     next();
   } catch (err) {
-    console.log(err);
     res.status(403).send({ error: '로그인이 필요한 서비스입니다' });
   }
 };
