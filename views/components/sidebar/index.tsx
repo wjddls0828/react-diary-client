@@ -76,8 +76,8 @@ const Sidebar: React.FC = () => {
             <Image
               onClick={() => router.push(`/mood?moodId=${mood}`)}
               src={'/' + MOOD_ICONS[mood - 1].src}
-              width='40px'
-              height='40px'
+              width='41px'
+              height='41px'
             />
           </S.MoodIcon>
         ))}
