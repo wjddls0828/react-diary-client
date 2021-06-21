@@ -17,18 +17,19 @@ interface IndexPageProps {
   total: number;
 }
 
+
 const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
   const { pageCount, changePage, pagedPosts } = usePagedPosts({ initialPosts, total });
+
 
   return (
     <Layout>
       <Sidebar />
-
       <S.Mainpage>
-
         <S.CalendarContainer>
           <MoodCalendar />
         </S.CalendarContainer>
+
 
 
         <S.DiaryListContainer>
@@ -59,6 +60,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
         </S.DiaryListContainer>
 
         
+
       </S.Mainpage>
     </Layout>
   );

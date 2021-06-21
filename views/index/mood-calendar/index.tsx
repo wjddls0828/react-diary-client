@@ -2,7 +2,7 @@ import FullCalendar, { EventClickArg } from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import koLocale from '@fullcalendar/core/locales/ko';
 import * as S from './styles';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { useMonthlyPosts } from 'views/index/hooks';
@@ -25,11 +25,10 @@ function MyFullCalendar() {
   );
 
   return (
-    <Fragment>
+    <S.MoodCalendarContainer>
       <FullCalendar
         plugins={[dayGridPlugin]}
         navLinks={false}
-        // navLinkDayClick={}
         eventClick={handleEventClick}
         locale={koLocale}
         displayEventTime={false}
@@ -44,7 +43,7 @@ function MyFullCalendar() {
             return <MoodCount key={moodCount.moodId} moodCount={moodCount} total={monthlyTotal} />;
           })}
       </S.MonthlyMoodCountContainer>
-    </Fragment>
+    </S.MoodCalendarContainer>
   );
 }
 
