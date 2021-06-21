@@ -23,4 +23,5 @@ export const CountBar = styled.div<{ width; color }>`
 export const CountText = styled.div`
   margin-left: 10px;
   font-size: 10px;
+  color: #453e3e;
 `;

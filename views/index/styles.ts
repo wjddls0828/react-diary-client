@@ -41,12 +41,12 @@ export const CalendarContainer = styled.div`
   height: 100% auto;
 
   background-color: white;
-  padding: 30px 40px;
+  padding: 30px;
   margin-bottom: 30px;
 `;
 
 export const Diaryinfo = styled.div`
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
   margin-bottom: 10px;
   color: ${THEME_COLOR.BROWN};

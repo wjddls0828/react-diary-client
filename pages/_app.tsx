@@ -6,10 +6,6 @@ import axios from 'common/api/axios';
 import { DecodedUserData, User } from 'share/interfaces/user';
 import { UserProvider } from 'common/context/user/user';
 
-import 'primereact/resources/themes/saga-blue/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-import 'primeflex/primeflex.css';
 import 'views/components/global-styles/paging.css';
 
 interface CustomAppProps extends AppProps {
@@ -53,8 +49,6 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     const userData = jwt.verify(accessToken, process.env.JWT_SECRET) as DecodedUserData;
     userProps.user = userData.data;
   } catch (err) {
-    console.log(err);
-
     // if (typeof res.writeHead === 'function')
     res.writeHead(302, { Location: '/login' }).end();
 

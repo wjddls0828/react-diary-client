@@ -5,7 +5,7 @@ import Layout from 'views/components/layout';
 import Sidebar from 'views/components/sidebar';
 import postAPI from 'common/api/postAPI';
 import * as S from 'views/index/styles';
-import DiaryBox from 'views/index/diarybox';
+import DiaryBox from 'views/components/post-list/diary-box';
 import ReactPaginate from 'react-paginate';
 import { usePagedPosts } from './hooks/index';
 

@@ -7,6 +7,7 @@ export const Toolbar = styled.div`
   border: 1px solid #d3d3d3;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding-left: 15px;
+  height: 43px;
 
   width: 100%;
 `;

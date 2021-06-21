@@ -23,7 +23,7 @@ export const BookSeachBar = styled.div<{ show: boolean }>`
     props.show &&
     css`
       top: 65%;
-      height: 40%;
+      height: 35%;
     `};
 `;
 
@@ -77,7 +77,7 @@ export const EmptyBookSearchList = styled.div`
 
 export const BookSearchList = styled.div`
   width: 100%;
-  padding: 30px;
+  padding: 14px;
 
   display: flex;
   justify-content: center;

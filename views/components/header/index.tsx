@@ -9,12 +9,10 @@ const Header: React.FC = () => {
   return (
     <S.Header>
       <Link href='/'>
-        <S.BlogTitle>
-          {user && user.blogTitle} <S.StyleLine />
-        </S.BlogTitle>
+        <S.BlogTitle>{user && user.blogTitle}</S.BlogTitle>
       </Link>
     </S.Header>
   );
 };
 
-export default Header;
+export default React.memo(Header);

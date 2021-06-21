@@ -8,6 +8,6 @@ export const THEME_COLOR = {
 export type MoodIcon = { id: number; src: string; color: string; className: string };
 export const MOOD_ICONS: MoodIcon[] = [
   { id: 1, src: 'good.png', color: '#FEABA6', className: 'goodMood' },
-  { id: 2, src: 'soso.png', color: '#FDD65E', className: 'sosoMood' },
+  { id: 2, src: 'soso.PNG', color: '#FDD65E', className: 'sosoMood' },
   { id: 3, src: 'sad.png', color: '#89ABCA', className: 'sadMood' },
 ];
