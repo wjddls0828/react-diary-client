@@ -8,7 +8,6 @@ import ReactPaginate from 'react-paginate';
 import postAPI from 'common/api/postAPI';
 import Emptybox from 'views/index/emptybox';
 import { PagedPosts, Post } from 'share/interfaces/post';
-import MoodCalendar from 'views/index/mood-calendar';
 import { usePagedPosts } from './hooks/usePagedPosts';
 import { useRouter } from 'next/router';
 
@@ -34,9 +33,6 @@ const MoodPage: NextPage<MoodPageProps> = ({ initialPosts, moodId, total }) => {
     <Layout>
       <Sidebar />
       <S.Mainpage>
-        <S.CalendarContainer>
-          <MoodCalendar />
-        </S.CalendarContainer>
         <S.DiaryListContainer>
           <S.Diaryinfo>나의 일기들</S.Diaryinfo>
           <S.DiaryBoxContainer>
