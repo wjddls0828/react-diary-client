@@ -22,6 +22,7 @@ plugins:
   - react-hooks
 
 rules:
+  no-useless-escape: off
   no-irregular-whitespace: off
   no-underscore-dangle: off
   no-use-before-define: off

@@ -36,24 +36,33 @@ function DraftEditor({ postState }: DraftEditorProps) {
 
   return (
     <>
-      <S.MoodInputContainer>
-        <S.MoodInputLabel>오늘의 기분은 어땠나요?</S.MoodInputLabel>
-        <S.MoodInput>
-          {MOOD_ICONS.map((mood) => {
-            const { id, src } = mood;
+      <S.EditorHeader>
+        <S.MoodInputContainer>
+          <S.MoodInputLabel>오늘의 기분은 어땠나요?</S.MoodInputLabel>
+          <S.MoodInput>
+            {MOOD_ICONS.map((mood) => {
+              const { id, src } = mood;
 
-            return (
-              <S.MoodIcon
-                key={id}
-                onClick={() => changeMoodId(id)}
-                clicked={moodId ? moodId === id : id === 1}
-              >
-                <Image src={`/${src}`} width={'50px'} height={'50px'} />
-              </S.MoodIcon>
-            );
-          })}
-        </S.MoodInput>
-      </S.MoodInputContainer>
+              return (
+                <S.MoodIcon
+                  key={id}
+                  onClick={() => changeMoodId(id)}
+                  clicked={moodId ? moodId === id : id === 1}
+                >
+                  <Image src={`/${src}`} width={'50px'} height={'50px'} />
+                </S.MoodIcon>
+              );
+            })}
+          </S.MoodInput>
+        </S.MoodInputContainer>
+        <ThemeButton
+          isBrownTheme={true}
+          text={'저장'}
+          width={'150px'}
+          height={'50px'}
+          onClick={postState ? () => editPost(postState.id) : createPost}
+        />
+      </S.EditorHeader>
 
       <EditorToolbar editorState={editorState} setEditorState={setEditorState} />
 
@@ -68,16 +77,6 @@ function DraftEditor({ postState }: DraftEditorProps) {
           placeholder={'나만의 일상을 기록해보세요 :)'}
         />
       </S.EditorContainer>
-
-      <S.ButtonContainer>
-        <ThemeButton
-          isBrownTheme={true}
-          text={'저장'}
-          width={'150px'}
-          height={'50px'}
-          onClick={postState ? () => editPost(postState.id) : createPost}
-        />
-      </S.ButtonContainer>
     </>
   );
 }

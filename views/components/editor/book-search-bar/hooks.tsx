@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useCallback } from 'react';
 import naverAPI from 'common/api/naver/naverAPI';
 import { NaverBook, PagedNaverBooks } from 'share/interfaces/naverBook';
-import { POSTS_PER_PAGE } from 'share/constant';
 
 const DEFAULT_PAGE = 1;
+const BOOK_RESULTS_PER_PAGE = 7;
 
 export const usePagedBooks = () => {
   const [keyword, setKeyword] = useState();
@@ -30,8 +31,12 @@ export const usePagedBooks = () => {
         return;
       }
 
-      const start = (page - 1) * POSTS_PER_PAGE + 1;
-      const pagedBooks: PagedNaverBooks = await naverAPI.searchBookByKeyword(keyword, start);
+      const start = (page - 1) * BOOK_RESULTS_PER_PAGE + 1;
+      const pagedBooks: PagedNaverBooks = await naverAPI.searchBookByKeyword(
+        keyword,
+        BOOK_RESULTS_PER_PAGE,
+        start
+      );
       if (!pagedBooks) return;
 
       const { total, display, items } = pagedBooks;

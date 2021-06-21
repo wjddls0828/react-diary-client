@@ -11,7 +11,6 @@ import Emptybox from './emptybox';
 import { PagedPosts, Post } from 'share/interfaces/post';
 import MoodCalendar from './mood-calendar';
 
-
 interface IndexPageProps {
   initialPosts: Post[];
   total: number;
@@ -23,13 +22,10 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
   return (
     <Layout>
       <Sidebar />
-
       <S.Mainpage>
-
         <S.CalendarContainer>
           <MoodCalendar />
         </S.CalendarContainer>
-
 
         <S.DiaryListContainer>
           <S.Diaryinfo>나의 일기들</S.Diaryinfo>
@@ -57,8 +53,6 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialPosts, total }) => {
             )}
           </S.Pgbox>
         </S.DiaryListContainer>
-
-        
       </S.Mainpage>
     </Layout>
   );

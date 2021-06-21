@@ -11,26 +11,19 @@ interface EditorBlockProps {
 
 const BookCardBlock: React.FC<EditorBlockProps> = (props) => {
   const { block, contentState } = props;
-  const blockData: { data: NaverBook } = contentState.getEntity(block.getEntityAt(0)).getData();
+  const blockData: { data: Partial<NaverBook> } = contentState
+    .getEntity(block.getEntityAt(0))
+    .getData();
 
-  const { title, image, author, publisher, pubdate } = blockData.data;
+  const { title, image, author } = blockData.data;
   const titleText = title.replace(/<[^>]*>/g, '');
-  const parsedTitle = titleText.length > 30 ? titleText.slice(0, 30) + '...' : titleText;
-  const pubDate = pubdate.slice(0, 4) + '.' + pubdate.slice(4, 6) + '.' + pubdate.slice(6, 8);
-  // TODO: util 정리
-
-  const onClick = () => {
-    // TODO: 삭제, 정렬 버튼 보이게?
-  };
 
   return (
-    <S.BookCard onClick={onClick} contentEditable={false}>
-      <img src={image} />
+    <S.BookCard contentEditable={false}>
+      <S.BookCardImage src={image} />
       <S.BookCardInfo>
-        <S.BookCardTitle>{parsedTitle}</S.BookCardTitle>
-        <p> 저자 {author}</p>
-        <p> 출판 {publisher}</p>
-        <p> 발매 {pubDate}</p>
+        <S.BookCardTitle>{titleText}</S.BookCardTitle>
+        <S.BookCardMeta> {author}</S.BookCardMeta>
       </S.BookCardInfo>
     </S.BookCard>
   );
