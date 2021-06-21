@@ -20,7 +20,6 @@ export const usePagedPosts = (initialPosts: Post[], term: string, total: number)
         if (!pagedPosts) return;
 
         const { posts } = pagedPosts;
-        console.log(posts);
         setPagedPosts(posts);
       };
 
