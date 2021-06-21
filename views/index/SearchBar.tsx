@@ -8,8 +8,10 @@ const { Search } = Input;
 
 const SearchBar: React.FC = () => {
   const router = useRouter();
+
   const { keyword } = router.query;
   const decodedTerm = decodeURIComponent(keyword as string);
+
   const [searchTerm, setSearchTerm] = useState<string>(decodedTerm);
   const handleSearchInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchTerm(event.currentTarget.value);

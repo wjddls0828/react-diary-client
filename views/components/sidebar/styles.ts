@@ -1,5 +1,6 @@
 import { THEME_COLOR } from 'common/constant';
 import styled from 'styled-components';
+import 'antd/lib/card/style/index.css';
 
 interface PCardProps {
   backgroundColor?: string;
