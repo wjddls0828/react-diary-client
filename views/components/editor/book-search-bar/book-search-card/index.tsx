@@ -14,7 +14,6 @@ const BookSearchCard = ({ book, onClick }) => {
           <S.BookCardMeta> {author}</S.BookCardMeta>
         </S.BookCardInfo>
       </S.BookSearchCard>
-      <S.BookShelf></S.BookShelf>
     </S.BookSearchCardContainer>
   );
 };

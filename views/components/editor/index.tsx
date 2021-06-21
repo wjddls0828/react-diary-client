@@ -57,11 +57,12 @@ function DraftEditor({ postState }: DraftEditorProps) {
         </S.MoodInputContainer>
         <ThemeButton
           isBrownTheme={true}
-          text={'저장'}
-          width={'150px'}
-          height={'50px'}
+          width={'130px'}
+          height={'40px'}
           onClick={postState ? () => editPost(postState.id) : createPost}
-        />
+        >
+          <S.ButtonText> 저장</S.ButtonText>
+        </ThemeButton>
       </S.EditorHeader>
 
       <EditorToolbar editorState={editorState} setEditorState={setEditorState} />

@@ -9,8 +9,7 @@ const naverAPI = {
   ): Promise<PagedNaverBooks> => {
     const pagedBooks = await naverAxios
       .get(`?query=${keyword}&display=${perPage}&start=${start}`)
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
         return null;
       });
 

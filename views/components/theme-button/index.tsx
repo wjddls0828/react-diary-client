@@ -18,4 +18,4 @@ const ThemeButton: React.FC<ThemeButtonProps> = ({
   );
 };
 
-export default ThemeButton;
+export default React.memo(ThemeButton);

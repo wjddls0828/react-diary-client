@@ -17,7 +17,7 @@ const Diarybox: React.FC<{ post: Post }> = ({ post }) => {
   if (!contentText.length) {
     contentText = '...';
   }
- 
+
   const router = useRouter();
   const handleClick = () => {
     router.push(`/post/${id}`);

@@ -9,6 +9,8 @@ export const Header = styled.header`
   background: url(/header-tape.png);
   background-repeat: no-repeat;
   background-position: left center;
+
+  margin-bottom: 30px;
 `;
 
 export const BlogTitle = styled.a`
@@ -21,9 +23,12 @@ export const BlogTitle = styled.a`
   height: 200px;
   margin-left: 30px;
 
-  font-size: 40px;
+  font-size: 35px;
   font-weight: 800;
   color: ${THEME_COLOR.BROWN};
+  :hover {
+    color: ${THEME_COLOR.BROWN};
+  }
 `;
 
 export const StyleLine = styled.div`

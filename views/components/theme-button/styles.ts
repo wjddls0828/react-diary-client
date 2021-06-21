@@ -8,6 +8,7 @@ export const ThemeButton = styled.button<ThemeButtonStyleProps>`
   margin-bottom: 5px;
 
   border-radius: 2px;
+  min-height: 30px;
 
   ${(props) =>
     props.isBrownTheme

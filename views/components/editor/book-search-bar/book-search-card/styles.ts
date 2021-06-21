@@ -12,8 +12,8 @@ export const BookSearchCardContainer = styled.div`
 export const BookSearchCard = styled.div`
   background-color: ${THEME_COLOR.BEIGE};
 
-  width: 130px;
-  height: 160px;
+  width: 115px;
+  height: 155px;
 
   display: flex;
   flex-direction: column;
@@ -29,14 +29,6 @@ export const BookSearchCard = styled.div`
   }
 `;
 
-export const BookShelf = styled.div`
-  background-color: ${THEME_COLOR.BROWN};
-  width: 105%;
-  height: 10px;
-
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-`;
-
 export const BookCardImage = styled.img`
   width: 80px;
   min-height: 110px;
@@ -49,22 +41,21 @@ export const BookCardInfo = styled.div`
 `;
 
 export const BookCardTitle = styled.div`
-  font-size: 13px;
-
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 800;
   color: gray;
-  margin: 2px 0;
-
+  margin-top: 2px;
+  margin-bottom: 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
 export const BookCardMeta = styled.div`
-  padding: 0 5px;
-  font-size: 11px;
+  font-size: 10px;
   color: gray;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 0 5px;
 `;

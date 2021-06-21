@@ -10,6 +10,7 @@ export interface ThemeButtonProps {
   isBrownTheme: boolean;
   width?: string;
   height?: string;
+  children?;
 }
 
 export interface ThemeButtonStyleProps {

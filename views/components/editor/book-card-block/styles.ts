@@ -30,7 +30,7 @@ export const BookCardInfo = styled.div`
 `;
 
 export const BookCardTitle = styled.div`
-  width: 150px;
+  width: 140px;
   font-size: 13px;
 
   font-weight: 700;
@@ -43,6 +43,7 @@ export const BookCardTitle = styled.div`
 `;
 
 export const BookCardMeta = styled.div`
+  width: 130px;
   padding: 0 5px;
   font-size: 11px;
   color: gray;
