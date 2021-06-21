@@ -22,4 +22,5 @@ module.exports = withTM({
     NAVER_API_CLIENT_ID: process.env.NAVER_API_CLIENT_ID,
     NAVER_API_CLIENT_SECRET: process.env.NAVER_API_CLIENT_SECRET,
   },
+  webpack5: false,
 });
