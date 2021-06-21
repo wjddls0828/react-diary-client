@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface EmojiDateContainerProps {
+  backgroundImage?: string;
+}
+
 export const PostContainer = styled.div`
   width: 100%;
   display: flex;
@@ -17,10 +21,6 @@ export const PostContent = styled.div`
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
   min-height: 100px;
 `;
-
-interface EmojiDateContainerProps {
-  backgroundImage?: string;
-}
 
 export const EmojiDateContainer = styled.div<EmojiDateContainerProps>`
   background-image: url(${(props) => props.backgroundImage});
