@@ -38,13 +38,16 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, initialPosts, total }
     else {
       const result = postAPI.deletePost(post.id);
       if (!result) alert('글이 삭제되지 않았습니다. 잠시 후 다시 시도해주세요 :)');
-      // else alert('삭제가 완료되었습니다.\n다이어리 홈 화면으로 이동합니다.');
       router.replace('/');
     }
   };
 
   const updatePost = () => {
     router.push(`/post/${post.id}/edit`);
+  };
+
+  const goMainPage = () => {
+    router.push('/');
   };
 
   return (
@@ -61,12 +64,7 @@ const PostViewPage: NextPage<PostViewPageProps> = ({ post, initialPosts, total }
           </S.PostContent>
         </S.PostContainer>
         <S.ButtonContainer>
-          <ThemeButton
-            width={'150px'}
-            text={'홈으로'}
-            onClick={() => router.push('/')}
-            isBrownTheme={true}
-          />
+          <ThemeButton width={'150px'} text={'홈으로'} onClick={goMainPage} isBrownTheme={true} />
           <S.EditDeleteButtonContainer>
             ​<ThemeButton text={'수정하기'} onClick={updatePost} isBrownTheme={true} />
             ​<ThemeButton text={'삭제하기'} onClick={deletePost} isBrownTheme={false} />​
