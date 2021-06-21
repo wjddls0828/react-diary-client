@@ -17,7 +17,6 @@ export const DiaryListContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-
 `;
 
 export const DiaryBoxContainer = styled.div`
@@ -49,7 +48,6 @@ export const Diaryinfo = styled.div`
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 10px;
-  color: ${THEME_COLOR.BROWN};
 `;
 
 export const Pgbox = styled.div`
