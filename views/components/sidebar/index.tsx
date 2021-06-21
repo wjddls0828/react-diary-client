@@ -32,11 +32,11 @@ const Sidebar: React.FC = () => {
   const quoteCardBackgroundColor = React.useMemo(() => {
     switch (currentMoodId) {
       case 1:
-        return '#ef9a9a';
+        return '#F7DBD7';
       case 2:
-        return '#a5d6a7';
+        return '#FAEACB';
       case 3:
-        return '#ce93d8';
+        return '#9CC0E7';
       default:
         return undefined;
     }
