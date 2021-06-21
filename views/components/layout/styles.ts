@@ -14,7 +14,7 @@ export const Layout = styled.div`
 
   padding: 0 100px;
   padding-top: 10px;
-  background-color: #f1f0ef;
+  background-color: #eeeeee;
 
   align-items: center;
 `;
