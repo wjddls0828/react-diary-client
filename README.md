@@ -5,6 +5,7 @@
 ## 프로젝트 설명
 
 > 하루의 기분과 함께 일상을 기록할 수 있는 나만의 다이어리를 만들어보자!
+http://ncp.moodiary.kr:3000
 
 ## 실행
 
@@ -17,6 +18,10 @@ $ yarn build:server
 $ yarn start:server
 
 ```
+
+<img width="400px" src="https://user-images.githubusercontent.com/37537202/122897535-0ef54c00-d385-11eb-81eb-caf29c35c080.png"/>
+
+
 
 ## 기술 스택
 
